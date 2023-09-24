@@ -8,9 +8,13 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import {Button} from "@mui/material";
 import React from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import inamujerLogo from "../assets/inamujer-logo.jpg"
 
 
 export default function Login() {
+
+  // const redirect = "../pages/Page0800" 
+
   const [showPassword, setShowPassword] = React.useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -19,32 +23,43 @@ export default function Login() {
     event.preventDefault();
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    location.href= "https://google.com"
+
+  }
+
   return (
     <div className="grid place-items-center min-h-screen box-border">
-      <div className="min-w-fit h-96 border-2 border-gray-400 box-border absolute">
-        <div className="clip-path-mypolygon bg-[#2E219E] h-48 w-full m-0 absolute box-border pt-4">
+      <div className="min-w-fit h-96 border-2 border-gray-400 box-border absolute rounded-lg">
+        <div className="clip-path-mypolygon bg-[#2E219E] h-48 w-full m-0 absolute box-border pt-4 rounded-t-lg">
           <h2 className="text-center text-white text-2xl font-bold">
             Iniciar sesión
           </h2>
         </div>
-        <form className="flex flex-col gap-2 p-8 mt-32">
-          <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+        <img
+          src={inamujerLogo}
+          alt="Logo inamujer"
+          className=" w-20 absolute rounded-full top-20 left-[38%] mt-1"
+        />
+        <form className="flex flex-col gap-2 p-8 mt-32" onSubmit={handleSubmit}>
+          <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined" required>
             <InputLabel htmlFor="outlined-adornment-username">
-              Username
+              Usuario
             </InputLabel>
             <OutlinedInput
               id="outlined-adornment-username"
               label="Username"
               endAdornment={
                 <InputAdornment position="end">
-                  <AccountCircleIcon /> 
+                  <AccountCircleIcon />
                 </InputAdornment>
               }
             />
           </FormControl>
-          <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+          <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined" required>
             <InputLabel htmlFor="outlined-adornment-password">
-              Password
+              Contraseña
             </InputLabel>
             <OutlinedInput
               id="outlined-adornment-password"
@@ -64,7 +79,7 @@ export default function Login() {
               label="Password"
             />
           </FormControl>
-          <Button variant="contained" color="secondary">
+          <Button variant="contained" color="secondary" type="submit">
             Ingresar
           </Button>
         </form>

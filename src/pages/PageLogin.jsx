@@ -1,4 +1,4 @@
-import CintilloHeader from "../components/Cintillo-header";
+import CintilloHeader from "../components/CintilloHeader";
 import Footer from "../components/Footer";
 import Login from "../components/Login";
 
