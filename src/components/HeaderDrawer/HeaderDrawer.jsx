@@ -13,8 +13,8 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 // import NotificationsIcon from "@mui/icons-material/Notifications";
-import { mainListItems, secondaryListItems } from "./ListItems";
-import NotificationsPopover from "./NotificationPopover";
+import { mainListItems, secondaryListItems } from "../ListItems/ListItems";
+import NotificationsPopover from "../NotificationPopover/NotificationPopover";
 
 const drawerWidth = 240;
 

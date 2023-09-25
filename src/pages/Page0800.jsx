@@ -1,4 +1,4 @@
-import PageTemplate from "../components/PageTemplate";
+import PageTemplate from "../components/PageTemplate/PageTemplate.jsx";
 
 export default function Page0800() {
   return (

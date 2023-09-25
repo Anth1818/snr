@@ -1,6 +1,6 @@
-import CintilloHeader from "./CintilloHeader";
-import Footer from "./Footer";
-import HeaderDrawer from "./HeaderDrawer";
+import CintilloHeader from "../CintilloHeader/CintilloHeader";
+import Footer from "../Footer/Footer";
+import HeaderDrawer from "../HeaderDrawer/HeaderDrawer";
 
 // eslint-disable-next-line react/prop-types
 export default function PageTemplate({children}) {
