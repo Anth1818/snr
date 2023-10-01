@@ -23,8 +23,8 @@ import {
 // utils
 import { fToNow } from "../../utils/formatTime";
 // components
-import Iconify from "../Iconify/Iconify";
-import Scrollbar from "../ScrollBar/Scrollbar";
+import Iconify from "../Iconify";
+import Scrollbar from "../ScrollBar";
 
 // ----------------------------------------------------------------------
 
@@ -147,7 +147,7 @@ export default function NotificationsPopover() {
 
         <Divider sx={{ borderStyle: "dashed" }} />
 
-        <Scrollbar sx={{ height: { xs: 340, sm: "auto" } }}>
+        <Scrollbar sx={{ minHeight: 340, height: { xs: 340, sm: "auto" } }}>
           <List
             disablePadding
             subheader={
@@ -160,25 +160,6 @@ export default function NotificationsPopover() {
             }
           >
             {notifications.slice(0, 2).map((notification) => (
-              <NotificationItem
-                key={notification.id}
-                notification={notification}
-              />
-            ))}
-          </List>
-
-          <List
-            disablePadding
-            subheader={
-              <ListSubheader
-                disableSticky
-                sx={{ py: 1, px: 2.5, typography: "overline" }}
-              >
-                Before that
-              </ListSubheader>
-            }
-          >
-            {notifications.slice(2, 5).map((notification) => (
               <NotificationItem
                 key={notification.id}
                 notification={notification}

@@ -13,7 +13,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 // import NotificationsIcon from "@mui/icons-material/Notifications";
-import { mainListItems, secondaryListItems } from "../ListItems/ListItems";
+import { mainListItems } from "../ListItems/ListItems";
 import NotificationsPopover from "../NotificationPopover/NotificationPopover";
 
 const drawerWidth = 240;
@@ -48,7 +48,7 @@ const Drawer = styled(MuiDrawer, {
     position: "relative",
     whiteSpace: "nowrap",
     width: drawerWidth,
-    height: "530px",
+    height: "500px",
     marginTop: "100px",
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
@@ -73,15 +73,15 @@ const Drawer = styled(MuiDrawer, {
 const defaultTheme = createTheme();
 
 // eslint-disable-next-line react/prop-types
-export default function HeaderDrawer() {
-  const [open, setOpen] = React.useState(true);
+export default function HeaderDrawer({ titlePage }) {
+  const [open, setOpen] = React.useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Box sx={{ display: "flex", }}>
+      <Box sx={{ display:"flex" }}>
         <CssBaseline />
         <AppBar position="absolute" open={open}>
           <Toolbar
@@ -103,22 +103,17 @@ export default function HeaderDrawer() {
             </IconButton>
             <Typography
               component="h1"
-              variant="h6"
+              variant="h4"
               color="inherit"
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              {titlePage}
             </Typography>
             <NotificationsPopover />
-            {/* <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton> */}
           </Toolbar>
         </AppBar>
-        <Drawer variant="permanent" open={open}>
+        <Drawer variant="permanent" open={open} sx={{display: {xs: "none", sm:"block"}}}>
           <Toolbar
             sx={{
               display: "flex",
@@ -134,8 +129,6 @@ export default function HeaderDrawer() {
           <Divider />
           <List component="nav">
             {mainListItems}
-            <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
           </List>
         </Drawer>
       </Box>
