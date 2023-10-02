@@ -73,7 +73,7 @@ const Drawer = styled(MuiDrawer, {
 const defaultTheme = createTheme();
 
 // eslint-disable-next-line react/prop-types
-export default function HeaderDrawer({ titlePage }) {
+export default function RenderDrawer({ titlePage }) {
   const [open, setOpen] = React.useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -113,7 +113,7 @@ export default function HeaderDrawer({ titlePage }) {
             <NotificationsPopover />
           </Toolbar>
         </AppBar>
-        <Drawer variant="permanent" open={open} sx={{display: {xs: "none", sm:"block"}}}>
+        <Drawer variant="permanent" open={open} sx={{display: {xs: "flex", sm:"block"}}}>
           <Toolbar
             sx={{
               display: "flex",

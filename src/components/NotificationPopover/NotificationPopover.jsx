@@ -9,7 +9,6 @@ import {
   List,
   Badge,
   Button,
-  Avatar,
   Tooltip,
   Divider,
   Popover,
@@ -17,14 +16,13 @@ import {
   IconButton,
   ListItemText,
   ListSubheader,
-  ListItemAvatar,
   ListItemButton,
 } from "@mui/material";
 // utils
 import { fToNow } from "../../utils/formatTime";
 // components
 import Iconify from "../Iconify";
-import Scrollbar from "../ScrollBar";
+// import Scrollbar from "../ScrollBar";
 
 // ----------------------------------------------------------------------
 
@@ -54,7 +52,7 @@ const NOTIFICATIONS = [
     avatar: null,
     type: "chat_message",
     createdAt: sub(new Date(), { days: 1, hours: 3, minutes: 30 }),
-    isUnRead: false,
+    isUnRead: true,
   },
   {
     id: faker.datatype.uuid(),
@@ -63,7 +61,7 @@ const NOTIFICATIONS = [
     avatar: null,
     type: "mail",
     createdAt: sub(new Date(), { days: 2, hours: 3, minutes: 30 }),
-    isUnRead: false,
+    isUnRead: true,
   },
   {
     id: faker.datatype.uuid(),
@@ -72,7 +70,88 @@ const NOTIFICATIONS = [
     avatar: null,
     type: "order_shipped",
     createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
-    isUnRead: false,
+    isUnRead: true,
+  },
+  {
+    id: faker.datatype.uuid(),
+    title: "Delivery processing",
+    description: "Your order is being shipped",
+    avatar: null,
+    type: "order_shipped",
+    createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
+    isUnRead: true,
+  },
+  {
+    id: faker.datatype.uuid(),
+    title: "Delivery processing",
+    description: "Your order is being shipped",
+    avatar: null,
+    type: "order_shipped",
+    createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
+    isUnRead: true,
+  },
+  {
+    id: faker.datatype.uuid(),
+    title: "Delivery processing",
+    description: "Your order is being shipped",
+    avatar: null,
+    type: "order_shipped",
+    createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
+    isUnRead: true,
+  },
+  {
+    id: faker.datatype.uuid(),
+    title: "Delivery processing",
+    description: "Your order is being shipped",
+    avatar: null,
+    type: "order_shipped",
+    createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
+    isUnRead: true,
+  },
+  {
+    id: faker.datatype.uuid(),
+    title: "Delivery processing",
+    description: "Your order is being shipped",
+    avatar: null,
+    type: "order_shipped",
+    createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
+    isUnRead: true,
+  },
+  {
+    id: faker.datatype.uuid(),
+    title: "Delivery processing",
+    description: "Your order is being shipped",
+    avatar: null,
+    type: "order_shipped",
+    createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
+    isUnRead: true,
+  },
+  {
+    id: faker.datatype.uuid(),
+    title: "Delivery processing",
+    description: "Your order is being shipped",
+    avatar: null,
+    type: "order_shipped",
+    createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
+    isUnRead: true,
+  },
+  {
+    id: faker.datatype.uuid(),
+    title: "Delivery processing",
+    description: "Your order is being shipped",
+    avatar: null,
+    type: "order_shipped",
+    createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
+    isUnRead: true,
+  },
+  {
+    id: faker.datatype.uuid(),
+    title: "Delivery processing",
+    description: "Your order is being shipped",
+    avatar: null,
+    type: "order_shipped",
+    createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
+    isUnRead: true,
   },
 ];
 
@@ -129,15 +208,15 @@ export default function NotificationsPopover() {
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center", py: 2, px: 2.5 }}>
-          <Box sx={{ flexGrow: 1 }}>
-            <Typography variant="subtitle1">Notifications</Typography>
+          <Box sx={{ flexGrow: 1}}>
+            <Typography variant="subtitle1">Notificaciones</Typography>
             <Typography variant="body2" sx={{ color: "text.secondary" }}>
-              You have {totalUnRead} unread messages
+              Tienes {totalUnRead} notificaciones sin leer
             </Typography>
           </Box>
 
           {totalUnRead > 0 && (
-            <Tooltip title=" Mark all as read">
+            <Tooltip title=" Marcar todas como leídas">
               <IconButton color="primary" onClick={handleMarkAllAsRead}>
                 <Iconify icon="eva:done-all-fill" />
               </IconButton>
@@ -147,7 +226,7 @@ export default function NotificationsPopover() {
 
         <Divider sx={{ borderStyle: "dashed" }} />
 
-        <Scrollbar sx={{ minHeight: 340, height: { xs: 340, sm: "auto" } }}>
+        {/* <Scrollbar sx={{ minHeight: 340, height: { xs: 340, sm: "auto" } }}> */}
           <List
             disablePadding
             subheader={
@@ -155,24 +234,24 @@ export default function NotificationsPopover() {
                 disableSticky
                 sx={{ py: 1, px: 2.5, typography: "overline" }}
               >
-                New
+                Nuevas
               </ListSubheader>
             }
           >
-            {notifications.slice(0, 2).map((notification) => (
+            {notifications.map((notification) => (
               <NotificationItem
                 key={notification.id}
                 notification={notification}
               />
             ))}
           </List>
-        </Scrollbar>
+        {/* </Scrollbar> */}
 
         <Divider sx={{ borderStyle: "dashed" }} />
 
         <Box sx={{ p: 1 }}>
           <Button fullWidth disableRipple>
-            View All
+            Ver Todas
           </Button>
         </Box>
       </Popover>
@@ -195,7 +274,7 @@ NotificationItem.propTypes = {
 };
 
 function NotificationItem({ notification }) {
-  const { avatar, title } = renderContent(notification);
+  const {title } = renderContent(notification);
 
   return (
     <ListItemButton
@@ -208,9 +287,7 @@ function NotificationItem({ notification }) {
         }),
       }}
     >
-      <ListItemAvatar>
-        <Avatar sx={{ bgcolor: "background.neutral" }}>{avatar}</Avatar>
-      </ListItemAvatar>
+     
       <ListItemText
         primary={title}
         secondary={
@@ -251,54 +328,51 @@ function renderContent(notification) {
     </Typography>
   );
 
-  if (notification.type === "order_placed") {
-    return {
-      avatar: (
-        <img
-          alt={notification.title}
-          src="/assets/icons/ic_notification_package.svg"
-        />
-      ),
-      title,
-    };
-  }
-  if (notification.type === "order_shipped") {
-    return {
-      avatar: (
-        <img
-          alt={notification.title}
-          src="/assets/icons/ic_notification_shipping.svg"
-        />
-      ),
-      title,
-    };
-  }
-  if (notification.type === "mail") {
-    return {
-      avatar: (
-        <img
-          alt={notification.title}
-          src="/assets/icons/ic_notification_mail.svg"
-        />
-      ),
-      title,
-    };
-  }
-  if (notification.type === "chat_message") {
-    return {
-      avatar: (
-        <img
-          alt={notification.title}
-          src="/assets/icons/ic_notification_chat.svg"
-        />
-      ),
-      title,
-    };
-  }
+  // if (notification.type === "order_placed") {
+  //   return {
+  //     // avatar: (
+  //     //   <img
+  //     //     alt={notification.title}
+  //     //     src="/assets/icons/ic_notification_package.svg"
+  //     //   />
+  //     // ),
+  //     title,
+  //   };
+  // }
+  // if (notification.type === "order_shipped") {
+  //   return {
+  //     // avatar: (
+  //     //   <img
+  //     //     alt={notification.title}
+  //     //     src="/assets/icons/ic_notification_shipping.svg"
+  //     //   />
+  //     // ),
+  //     title,
+  //   };
+  // }
+  // if (notification.type === "mail") {
+  //   return {
+  //     avatar: (
+  //       <img
+  //         alt={notification.title}
+  //         src="/assets/icons/ic_notification_mail.svg"
+  //       />
+  //     ),
+  //     title,
+  //   };
+  // }
+  // if (notification.type === "chat_message") {
+  //   return {
+  //     avatar: (
+  //       <img
+  //         alt={notification.title}
+  //         src="/assets/icons/ic_notification_chat.svg"
+  //       />
+  //     ),
+  //     title,
+  //   };
+  // }
   return {
-    avatar: notification.avatar ? (
-      <img alt={notification.title} src={notification.avatar} />
-    ) : null,
-    title,
+    title
   };
 }

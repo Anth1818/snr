@@ -28,6 +28,7 @@ import Iconify from "../Iconify";
 import { UserListHead, UserListToolbar } from "../../sections/user";
 // mock
 import USERLIST from "../../_mock/user";
+import SimpleBar from "simplebar-react";
 
 // ----------------------------------------------------------------------
 
@@ -157,43 +158,40 @@ export default function UserTable() {
 
   return (
     <>
-        <Container
+      <Container
         sx={{
-          width: { xs:"400px", sm:"800px", md:"1200px"},
+          width: { xs: "400px", sm: "850px", md: "1200px" },
           position: "absolute",
           top: "200px",
-          left:{xs:"50px", sm:"100px", md:"120px"}
-          }}
-        >
-          <Typography variant="h4" gutterBottom align="center">
-            Lista de llamadas
-          </Typography>
-          <Stack
-            direction="row"
-            alignItems="center"
+          left: { xs: "50px", sm: "100px", md: "120px" },
+        }}
+      >
+        <Typography variant="h4" gutterBottom align="center">
+          Lista de llamadas
+        </Typography>
+        <Stack
+          direction="row"
+          alignItems="center"
           justifyContent="center"
-        
-            mb={1}
-          >
-            <Button
-              variant="contained"
+          mb={1}
+        >
+          <Button
+            variant="contained"
             startIcon={<Iconify icon="eva:plus-fill" />}
-            >
-              Nueva llamada
-            </Button>
-          </Stack>
+          >
+            Nueva llamada
+          </Button>
+        </Stack>
 
-          <Card>
-            <UserListToolbar
-              numSelected={selected.length}
-              filterName={filterName}
-              onFilterName={handleFilterByName}
-            />
+        <Card>
+          <UserListToolbar
+            numSelected={selected.length}
+            filterName={filterName}
+            onFilterName={handleFilterByName}
+          />
 
-            {/* <Scrollbar> */}
-            <TableContainer
-              sx={{ minWidth: 800, maxHeight: 500, }}
-            >
+          <SimpleBar style={{ maxHeight: "500px", overflowY: "hidden" }}>
+            <TableContainer sx={{ minWidth: 800, maxHeight: 500 }}>
               <Table>
                 <UserListHead
                   order={order}
@@ -302,8 +300,6 @@ export default function UserTable() {
                 )}
               </Table>
             </TableContainer>
-            {/* </Scrollbar> */}
-
             <TablePagination
               rowsPerPageOptions={[5, 10, 25]}
               component="div"
@@ -312,38 +308,43 @@ export default function UserTable() {
               page={page}
               onPageChange={handleChangePage}
               onRowsPerPageChange={handleChangeRowsPerPage}
+              sx={{
+                display: "flex",
+                justifyContent: { md: "flex-end", sm: "flex-start" },
+              }}
             />
-          </Card>
-        </Container>
+          </SimpleBar>
+        </Card>
+      </Container>
 
-        <Popover
-          open={Boolean(open)}
-          anchorEl={open}
-          onClose={handleCloseMenu}
-          anchorOrigin={{ vertical: "top", horizontal: "left" }}
-          transformOrigin={{ vertical: "top", horizontal: "right" }}
-          PaperProps={{
-            sx: {
-              p: 1,
-              width: 140,
-              "& .MuiMenuItem-root": {
-                px: 1,
-                typography: "body2",
-                borderRadius: 0.75,
-              },
+      <Popover
+        open={Boolean(open)}
+        anchorEl={open}
+        onClose={handleCloseMenu}
+        anchorOrigin={{ vertical: "top", horizontal: "left" }}
+        transformOrigin={{ vertical: "top", horizontal: "right" }}
+        PaperProps={{
+          sx: {
+            p: 1,
+            width: 140,
+            "& .MuiMenuItem-root": {
+              px: 1,
+              typography: "body2",
+              borderRadius: 0.75,
             },
-          }}
-        >
-          <MenuItem>
-            <Iconify icon={"eva:edit-fill"} sx={{ mr: 2 }} />
-            Edit
-          </MenuItem>
+          },
+        }}
+      >
+        <MenuItem>
+          <Iconify icon={"eva:edit-fill"} sx={{ mr: 2 }} />
+          Editar
+        </MenuItem>
 
-          <MenuItem sx={{ color: "error.main" }}>
-            <Iconify icon={"eva:trash-2-outline"} sx={{ mr: 2 }} />
-            Delete
-          </MenuItem>
-        </Popover>
+        <MenuItem sx={{ color: "error.main" }}>
+          <Iconify icon={"eva:trash-2-outline"} sx={{ mr: 2 }} />
+          Eliminar
+        </MenuItem>
+      </Popover>
     </>
   );
 }
