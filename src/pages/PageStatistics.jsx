@@ -1,13 +1,18 @@
-import PageTemplate from "../components/PageTemplate";
+import CintilloHeader from "../components/CintilloHeader/CintilloHeader";
+import { Box } from "@mui/system";
+import RenderDrawer from "../components/Drawer/Drawer";
 
 export default function PageStatistics() {
   return (
     <>
-      <PageTemplate>
-        <main className="w-screen min-h-screen flex justify-center items-center">
+      <Box
+      >
+        <CintilloHeader></CintilloHeader>
+        <RenderDrawer titlePage={"Estadísticas"}></RenderDrawer>
+        <main>
           <h1 className="text-7xl">Página Estadísticas</h1>
         </main>
-      </PageTemplate>
+      </Box>
     </>
   );
 }

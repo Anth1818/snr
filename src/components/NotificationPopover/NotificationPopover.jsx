@@ -29,128 +29,23 @@ import Iconify from "../Iconify";
 const NOTIFICATIONS = [
   {
     id: faker.datatype.uuid(),
-    title: "Your order is placed",
-    description: "waiting for shipping",
-    avatar: null,
-    type: "order_placed",
+    title: "Caso remitido desde '0800'",
+    description: "Numero del caso: 000123",
     createdAt: set(new Date(), { hours: 10, minutes: 30 }),
     isUnRead: true,
   },
   {
     id: faker.datatype.uuid(),
-    title: faker.name.fullName(),
-    description: "answered to your comment on the Minimal",
-    avatar: "/assets/images/avatars/avatar_2.jpg",
-    type: "friend_interactive",
+    title: "Caso remitido desde 'Registro de casos de violencia'",
+    description: "Numero del caso: 000456",
     createdAt: sub(new Date(), { hours: 3, minutes: 30 }),
     isUnRead: true,
   },
   {
     id: faker.datatype.uuid(),
-    title: "You have new message",
+    title: "",
     description: "5 unread messages",
-    avatar: null,
-    type: "chat_message",
     createdAt: sub(new Date(), { days: 1, hours: 3, minutes: 30 }),
-    isUnRead: true,
-  },
-  {
-    id: faker.datatype.uuid(),
-    title: "You have new mail",
-    description: "sent from Guido Padberg",
-    avatar: null,
-    type: "mail",
-    createdAt: sub(new Date(), { days: 2, hours: 3, minutes: 30 }),
-    isUnRead: true,
-  },
-  {
-    id: faker.datatype.uuid(),
-    title: "Delivery processing",
-    description: "Your order is being shipped",
-    avatar: null,
-    type: "order_shipped",
-    createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
-    isUnRead: true,
-  },
-  {
-    id: faker.datatype.uuid(),
-    title: "Delivery processing",
-    description: "Your order is being shipped",
-    avatar: null,
-    type: "order_shipped",
-    createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
-    isUnRead: true,
-  },
-  {
-    id: faker.datatype.uuid(),
-    title: "Delivery processing",
-    description: "Your order is being shipped",
-    avatar: null,
-    type: "order_shipped",
-    createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
-    isUnRead: true,
-  },
-  {
-    id: faker.datatype.uuid(),
-    title: "Delivery processing",
-    description: "Your order is being shipped",
-    avatar: null,
-    type: "order_shipped",
-    createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
-    isUnRead: true,
-  },
-  {
-    id: faker.datatype.uuid(),
-    title: "Delivery processing",
-    description: "Your order is being shipped",
-    avatar: null,
-    type: "order_shipped",
-    createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
-    isUnRead: true,
-  },
-  {
-    id: faker.datatype.uuid(),
-    title: "Delivery processing",
-    description: "Your order is being shipped",
-    avatar: null,
-    type: "order_shipped",
-    createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
-    isUnRead: true,
-  },
-  {
-    id: faker.datatype.uuid(),
-    title: "Delivery processing",
-    description: "Your order is being shipped",
-    avatar: null,
-    type: "order_shipped",
-    createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
-    isUnRead: true,
-  },
-  {
-    id: faker.datatype.uuid(),
-    title: "Delivery processing",
-    description: "Your order is being shipped",
-    avatar: null,
-    type: "order_shipped",
-    createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
-    isUnRead: true,
-  },
-  {
-    id: faker.datatype.uuid(),
-    title: "Delivery processing",
-    description: "Your order is being shipped",
-    avatar: null,
-    type: "order_shipped",
-    createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
-    isUnRead: true,
-  },
-  {
-    id: faker.datatype.uuid(),
-    title: "Delivery processing",
-    description: "Your order is being shipped",
-    avatar: null,
-    type: "order_shipped",
-    createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
     isUnRead: true,
   },
 ];
@@ -327,51 +222,6 @@ function renderContent(notification) {
       </Typography>
     </Typography>
   );
-
-  // if (notification.type === "order_placed") {
-  //   return {
-  //     // avatar: (
-  //     //   <img
-  //     //     alt={notification.title}
-  //     //     src="/assets/icons/ic_notification_package.svg"
-  //     //   />
-  //     // ),
-  //     title,
-  //   };
-  // }
-  // if (notification.type === "order_shipped") {
-  //   return {
-  //     // avatar: (
-  //     //   <img
-  //     //     alt={notification.title}
-  //     //     src="/assets/icons/ic_notification_shipping.svg"
-  //     //   />
-  //     // ),
-  //     title,
-  //   };
-  // }
-  // if (notification.type === "mail") {
-  //   return {
-  //     avatar: (
-  //       <img
-  //         alt={notification.title}
-  //         src="/assets/icons/ic_notification_mail.svg"
-  //       />
-  //     ),
-  //     title,
-  //   };
-  // }
-  // if (notification.type === "chat_message") {
-  //   return {
-  //     avatar: (
-  //       <img
-  //         alt={notification.title}
-  //         src="/assets/icons/ic_notification_chat.svg"
-  //       />
-  //     ),
-  //     title,
-  //   };
-  // }
   return {
     title
   };

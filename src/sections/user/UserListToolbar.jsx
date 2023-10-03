@@ -60,13 +60,13 @@ export default function UserListToolbar({
     >
       {numSelected > 0 ? (
         <Typography component="div" variant="subtitle1">
-          {numSelected} selected
+          {numSelected} Seleccione
         </Typography>
       ) : (
         <StyledSearch
           value={filterName}
           onChange={onFilterName}
-          placeholder="Search user..."
+          placeholder="Buscar usuario..."
           startAdornment={
             <InputAdornment position="start">
               <Iconify
@@ -79,13 +79,13 @@ export default function UserListToolbar({
       )}
 
       {numSelected > 0 ? (
-        <Tooltip title="Delete">
+        <Tooltip title="Eliminar">
           <IconButton>
             <Iconify icon="eva:trash-2-fill" />
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip title="Filter list">
+        <Tooltip title="Filtros">
           <IconButton>
             <Iconify icon="ic:round-filter-list" />
           </IconButton>
