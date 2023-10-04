@@ -15,6 +15,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 // import NotificationsIcon from "@mui/icons-material/Notifications";
 import { mainListItems } from "../ListItems/ListItems";
 import NotificationsPopover from "../NotificationPopover/NotificationPopover";
+import AccountPopover from "../AccountPopover";
 
 const drawerWidth = 240;
 
@@ -110,10 +111,11 @@ export default function RenderDrawer({ titlePage }) {
             >
               {titlePage}
             </Typography>
+            <AccountPopover />
             <NotificationsPopover />
           </Toolbar>
         </AppBar>
-        <Drawer variant="permanent" open={open} sx={{display: {xs: "flex", sm:"block"}}}>
+        <Drawer variant="permanent" open={open} sx={{display: {xs: "flex", sm:"block"}, height: "100%"}}>
           <Toolbar
             sx={{
               display: "flex",

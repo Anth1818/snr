@@ -1,5 +1,5 @@
-import Cintillo from "../../assets/cintillo.svg";
-import Cintillo2 from "../../assets/cintillo2.svg";
+import Cintillo from "/assets/cintillo.svg";
+import Cintillo2 from "/assets/cintillo2.svg";
 
 export default function CintilloHeader() {
   return (

@@ -30,19 +30,6 @@ import { UserListHead, UserListToolbar } from "../../sections/user";
 import USERLIST from "../../_mock/user";
 import SimpleBar from "simplebar-react";
 
-// ----------------------------------------------------------------------
-
-const TABLE_HEAD = [
-  { id: "name", label: "Name", alignRight: false },
-  { id: "company", label: "Company", alignRight: false },
-  { id: "role", label: "Role", alignRight: false },
-  { id: "isVerified", label: "Verified", alignRight: false },
-  { id: "status", label: "Status", alignRight: false },
-  { id: "" },
-];
-
-// ----------------------------------------------------------------------
-
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -75,7 +62,7 @@ function applySortFilter(array, comparator, query) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-export default function UserTable() {
+export default function UserTable({dataHeadTable, dataTitle}) {
   const [open, setOpen] = useState(null);
 
   const [page, setPage] = useState(0);
@@ -160,14 +147,14 @@ export default function UserTable() {
     <>
       <Container
         sx={{
-          width: { xs: "400px", sm: "850px", md: "1200px" },
+          width: { xs: "400px", sm: "700px", md: "auto" },
           position: "absolute",
           top: "200px",
-          left: { xs: "50px", sm: "100px", md: "120px" },
+          left: { xs: "50px", sm: "100px", md: "250px" },
         }}
       >
         <Typography variant="h4" gutterBottom align="center">
-          Lista de llamadas
+        {dataTitle}
         </Typography>
         <Stack
           direction="row"
@@ -179,7 +166,7 @@ export default function UserTable() {
             variant="contained"
             startIcon={<Iconify icon="eva:plus-fill" />}
           >
-            Nueva llamada
+            Nuevo Registro
           </Button>
         </Stack>
 
@@ -196,7 +183,7 @@ export default function UserTable() {
                 <UserListHead
                   order={order}
                   orderBy={orderBy}
-                  headLabel={TABLE_HEAD}
+                  headLabel={dataHeadTable}
                   rowCount={USERLIST.length}
                   numSelected={selected.length}
                   onRequestSort={handleRequestSort}

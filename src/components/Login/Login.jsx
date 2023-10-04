@@ -8,7 +8,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import {Button} from "@mui/material";
 import React from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import inamujerLogo from "../../assets/inamujer-logo.jpg"
+import inamujerLogo from "/assets/inamujer-logo.jpg"
 
 
 export default function Login() {
