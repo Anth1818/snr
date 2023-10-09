@@ -13,7 +13,7 @@ export default function App() {
       <Route path="/pages/PageRCV" element={<PageRCV />} />
       <Route path="/pages/PageOAC" element={<PageOAC />} />
       <Route path="/pages/PageStatistics" element={<PageStatistics />} />
-      <Route path="/pages/PageLogin" element={<PageLogin />} />
+      <Route path="/" element={<PageLogin />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

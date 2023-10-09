@@ -75,7 +75,7 @@ export default function UserTable({dataHeadTable, dataTitle}) {
 
   const [filterName, setFilterName] = useState("");
 
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleOpenMenu = (event) => {
     setOpen(event.currentTarget);
@@ -147,10 +147,10 @@ export default function UserTable({dataHeadTable, dataTitle}) {
     <>
       <Container
         sx={{
-          width: { xs: "400px", sm: "700px", md: "auto" },
+          width:"80%",
           position: "absolute",
           top: "200px",
-          left: { xs: "50px", sm: "100px", md: "250px" },
+          left: { xs: "50px", sm: "80px", md: "120px", lg: "200px" },
         }}
       >
         <Typography variant="h4" gutterBottom align="center">
@@ -177,8 +177,8 @@ export default function UserTable({dataHeadTable, dataTitle}) {
             onFilterName={handleFilterByName}
           />
 
-          <SimpleBar style={{ maxHeight: "500px", overflowY: "hidden" }}>
-            <TableContainer sx={{ minWidth: 800, maxHeight: 500 }}>
+          <SimpleBar style={{ height:"1000px", overflowY:"visible"}}>
+            <TableContainer sx={{width:"inherit"}}>
               <Table>
                 <UserListHead
                   order={order}
@@ -202,17 +202,8 @@ export default function UserTable({dataHeadTable, dataTitle}) {
                           hover
                           key={id}
                           tabIndex={-1}
-                          role="checkbox"
-                          selected={selectedUser}
                         >
-                          <TableCell padding="checkbox">
-                            <Checkbox
-                              checked={selectedUser}
-                              onChange={(event) => handleClick(event, name)}
-                            />
-                          </TableCell>
-
-                          <TableCell component="th" scope="row" padding="none">
+                          <TableCell component="th" scope="row" padding="normal">
                             <Stack
                               direction="row"
                               alignItems="center"
@@ -288,13 +279,11 @@ export default function UserTable({dataHeadTable, dataTitle}) {
               </Table>
             </TableContainer>
             <TablePagination
-              rowsPerPageOptions={[5, 10, 25]}
-              component="div"
               count={USERLIST.length}
+              component={"div"}
               rowsPerPage={rowsPerPage}
               page={page}
               onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
               sx={{
                 display: "flex",
                 justifyContent: { md: "flex-end", sm: "flex-start" },

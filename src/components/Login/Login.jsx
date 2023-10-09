@@ -9,6 +9,7 @@ import {Button} from "@mui/material";
 import React from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import inamujerLogo from "/assets/inamujer-logo.jpg"
+import { useNavigate } from "react-router-dom";
 
 
 export default function Login() {
@@ -22,10 +23,12 @@ export default function Login() {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+  
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    location.href= "https://google.com"
+    navigate("/pages/Page0800")
 
   }
 

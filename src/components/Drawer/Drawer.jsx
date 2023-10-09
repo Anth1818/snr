@@ -64,7 +64,9 @@ const Drawer = styled(MuiDrawer, {
       }),
       width: theme.spacing(7),
       [theme.breakpoints.up("sm")]: {
-        width: theme.spacing(9),
+        width: theme.spacing(7),
+      }, [theme.breakpoints.down("sm")]: {
+        width: theme.spacing(0),
       },
     }),
   },
@@ -107,7 +109,7 @@ export default function RenderDrawer({ titlePage }) {
               variant="h4"
               color="inherit"
               noWrap
-              sx={{ flexGrow: 1 }}
+              sx={{ flexGrow: 1, display:{xs:"none", sm:"block"}}}
             >
               {titlePage}
             </Typography>
