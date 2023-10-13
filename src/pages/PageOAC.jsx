@@ -1,13 +1,17 @@
-import PageTemplate from "./PageTemplate";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import CintilloHeader from "../components/CintilloHeader/CintilloHeader";
 
-export default function PageOAC() {
+import Footer from "../components/Footer/Footer";
+import ResponsiveLayoutStatistics from "../components/ResponsiveLayout/ResponsiveLayoutOAC";
+// TODO remove, this demo shouldn't need to reset the theme.
+const defaultTheme = createTheme();
+
+export default function Statistics() {
   return (
-    <>
-      <PageTemplate titlePage={"OAC"}>
-        <main className="w-[500px] absolute top-[50%] left-[35%] text-center">
-          <h1 className="text-4xl">Pagina OAC</h1>
-        </main>
-      </PageTemplate>
-    </>
+    <ThemeProvider theme={defaultTheme}>
+      <CintilloHeader></CintilloHeader>
+      <ResponsiveLayoutStatistics></ResponsiveLayoutStatistics>
+      <Footer></Footer>
+    </ThemeProvider>
   );
 }

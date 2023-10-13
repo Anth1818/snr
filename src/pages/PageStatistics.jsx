@@ -1,18 +1,18 @@
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CintilloHeader from "../components/CintilloHeader/CintilloHeader";
-import { Box } from "@mui/system";
-import RenderDrawer from "../components/Drawer/Drawer";
 
-export default function PageStatistics() {
+import Footer from "../components/Footer/Footer";
+import ResponsiveLayoutStatistics from "../components/ResponsiveLayout/ResponsiveLayoutStatistics";
+// TODO remove, this demo shouldn't need to reset the theme.
+const defaultTheme = createTheme();
+
+
+export default function Statistics() {
   return (
-    <>
-      <Box
-      >
-        <CintilloHeader></CintilloHeader>
-        <RenderDrawer titlePage={"Estadísticas"}></RenderDrawer>
-        <main>
-          <h1 className="text-7xl">Página Estadísticas</h1>
-        </main>
-      </Box>
-    </>
+    <ThemeProvider theme={defaultTheme}>
+      <CintilloHeader></CintilloHeader>
+      <ResponsiveLayoutStatistics></ResponsiveLayoutStatistics>
+      <Footer></Footer>
+    </ThemeProvider>
   );
 }

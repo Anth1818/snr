@@ -9,7 +9,6 @@ import {
   Paper,
   Button,
   Popover,
-  Checkbox,
   TableRow,
   MenuItem,
   TableBody,
@@ -62,6 +61,7 @@ function applySortFilter(array, comparator, query) {
   return stabilizedThis.map((el) => el[0]);
 }
 
+// eslint-disable-next-line react/prop-types
 export default function UserTable({dataHeadTable, dataTitle}) {
   const [open, setOpen] = useState(null);
 
@@ -75,7 +75,8 @@ export default function UserTable({dataHeadTable, dataTitle}) {
 
   const [filterName, setFilterName] = useState("");
 
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  // eslint-disable-next-line no-unused-vars
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const handleOpenMenu = (event) => {
     setOpen(event.currentTarget);
@@ -100,31 +101,8 @@ export default function UserTable({dataHeadTable, dataTitle}) {
     setSelected([]);
   };
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      );
-    }
-    setSelected(newSelected);
-  };
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setPage(0);
-    setRowsPerPage(parseInt(event.target.value, 10));
   };
 
   const handleFilterByName = (event) => {
@@ -147,9 +125,8 @@ export default function UserTable({dataHeadTable, dataTitle}) {
     <>
       <Container
         sx={{
-          width:"80%",
-          position: "absolute",
-          top: "200px",
+          width:"100%",
+          marginTop:"40px",
           left: { xs: "50px", sm: "80px", md: "120px", lg: "200px" },
         }}
       >
@@ -177,7 +154,7 @@ export default function UserTable({dataHeadTable, dataTitle}) {
             onFilterName={handleFilterByName}
           />
 
-          <SimpleBar style={{ height:"1000px", overflowY:"visible"}}>
+          <SimpleBar style={{ height:"550px", overflowY:"visible"}}>
             <TableContainer sx={{width:"inherit"}}>
               <Table>
                 <UserListHead
@@ -195,7 +172,6 @@ export default function UserTable({dataHeadTable, dataTitle}) {
                     .map((row) => {
                       const { id, name, role, status, company, isVerified } =
                         row;
-                      const selectedUser = selected.indexOf(name) !== -1;
 
                       return (
                         <TableRow
@@ -282,6 +258,7 @@ export default function UserTable({dataHeadTable, dataTitle}) {
               count={USERLIST.length}
               component={"div"}
               rowsPerPage={rowsPerPage}
+              rowsPerPageOptions={[]}
               page={page}
               onPageChange={handleChangePage}
               sx={{
