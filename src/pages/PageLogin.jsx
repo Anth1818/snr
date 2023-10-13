@@ -8,7 +8,6 @@ export default function PageLogin() {
     <>
         <CintilloHeader />
         <Login />
-        <Footer />
     </>
   );
 }

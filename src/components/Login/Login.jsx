@@ -33,9 +33,9 @@ export default function Login() {
   }
 
   return (
-    <div className="grid place-items-center min-h-screen box-border">
-      <div className="min-w-fit h-96 border-2 border-gray-400 box-border absolute rounded-lg">
-        <div className="clip-path-mypolygon bg-[#2E219E] h-48 w-full m-0 absolute box-border pt-4 rounded-t-lg">
+    <div className="grid place-items-center box-border mt-32">
+      <div className="min-w-fit h-full border-2 border-gray-400 box-border  rounded-lg">
+        <div className="clip-path-mypolygon bg-[#2E219E] h-44 w-full m-0 box-border pt-4 rounded-t-lg">
           <h2 className="text-center text-white text-2xl font-bold">
             Iniciar sesión
           </h2>
@@ -43,9 +43,9 @@ export default function Login() {
         <img
           src={inamujerLogo}
           alt="Logo inamujer"
-          className=" w-20 absolute rounded-full top-20 left-[38%] mt-1"
+          className=" w-20 -mt-24 ml-28"
         />
-        <form className="flex flex-col gap-2 p-8 mt-32" onSubmit={handleSubmit}>
+        <form className="flex flex-col gap-2 p-8 mb-4" onSubmit={handleSubmit}>
           <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined" required>
             <InputLabel htmlFor="outlined-adornment-username">
               Usuario
