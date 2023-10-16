@@ -5,6 +5,7 @@ import PageLogin from "./pages/PageLogin.jsx";
 import { Routes, Route } from "react-router-dom";
 import NotFound from "./pages/PageNotFound.jsx";
 import PageStatistics from "./pages/PageStatistics.jsx"
+import PageForm0800 from "./pages/Pageform0800.jsx";
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
       <Route path="/pages/PageRCV" element={<PageRCV />} />
       <Route path="/pages/PageOAC" element={<PageOAC />} />
       <Route path="/pages/PageStatistics" element={<PageStatistics />} />
+      <Route path="/pages/Page0800/PageForm0800" element={<PageForm0800 />} />
       <Route path="/" element={<PageLogin />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
