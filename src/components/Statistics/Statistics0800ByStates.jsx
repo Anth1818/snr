@@ -5,7 +5,7 @@ import { faker } from '@faker-js/faker';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const labels = [
+export const labels = [
     'Amazonas',
     'Anzoátegui',
     'Apure',

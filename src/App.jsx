@@ -14,7 +14,7 @@ export default function App() {
       <Route path="/pages/PageRCV" element={<PageRCV />} />
       <Route path="/pages/PageOAC" element={<PageOAC />} />
       <Route path="/pages/PageStatistics" element={<PageStatistics />} />
-      <Route path="/pages/Page0800/PageForm0800" element={<PageForm0800 />} />
+      <Route path="/pages/PageForm0800" element={<PageForm0800 />} />
       <Route path="/" element={<PageLogin />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

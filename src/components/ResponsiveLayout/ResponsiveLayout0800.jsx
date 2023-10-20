@@ -26,6 +26,7 @@ export default function ResponsiveLayout0800({ dataHeadTable }) {
           <UserTable
             dataHeadTable={dataHeadTable}
             dataTitle={"Lista de llamadas"}
+            pathToForm={"/Pages/PageForm0800"}
           ></UserTable>
         </Container>
       </Box>
