@@ -28,6 +28,7 @@ import { UserListHead, UserListToolbar } from "../../sections/user";
 // mock
 import USERLIST from "../../_mock/user";
 import SimpleBar from "simplebar-react";
+import { Link } from "react-router-dom";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -139,12 +140,14 @@ export default function UserTable({dataHeadTable, dataTitle, pathToForm}) {
           justifyContent="center"
           mb={1}
         >
-          <Button
-            variant="contained"
-            startIcon={<Iconify icon="eva:plus-fill" />}
-          >
-            Nuevo Registro
-          </Button>
+          <Link to={pathToForm}>
+            <Button
+              variant="contained"
+              startIcon={<Iconify icon="eva:plus-fill" />}
+            >
+              Nuevo Registro
+            </Button>
+          </Link>
         </Stack>
 
         <Card>

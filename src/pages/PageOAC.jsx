@@ -11,7 +11,7 @@ export default function Statistics() {
     <ThemeProvider theme={defaultTheme}>
       <CintilloHeader></CintilloHeader>
       <ResponsiveLayoutStatistics></ResponsiveLayoutStatistics>
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
     </ThemeProvider>
   );
 }

@@ -27,7 +27,7 @@ export default function Page0800() {
         <ResponsiveLayoutRCV
           dataHeadTable={TABLE_HEAD_RCV}
         ></ResponsiveLayoutRCV>
-        <Footer></Footer>
+        {/* <Footer></Footer> */}
       </ThemeProvider>
     </>
   );

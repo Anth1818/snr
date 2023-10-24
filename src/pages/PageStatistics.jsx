@@ -1,7 +1,7 @@
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CintilloHeader from "../components/CintilloHeader/CintilloHeader";
 
-import Footer from "../components/Footer/Footer";
+// import Footer from "../components/Footer/Footer";
 import ResponsiveLayoutStatistics from "../components/ResponsiveLayout/ResponsiveLayoutStatistics";
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
@@ -12,7 +12,7 @@ export default function Statistics() {
     <ThemeProvider theme={defaultTheme}>
       <CintilloHeader></CintilloHeader>
       <ResponsiveLayoutStatistics></ResponsiveLayoutStatistics>
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
     </ThemeProvider>
   );
 }

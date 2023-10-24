@@ -27,7 +27,7 @@ export default function Page0800() {
           dataHeadTable={TABLE_HEAD_0800
           }
         ></ResponsiveLayout0800>
-        <Footer></Footer>
+        {/* <Footer></Footer> */}
       </ThemeProvider>
     </>
   );
