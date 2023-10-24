@@ -59,18 +59,53 @@ export const NIVELDEINSTRUCCION = [
 ];
 
 export const OCUPACION = [
-  "Desempleada",
-  "Ama de casa",
+  "Desempleada(o)",
+  "Ama(o) de casa",
   "Estudiante",
   "Area de salud",
   "Area Administrativa",
-  "Empresaria",
+  "Empresaria(o)",
   "Comerciante",
   "Independiente",
-  "Vendedora",
+  "Vendedor(a)",
   "Artista",
-  "Peluquera",
-  "Costurera",
-  "Jubilada",
+  "Peluquera(o)",
+  "Costurera(o)",
+  "Jubilada(o)",
   "Otros",
 ];
+
+export const VINCULO = [
+  "Amigo",
+  "Concubino",
+  "Esposo",
+  "Novio",
+  "Ex concubino",
+  "Ex esposo",
+  "Ex novio",
+  "Hermano",
+  "Padre",
+  "Hijo",
+  "Tío",
+  "Primo",
+  "Vecino",
+  "Desconocido"
+]
+
+export const INSTITUTIONALINTERVENTIONDATA = [
+  "Acudio en tiempo acordado",
+  "Incumplio tiempo acordado",
+  "No acudio"
+]
+
+
+export const FINDOUT0800 = [
+  "Radio",
+  "TV",
+  "Internet",
+  "Inamujer",
+  "Prensa",
+  "Amigo(a)",
+  "Familiar",
+  "Otro"
+]

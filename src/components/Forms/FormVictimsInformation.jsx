@@ -102,9 +102,9 @@ export default function FormVictimsInformation ( ){
           )}
         ></Autocomplete>
         <Autocomplete
-          disablePortal
+          disabled
           size="small"
-          id="states"
+          id="municipio"
           options={MUNICIPIO}
           sx={{ width: "300px" }}
           renderInput={(params) => (
@@ -112,9 +112,9 @@ export default function FormVictimsInformation ( ){
           )}
         ></Autocomplete>
         <Autocomplete
-          disablePortal
+          disabled
           size="small"
-          id="states"
+          id="parroquia"
           options={PARROQUIA}
           sx={{ width: "300px" }}
           renderInput={(params) => (

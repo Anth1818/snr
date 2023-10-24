@@ -1,24 +1,23 @@
 import { CssBaseline, Grid, Paper, TextField, Toolbar, Typography, Button, Autocomplete, FormGroup } from "@mui/material";
-import { Box, Container } from "@mui/system";
+import { Box, Container, width } from "@mui/system";
 import RenderDrawer from "../Drawer/Drawer";
 import FormTypesOfCalls from "../Forms/FormTypesOfCalls";
 import { useState } from "react";
 import FormVictimsInformation from "../Forms/FormVictimsInformation";
+import FormDataOfTheTypeOfViolence from "../Forms/FormDataOfTheTypeOfViolence";
+import FormAggressorsDetails from "../Forms/FormAggressorsDetails";
+import FormInstitutionalIntervention from "../Forms/FormInstitutionalIntervention";
+import FormContactInformation from "../Forms/FormContactInformation";
+import FormSummaryCall from "../Forms/FormSummaryCall";
+import FormButtonSubmit from "../Forms/FormButtonSubmit";
 
 export default function ResponsiveLayoutForm0800() {
 
-  const typesOfCall = [{
-    label: 'Orientación'
-  },
-  {
-    label: 'Información'
-  },
-  {
-    label: 'Intervención'
-  },
-  {
-    label: 'No relevante'
-  },
+  const typesOfCall = [
+    'Orientación',
+    'Información',
+    'Intervención',
+    'No relevante'
   ]
 
   const checkboxesDataOrientation = [
@@ -59,39 +58,78 @@ export default function ResponsiveLayoutForm0800() {
   let componentToRender = null;
 
   switch (selectedOption) {
-    case "Orientación":
+    case 'Orientación':
       componentToRender = (
         <>
-        <FormTypesOfCalls
-          title={"Subtipos de orientación"}
-          checkboxesData={checkboxesDataOrientation}
-        />
-        <FormVictimsInformation></FormVictimsInformation>
+          <FormTypesOfCalls
+            title={"Subtipos de orientación"}
+            checkboxesData={checkboxesDataOrientation}
+          />
+          <FormVictimsInformation />
+          <FormDataOfTheTypeOfViolence />
+          <FormAggressorsDetails />
+          <FormInstitutionalIntervention />
+          <FormContactInformation />
+          <FormButtonSubmit />
         </>
       );
       break;
-    case "Información":
+    case 'Información':
       componentToRender = (
-        <FormTypesOfCalls
-          title={"Subtipos de información"}
-          checkboxesData={checkboxesDataInformation}
-        />
+        <>
+          <FormTypesOfCalls
+            title={"Subtipos de información"}
+            checkboxesData={checkboxesDataInformation}
+          />
+          <FormSummaryCall />
+          <FormButtonSubmit />
+        </>
       );
       break;
-    case "Intervención":
+    case 'Intervención':
       componentToRender = (
-        <FormTypesOfCalls
-          title={"Subtipos de intervención"}
-          checkboxesData={checkboxesDataIntervention}
-        />
+        <>
+          <FormTypesOfCalls
+            title={"Subtipos de intervención"}
+            checkboxesData={checkboxesDataIntervention}
+          />
+          <FormVictimsInformation />
+          <FormDataOfTheTypeOfViolence />
+          <FormAggressorsDetails />
+          <FormInstitutionalIntervention />
+          <FormButtonSubmit />
+        </>
       );
       break;
-    case "No relevante":
+    case 'No relevante':
       componentToRender = (
-        <FormTypesOfCalls
-          title={"Subtipos de no relevante"}
-          checkboxesData={checkboxesDataNotRelevant}
-        />
+        <>
+          <FormTypesOfCalls
+            title={"Subtipos de no relevante"}
+            checkboxesData={checkboxesDataNotRelevant}
+          />
+        <Typography variant="h5" textAlign={"center"} sx={{ marginBottom: '10px', marginTop:'10px'}}>
+                Resumen de la llamada
+            </Typography>
+            <FormGroup
+                sx={{
+                    display: "flex",
+                    gap: "20px",
+                    flexDirection: "column",
+                    marginTop: "15px",
+                    justifyContent: "space-evenly",
+                    alignItems:"center",
+                }}
+            >
+                <TextField
+                    multiline
+                    minRows={5}
+                    sx={{ width: 500 }}
+                    label="Resumen de la llamada..."
+                ></TextField>
+          </FormGroup>
+        <FormButtonSubmit />
+        </>
       );
       break;
     default:
@@ -132,6 +170,7 @@ export default function ResponsiveLayoutForm0800() {
                   }}
                 >
                   <form className=" ">
+                    {/* ------Seleccionar tipo de llamada----------- */}
                     <Autocomplete
                       disablePortal
                       id="typesOfCall"
@@ -148,20 +187,17 @@ export default function ResponsiveLayoutForm0800() {
                         />
                       )}
                       onChange={(event, newValue) => {
-                        setSelectedOption(newValue.label);
+                        setSelectedOption(newValue);
                       }}
-                      isOptionEqualToValue={(option, value) =>
-                        option.label === value.label
-                      }
+                      isOptionEqualToValue={(option, value) => option.id === value.id}
                     ></Autocomplete>
 
-                    {/* ----------Formulario subtipos de llamadas------------- */}
                     {selectedOption !== null ? (
                       <div>
                         {/* Contenido a renderizar si selectedOption no es null */}
                         {componentToRender}
                       </div>
-                    ) : null}            
+                    ) : null}
                   </form>
                 </Box>
               </Paper>

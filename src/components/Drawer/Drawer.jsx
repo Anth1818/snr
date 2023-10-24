@@ -33,7 +33,7 @@ const AppBar = styled(MuiAppBar, {
   ...(open && {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
-    marginTop: "80px",
+    marginTop: "65px",
     boxSizing: "border-box",
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
