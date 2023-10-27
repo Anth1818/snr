@@ -3,19 +3,16 @@ import { Box } from "@mui/system";
 import { ID, GENDER, MUNICIPIO, PARROQUIA, ISPREGNANT, ESTADOCIVIL, OCUPACION, ETNIA, NIVELDEINSTRUCCION } from '../../utils/constants.js'
 import { labels as STATES } from "../Statistics/Statistics0800ByStates";
 
-export default function FormVictimsInformation ( ){
+export default function FormVictimsInformation() {
   return (
     <Box
       sx={{
-        border: "solid 1px black",
-        marginTop: "20px",
-        width: "80%",
-        marginLeft: "auto",
-        marginRight: "auto",
+        width: "100%",
+
         padding: "20px",
       }}
     >
-      <Typography variant="h4" textAlign={"center"}>
+      <Typography variant="h4" textAlign={"center"} sx={{marginBottom:'20px'}}>
         Datos de la agraviada
       </Typography>
       <FormGroup
@@ -193,10 +190,13 @@ export default function FormVictimsInformation ( ){
           sx={{ width: 500 }}
           label="Resumen de la llamada..."
         ></TextField>
-        <Button variant="contained" size="large" sx={{ width: 500 }}>
+      </FormGroup>
+      <Box sx={{width:'100%', display:'flex', justifyContent:'center', marginTop:'10px'}}>
+        <Button variant="contained" size="large" sx={{width:'500px'}}>
           Agregar familiar
         </Button>
-      </FormGroup>
+
+      </Box>
     </Box>
   );
 }

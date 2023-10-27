@@ -8,9 +8,9 @@ export default function FormTypesOfCalls({ title, checkboxesData }) {
   return (
     <Box
       sx={{
-        border: "solid 1px black",
+        borderBottom: "solid 1px grey",
         marginTop: "20px",
-        width: "80%",
+        width: "100%",
         marginLeft: "auto",
         marginRight: "auto",
         padding: "20px",

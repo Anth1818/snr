@@ -25,7 +25,7 @@ export default function FormContactInformation() {
       sx={{
         border: "solid 1px black",
         marginTop: "20px",
-        width: "80%",
+        width: "100%",
         marginLeft: "auto",
         marginRight: "auto",
         padding: "20px",
@@ -128,7 +128,7 @@ export default function FormContactInformation() {
             variant="outlined"
             size="small"
             type="email"
-            sx={{ width: "300px" }}
+            sx={{ width:{xs:'300px', lg:'80%'}}}
           />
         </FormGroup>
       )}

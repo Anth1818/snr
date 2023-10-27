@@ -1,5 +1,5 @@
 import { Autocomplete, FormControl, FormControlLabel, FormGroup, FormLabel, Radio, RadioGroup, TextField, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import { Box, width } from "@mui/system";
 import { useState } from "react";
 import {INSTITUTIONALINTERVENTIONDATA} from "../../utils/constants";
 
@@ -17,7 +17,7 @@ export default function FormInstitutionalIntervention() {
             sx={{
                 border: "solid 1px black",
                 marginTop: "20px",
-                width: "80%",
+                width: "100%",
                 marginLeft: "auto",
                 marginRight: "auto",
                 padding: "20px",
@@ -81,14 +81,14 @@ export default function FormInstitutionalIntervention() {
                         name="phone"
                         variant="outlined"
                         size="small"
-                        sx={{ width: "300px" }}
+                        sx={{ width:{xs:'300px', lg:'450px'}}}
                     />
                        <Autocomplete
                         disablePortal
                         size="small"
                         id="occupation"
                         options={INSTITUTIONALINTERVENTIONDATA}
-                        sx={{ width: "300px" }}
+                        sx={{ width:{xs:'300px', lg:'450px'}}}
                         renderInput={(params) => (
                             <TextField {...params} label="Seleccione respuesta" />
                         )}

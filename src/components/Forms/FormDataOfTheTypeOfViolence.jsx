@@ -1,5 +1,5 @@
 import { Checkbox, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import { Box, width } from "@mui/system";
 import { useState } from "react";
 
 export default function FormDataOfTheTypeOfViolence() {
@@ -38,7 +38,7 @@ export default function FormDataOfTheTypeOfViolence() {
             sx={{
                 border: "solid 1px black",
                 marginTop: "20px",
-                width: "80%",
+                width: "100%",
                 marginLeft: "auto",
                 marginRight: "auto",
                 padding: "20px",
@@ -63,19 +63,22 @@ export default function FormDataOfTheTypeOfViolence() {
             </FormControl>
 
             {value === "Si" &&  checkboxesDataTypesOfViolence.map((checkbox) => (
+            
+
               <FormControlLabel
                 name="typeOfViolence"
-                    key={checkbox.id}
-                    control={
-                        <Checkbox
-                        // Aquí puedes añadir lógica para manejar el cambio de estado del checkbox
-                        // Por ejemplo, puedes llamar a una función cuando cambie el estado
-                        // onChange={() => handleCheckboxChange(checkbox.id)}
-                        />
-                    }
-                    label={checkbox.label}
-                    sx={{ display: "flex" }}
+                key={checkbox.id}
+                control={ 
+                    <Checkbox
+                    // Aquí puedes añadir lógica para manejar el cambio de estado del checkbox
+                    // Por ejemplo, puedes llamar a una función cuando cambie el estado
+                    // onChange={() => handleCheckboxChange(checkbox.id)}
+                    />
+                }
+                label={checkbox.label}
+                
                 />
+               
             ))}
 
         </Box>

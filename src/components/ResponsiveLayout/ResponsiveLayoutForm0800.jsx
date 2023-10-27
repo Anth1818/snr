@@ -1,4 +1,4 @@
-import { CssBaseline, Grid, Paper, TextField, Toolbar, Typography, Autocomplete, FormGroup } from "@mui/material";
+import { CssBaseline, Grid, Paper, TextField, Toolbar, Typography, Autocomplete, FormGroup, Select, MenuItem, InputLabel, FormControl } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import RenderDrawer from "../Drawer/Drawer";
 import FormTypesOfCalls from "../Forms/FormTypesOfCalls";
@@ -15,7 +15,7 @@ import { TYPEOFCALLS } from "../../utils/constants";
 
 export default function ResponsiveLayoutForm0800() {
 
-  
+
   const [selectedOption, setSelectedOption] = useState('Orientación');
   let componentToRender = null;
 
@@ -70,27 +70,27 @@ export default function ResponsiveLayoutForm0800() {
             title={"Subtipos de no relevante"}
             checkboxesData={checkboxesDataNotRelevant}
           />
-        <Typography variant="h5" textAlign={"center"} sx={{ marginBottom: '10px', marginTop:'10px'}}>
-                Resumen de la llamada
-            </Typography>
-            <FormGroup
-                sx={{
-                    display: "flex",
-                    gap: "20px",
-                    flexDirection: "column",
-                    marginTop: "15px",
-                    justifyContent: "space-evenly",
-                    alignItems:"center",
-                }}
-            >
-                <TextField
-                    multiline
-                    minRows={5}
-                    sx={{ width: 500 }}
-                    label="Resumen de la llamada..."
-                ></TextField>
+          <Typography variant="h5" textAlign={"center"} sx={{ marginBottom: '10px', marginTop: '10px' }}>
+            Resumen de la llamada
+          </Typography>
+          <FormGroup
+            sx={{
+              display: "flex",
+              gap: "20px",
+              flexDirection: "column",
+              marginTop: "15px",
+              justifyContent: "space-evenly",
+              alignItems: "center",
+            }}
+          >
+            <TextField
+              multiline
+              minRows={5}
+              sx={{ width: 500 }}
+              label="Resumen de la llamada..."
+            ></TextField>
           </FormGroup>
-        <FormButtonSubmit />
+          <FormButtonSubmit />
         </>
       );
       break;
@@ -134,11 +134,9 @@ export default function ResponsiveLayoutForm0800() {
                   <form className=" ">
                     {/* ------Seleccionar tipo de llamada----------- */}
                     <Autocomplete
-                      disablePortal
                       id="typesOfCall"
                       name="typeOfCall"
                       options={TYPEOFCALLS}
-                      clearOnEscape
                       value={selectedOption}
                       sx={{ width: 300, margin: "0 auto" }}
                       renderInput={(params) => (

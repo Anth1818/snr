@@ -19,7 +19,7 @@ export default function FormDataOfFamily() {
       sx={{
         border: "solid 1px black",
         marginTop: "20px",
-        width: "80%",
+        width: "100%",
         marginLeft: "auto",
         marginRight: "auto",
         padding: "20px",
