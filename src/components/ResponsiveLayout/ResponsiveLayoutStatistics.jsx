@@ -32,7 +32,7 @@ export default function ResponsiveLayoutStatistics() {
         }}
       >
         <Toolbar />
-        <Container maxWidth="lg" sx={{ mt: 4, mb: 4, }}>
+        <Container maxWidth="lg" sx={{ mt: 4, mb: 10, }}>
           <Grid container spacing={3} sx={{ overflowY: 'hidden' }}>
             {/* Chart */}
             <Grid item xs={12} md={8} lg={6}>

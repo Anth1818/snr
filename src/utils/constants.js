@@ -1,5 +1,13 @@
 export const ID = [{ label: "Cédula" }, { label: "Rif" }, { label: "Pasaporte" }];
 
+export const TYPEOFCALLS = [
+  "Orientación",
+  "Información",
+  "Intervención",
+  "No relevante",
+];
+
+
 export const GENDER = [
   {
     label: "Hombre",

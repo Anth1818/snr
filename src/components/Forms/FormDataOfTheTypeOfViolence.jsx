@@ -63,7 +63,8 @@ export default function FormDataOfTheTypeOfViolence() {
             </FormControl>
 
             {value === "Si" &&  checkboxesDataTypesOfViolence.map((checkbox) => (
-                <FormControlLabel
+              <FormControlLabel
+                name="typeOfViolence"
                     key={checkbox.id}
                     control={
                         <Checkbox

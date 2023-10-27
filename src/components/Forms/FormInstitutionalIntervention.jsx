@@ -1,4 +1,4 @@
-import { Autocomplete, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Radio, RadioGroup, TextField, Typography } from "@mui/material";
+import { Autocomplete, FormControl, FormControlLabel, FormGroup, FormLabel, Radio, RadioGroup, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
 import {INSTITUTIONALINTERVENTIONDATA} from "../../utils/constants";

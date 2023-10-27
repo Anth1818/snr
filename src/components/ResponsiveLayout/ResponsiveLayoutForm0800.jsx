@@ -1,5 +1,5 @@
-import { CssBaseline, Grid, Paper, TextField, Toolbar, Typography, Button, Autocomplete, FormGroup } from "@mui/material";
-import { Box, Container, width } from "@mui/system";
+import { CssBaseline, Grid, Paper, TextField, Toolbar, Typography, Autocomplete, FormGroup } from "@mui/material";
+import { Box, Container } from "@mui/system";
 import RenderDrawer from "../Drawer/Drawer";
 import FormTypesOfCalls from "../Forms/FormTypesOfCalls";
 import { useState } from "react";
@@ -10,50 +10,12 @@ import FormInstitutionalIntervention from "../Forms/FormInstitutionalInterventio
 import FormContactInformation from "../Forms/FormContactInformation";
 import FormSummaryCall from "../Forms/FormSummaryCall";
 import FormButtonSubmit from "../Forms/FormButtonSubmit";
+import { checkboxesDataInformation, checkboxesDataIntervention, checkboxesDataOrientation, checkboxesDataNotRelevant } from "../../utils/checkboxesData";
+import { TYPEOFCALLS } from "../../utils/constants";
 
 export default function ResponsiveLayoutForm0800() {
 
-  const typesOfCall = [
-    'Orientación',
-    'Información',
-    'Intervención',
-    'No relevante'
-  ]
-
-  const checkboxesDataOrientation = [
-    { id: 1, label: 'Pasos a seguir para la solucion de problemas' },
-    { id: 2, label: 'Aclaracion de errores, mitos y creencias' },
-    { id: 3, label: 'Legal ' },
-    { id: 4, label: 'Situacion (Violencia contra la mujer) ' },
-    { id: 5, label: 'Salud ' },
-    { id: 6, label: 'App (Contención emocional) ' }
-  ];
-
-  const checkboxesDataInformation = [
-    { id: 1, label: 'Servicios del 0800' },
-    { id: 2, label: 'Referencias simples' },
-    { id: 3, label: 'Puntos de encuentro' },
-    { id: 4, label: 'Eventos' },
-    { id: 5, label: 'Salud ' },
-    { id: 6, label: 'Contactos institucionales' }
-  ]
-
-  const checkboxesDataIntervention = [
-    { id: 1, label: "Protección fisica" },
-    { id: 2, label: "Preservación de la vida" },
-    { id: 3, label: "Protección legal" },
-  ];
-
-  const checkboxesDataNotRelevant = [
-    { id: 1, label: "Violencia simulada" },
-    { id: 2, label: "Agresión verbal" },
-    { id: 3, label: "Niños" },
-    { id: 4, label: "Sin audio" },
-    { id: 5, label: "Llamada caída" },
-    { id: 6, label: "Llamada equivocada" },
-    { id: 7, label: "Ociosa" },
-  ];
-
+  
   const [selectedOption, setSelectedOption] = useState('Orientación');
   let componentToRender = null;
 
@@ -153,7 +115,7 @@ export default function ResponsiveLayoutForm0800() {
         }}
       >
         <Toolbar />
-        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+        <Container maxWidth="lg" sx={{ mt: 4, mb: 10 }}>
           <Grid container>
             <Grid item xs={12}>
               <Paper
@@ -174,7 +136,8 @@ export default function ResponsiveLayoutForm0800() {
                     <Autocomplete
                       disablePortal
                       id="typesOfCall"
-                      options={typesOfCall}
+                      name="typeOfCall"
+                      options={TYPEOFCALLS}
                       clearOnEscape
                       value={selectedOption}
                       sx={{ width: 300, margin: "0 auto" }}

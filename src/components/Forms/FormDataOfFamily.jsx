@@ -35,6 +35,7 @@ export default function FormDataOfFamily() {
       <Autocomplete
         disablePortal
         id="parentesco-familiar"
+        name="parentescoFamiliar"
         options={parentescoFamiliar}
         clearOnEscape
         sx={{ width: 300, margin: "0 auto" }}
@@ -57,21 +58,24 @@ export default function FormDataOfFamily() {
         }}
       >
         <TextField
-          id="name"
+          id="name-of-familiar"
           label="Nombres"
+          name="nameOfFamiliar"
           variant="outlined"
           size="small"
           sx={{ width: "300px" }}
         />
         <TextField
-          id="last-name"
+          id="last-name-of-familiar"
+          name="lastNameOfFamiliar"
           label="Apellidos"
           variant="outlined"
           size="small"
           sx={{ width: "300px" }}
         />
         <TextField
-          id="phone-number"
+          id="phone-number-of-familiar"
+          name="phoneNumberOfFamiliar"
           label="Telefono"
           variant="outlined"
           size="small"
@@ -80,6 +84,7 @@ export default function FormDataOfFamily() {
         />
         <TextField
           id="phone-number2"
+          name="phoneNumber2OfFamiliar"
           label="Telefono 2"
           variant="outlined"
           size="small"
@@ -87,7 +92,8 @@ export default function FormDataOfFamily() {
           sx={{ width: "300px" }}
         />
         <TextField
-          id="date"
+          id="date-of-familiar"
+          name="dateOfFamiliar"
           variant="outlined"
           size="small"
           type="date"
