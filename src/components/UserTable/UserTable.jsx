@@ -126,13 +126,13 @@ export default function UserTable({dataHeadTable, dataTitle, pathToForm}) {
     <>
       <Container
         sx={{
-          width:"100%",
-          marginTop:"40px",
+          width: "100%",
+          marginTop: "40px",
           left: { xs: "50px", sm: "80px", md: "120px", lg: "200px" },
         }}
       >
         <Typography variant="h4" gutterBottom align="center">
-        {dataTitle}
+          {dataTitle}
         </Typography>
         <Stack
           direction="row"
@@ -157,8 +157,8 @@ export default function UserTable({dataHeadTable, dataTitle, pathToForm}) {
             onFilterName={handleFilterByName}
           />
 
-          <SimpleBar style={{ height:"550px", overflowY:"visible"}}>
-            <TableContainer sx={{width:"inherit"}}>
+          <SimpleBar style={{ height: "550px", overflowY: "visible" }}>
+            <TableContainer sx={{ width: "inherit" }}>
               <Table>
                 <UserListHead
                   order={order}
@@ -177,12 +177,12 @@ export default function UserTable({dataHeadTable, dataTitle, pathToForm}) {
                         row;
 
                       return (
-                        <TableRow
-                          hover
-                          key={id}
-                          tabIndex={-1}
-                        >
-                          <TableCell component="th" scope="row" padding="normal">
+                        <TableRow hover key={id} tabIndex={-1}>
+                          <TableCell
+                            component="th"
+                            scope="row"
+                            padding="normal"
+                          >
                             <Stack
                               direction="row"
                               alignItems="center"
@@ -291,6 +291,10 @@ export default function UserTable({dataHeadTable, dataTitle, pathToForm}) {
           },
         }}
       >
+        <MenuItem>
+          <Iconify icon={"eva:eye-fill"} sx={{ mr: 2 }} />
+          Ver detalles
+        </MenuItem>
         <MenuItem>
           <Iconify icon={"eva:edit-fill"} sx={{ mr: 2 }} />
           Editar

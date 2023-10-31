@@ -1,18 +1,28 @@
 import { Autocomplete, Button, FormGroup, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { ID, GENDER, MUNICIPIO, PARROQUIA, ISPREGNANT, ESTADOCIVIL, OCUPACION, ETNIA, NIVELDEINSTRUCCION } from '../../utils/constants.js'
-import { labels as STATES } from "../Statistics/Statistics0800ByStates";
+import { ID, GENDER, MUNICIPIO, PARROQUIA, ISPREGNANT, ESTADOCIVIL, OCUPACION, ETNIA, NIVELDEINSTRUCCION } from '../../../utils/constants.js'
+import { labels as STATES } from "../../Statistics/Statistics0800ByStates.jsx";
+import { ErrorMessage, Field } from "formik";
+import {debounce} from "lodash"
 
-export default function FormVictimsInformation() {
+export default function FormVictimsInformation({ props }) {
+  
+  const debouncedHandleChange = debounce((e) => {
+    props.handleChange(e);
+  }, 100); 
   return (
     <Box
       sx={{
         width: "100%",
-
+        borderBottom: "solid 1px grey",
         padding: "20px",
       }}
     >
-      <Typography variant="h4" textAlign={"center"} sx={{marginBottom:'20px'}}>
+      <Typography
+        variant="h4"
+        textAlign={"center"}
+        sx={{ marginBottom: "20px" }}
+      >
         Datos de la agraviada
       </Typography>
       <FormGroup
@@ -28,7 +38,12 @@ export default function FormVictimsInformation() {
           disablePortal
           size="small"
           id="ID"
+          name="typeIdOfVictim"
           options={ID}
+          onChange={debouncedHandleChange}
+          onBlur={props.handleBlur}
+          helpertext={<ErrorMessage name="typeIdOfVictim" />}
+          error={!!props.errors.typeIdOfVictim}
           sx={{ width: "300px" }}
           renderInput={(params) => (
             <TextField {...params} label="Seleccione documento de identidad" />
@@ -36,27 +51,46 @@ export default function FormVictimsInformation() {
         ></Autocomplete>
         <TextField
           id="id-document"
+          name="victimIdDocument"
           label="Ingrese documento de identidad"
           variant="outlined"
           size="small"
           sx={{ width: "300px" }}
+          onChange={debouncedHandleChange}
+          onBlur={props.handleBlur}
+          helperText={<ErrorMessage name="victimIdDocument" />}
+          error={
+            !!props.errors.victimIdDocument && props.touched.victimIdDocument
+          }
         />
         <TextField
-          id="name"
           label="Nombres"
+          name="victimName"
           variant="outlined"
+          margin="dense"
+          onChange={debouncedHandleChange}
+          onBlur={props.handleBlur}
+          helperText={<ErrorMessage name="victimName" />}
+          error={!!props.errors.victimName && props.touched.victimName}
           size="small"
           sx={{ width: "300px" }}
         />
+
         <TextField
+          name="victimLastName"
           id="last-name"
           label="Apellidos"
           variant="outlined"
           size="small"
           sx={{ width: "300px" }}
+          onChange={debouncedHandleChange}
+          onBlur={props.handleBlur}
+          helperText={<ErrorMessage name="victimLastName" />}
+          error={!!props.errors.victimLastName && props.touched.victimLastName}
         />
         <TextField
           id="phone-number"
+          name="victimPhoneNumber"
           label="Telefono"
           variant="outlined"
           size="small"
@@ -65,6 +99,7 @@ export default function FormVictimsInformation() {
         />
         <TextField
           id="phone-number2"
+          name="victimPhoneNumber2"
           label="Telefono 2"
           variant="outlined"
           size="small"
@@ -73,6 +108,7 @@ export default function FormVictimsInformation() {
         />
         <TextField
           id="date"
+          name="victimBirthdate"
           variant="outlined"
           size="small"
           type="date"
@@ -81,6 +117,7 @@ export default function FormVictimsInformation() {
         <Autocomplete
           disablePortal
           size="small"
+          name="gender"
           id="gender"
           options={GENDER}
           sx={{ width: "300px" }}
@@ -91,6 +128,7 @@ export default function FormVictimsInformation() {
         <Autocomplete
           disablePortal
           size="small"
+          name="stateLocation"
           id="states"
           options={STATES}
           sx={{ width: "300px" }}
@@ -101,6 +139,7 @@ export default function FormVictimsInformation() {
         <Autocomplete
           disabled
           size="small"
+          name="townShipLocation"
           id="municipio"
           options={MUNICIPIO}
           sx={{ width: "300px" }}
@@ -111,6 +150,7 @@ export default function FormVictimsInformation() {
         <Autocomplete
           disabled
           size="small"
+          name="parishLocation"
           id="parroquia"
           options={PARROQUIA}
           sx={{ width: "300px" }}
@@ -120,6 +160,7 @@ export default function FormVictimsInformation() {
         ></Autocomplete>
         <TextField
           id="location"
+          name="localLocation"
           label="Dirección"
           variant="outlined"
           size="small"
@@ -129,6 +170,7 @@ export default function FormVictimsInformation() {
         <Autocomplete
           disablePortal
           size="small"
+          name="isPregnant"
           id="isPregnant"
           options={ISPREGNANT}
           sx={{ width: "300px" }}
@@ -140,6 +182,7 @@ export default function FormVictimsInformation() {
         <TextField
           id="numberOfChildren"
           label="Numero de hijos"
+          name="numberOfChildren"
           variant="outlined"
           size="small"
           sx={{ width: "300px", marginBottom: "10px" }}
@@ -147,7 +190,8 @@ export default function FormVictimsInformation() {
         <Autocomplete
           disablePortal
           size="small"
-          id="etnia"
+          name="ethnicity"
+          id="ethnicity"
           options={ETNIA}
           sx={{ width: "300px", marginBottom: "10px" }}
           renderInput={(params) => (
@@ -157,7 +201,8 @@ export default function FormVictimsInformation() {
         <Autocomplete
           disablePortal
           size="small"
-          id="estado-civil"
+          name="maritalStatus"
+          id="maritalStatus"
           options={ESTADOCIVIL}
           sx={{ width: "300px", marginBottom: "10px" }}
           renderInput={(params) => (
@@ -167,7 +212,8 @@ export default function FormVictimsInformation() {
         <Autocomplete
           disablePortal
           size="small"
-          id="nivel-de-instruccion"
+          id="levelOfInstruction"
+          name="levelOfInstruction"
           options={NIVELDEINSTRUCCION}
           sx={{ width: "300px", marginBottom: "10px" }}
           renderInput={(params) => (
@@ -177,7 +223,8 @@ export default function FormVictimsInformation() {
         <Autocomplete
           disablePortal
           size="small"
-          id="ocupacion"
+          name="ocupation"
+          id="ocupation"
           options={OCUPACION}
           sx={{ width: "300px", marginBottom: "10px" }}
           renderInput={(params) => (
@@ -185,17 +232,24 @@ export default function FormVictimsInformation() {
           )}
         ></Autocomplete>
         <TextField
+          name="Summary"
           multiline
           minRows={5}
           sx={{ width: 500 }}
           label="Resumen de la llamada..."
         ></TextField>
       </FormGroup>
-      <Box sx={{width:'100%', display:'flex', justifyContent:'center', marginTop:'10px'}}>
-        <Button variant="contained" size="large" sx={{width:'500px'}}>
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "10px",
+        }}
+      >
+        {/* <Button variant="contained" size="large" sx={{ width: "500px" }}>
           Agregar familiar
-        </Button>
-
+        </Button> */}
       </Box>
     </Box>
   );

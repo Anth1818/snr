@@ -1,5 +1,5 @@
 import { Checkbox, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from "@mui/material";
-import { Box, width } from "@mui/system";
+import { Box } from "@mui/system";
 import { useState } from "react";
 
 export default function FormDataOfTheTypeOfViolence() {
@@ -36,7 +36,7 @@ export default function FormDataOfTheTypeOfViolence() {
     return (
         <Box
             sx={{
-                border: "solid 1px black",
+                borderBottom: "solid 1px grey",
                 marginTop: "20px",
                 width: "100%",
                 marginLeft: "auto",

@@ -11,8 +11,9 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
-import { NIVELDEINSTRUCCION, VINCULO, OCUPACION } from "../../utils/constants";
-export default function FormAggressorsDetails() {
+import { ID } from "../../../utils/constants";
+
+export default function FormContactInformation() {
   const [value, setValue] = useState("No");
 
   const handleChange = (event) => {
@@ -22,7 +23,7 @@ export default function FormAggressorsDetails() {
   return (
     <Box
       sx={{
-        border: "solid 1px black",
+        borderBottom: "solid 1px grey",
         marginTop: "20px",
         width: "100%",
         marginLeft: "auto",
@@ -35,17 +36,17 @@ export default function FormAggressorsDetails() {
         textAlign={"center"}
         sx={{ marginBottom: "10px" }}
       >
-        Datos del agresor
+        Datos de contacto
       </Typography>
 
       <FormControl sx={{ marginLeft: "40%", marginRight: "40%" }}>
-        <FormLabel id="demo-controlled-radio-buttons-group-2">
-          ¿La victima indico los datos del agresor?
+        <FormLabel id="demo-controlled-radio-buttons-group-4">
+          ¿La persona que realizo la llamada desea ser contactada?
         </FormLabel>
         <RadioGroup
           row
-          aria-labelledby="demo-controlled-radio-buttons-group-2"
-          name="controlled-radio-buttons-group-2"
+          aria-labelledby="demo-controlled-radio-buttons-group-4"
+          name="controlled-radio-buttons-group-4"
           value={value}
           onChange={handleChange}
         >
@@ -64,64 +65,71 @@ export default function FormAggressorsDetails() {
             justifyContent: "space-evenly",
           }}
         >
+          <Autocomplete
+            disablePortal
+            size="small"
+            id="ID"
+            name="typeOfId"
+            options={ID}
+            sx={{ width: "300px" }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Seleccione documento de identidad"
+              />
+            )}
+          ></Autocomplete>
+          <TextField
+            id="id-document"
+            name="idDocument"
+            label="Ingrese documento de identidad"
+            variant="outlined"
+            size="small"
+            sx={{ width: "300px" }}
+          />
           <TextField
             id="name"
+            name="nameOfContact"
             label="Nombres"
-            name="nameOfAggressor"
             variant="outlined"
             size="small"
             sx={{ width: "300px" }}
           />
           <TextField
-            id="lastname"
+            id="last-name"
+            name="lastNameOfContact"
             label="Apellidos"
-            name="lastNameOfAggressor"
             variant="outlined"
             size="small"
             sx={{ width: "300px" }}
           />
           <TextField
-            id="age"
-            label="Edad aproximada"
-            name="ageOfAggressor"
+            id="phone-number"
+            name="phoneNumberOfContact"
+            label="Telefono"
             variant="outlined"
             size="small"
+            type="number"
             sx={{ width: "300px" }}
           />
-
-          <Autocomplete
-            disablePortal
+          <TextField
+            id="phone-number2"
+            label="Telefono 2"
+            name="phoneNumber2OfContact"
+            variant="outlined"
             size="small"
-            id="levelOfInstrution"
-            name="levelOfInstrutionOfAggressor"
-            options={NIVELDEINSTRUCCION}
+            type="number"
             sx={{ width: "300px" }}
-            renderInput={(params) => (
-              <TextField {...params} label="Seleccione nivel de instrucción" />
-            )}
-          ></Autocomplete>
-          <Autocomplete
-            disablePortal
+          />
+          <TextField
+            id="email"
+            name="emailOfContact"
+            label="Correo electrónico"
+            variant="outlined"
             size="small"
-            id="bond"
-            name="bond"
-            options={VINCULO}
-            sx={{ width: "300px" }}
-            renderInput={(params) => (
-              <TextField {...params} label="Seleccione vinculo" />
-            )}
-          ></Autocomplete>
-          <Autocomplete
-            disablePortal
-            size="small"
-            id="occupation"
-            name="AggressorOccupation"
-            options={OCUPACION}
-            sx={{ width: "300px" }}
-            renderInput={(params) => (
-              <TextField {...params} label="Seleccione ocupación" />
-            )}
-          ></Autocomplete>
+            type="email"
+            sx={{ width: { xs: "300px", lg: "400px" } }}
+          />
         </FormGroup>
       )}
     </Box>

@@ -1,6 +1,6 @@
 import CintilloHeader from "../components/CintilloHeader/CintilloHeader";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Footer from "../components/Footer";
+// import Footer from "../components/Footer";
 import ResponsiveLayoutRCV from "../components/ResponsiveLayout/ResponsiveLayoutRCV";
 
 const defaultTheme = createTheme();
@@ -16,7 +16,6 @@ export default function Page0800() {
      { id: "location", label: "Ubicación", alignRight: false },
      { id: "phone_number", label: "Teléfonos", alignRight: false },
      { id: "refer", label: "Remitida", alignRight: false },
-     { id: "civil_servant", label: "Funcionaria", alignRight: false },
      { id: "" },
    ];
 

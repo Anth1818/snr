@@ -1,0 +1,21 @@
+export const initialValues = {
+  typeIdOfVictim: "", // Ajusta el valor inicial según tus necesidades
+  victimIdDocument: "",
+  victimName: "",
+  victimLastName: "",
+  victimPhoneNumber: "",
+  victimPhoneNumber2: "",
+  victimBirthdate: "",
+  gender: "",
+  stateLocation: "",
+  townShipLocation: "",
+  parishLocation: "",
+  localLocation: "",
+  isPregnant: "",
+  numberOfChildren: "",
+  ethnicity: "",
+  maritalStatus: "",
+  levelOfInstruction: "",
+  ocupation: "",
+  Summary: "",
+};
