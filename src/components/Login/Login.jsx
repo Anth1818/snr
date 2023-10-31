@@ -33,7 +33,7 @@ export default function Login() {
   }
 
   return (
-    <div className="grid place-items-center box-border mt-16">
+    <div className="w-full min-h-screen flex justify-center items-center">
       <div className="min-w-fit h-full border-2 border-gray-400 box-border  rounded-lg">
         <div className="clip-path-mypolygon bg-[#2E219E] h-44 w-full m-0 box-border pt-4 rounded-t-lg">
           <h2 className="text-center text-white text-2xl font-bold">

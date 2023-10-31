@@ -3,13 +3,17 @@ import { Box } from "@mui/system";
 import { ID, GENDER, MUNICIPIO, PARROQUIA, ISPREGNANT, ESTADOCIVIL, OCUPACION, ETNIA, NIVELDEINSTRUCCION } from '../../../utils/constants.js'
 import { labels as STATES } from "../../Statistics/Statistics0800ByStates.jsx";
 import { ErrorMessage, Field } from "formik";
-import {debounce} from "lodash"
+import { debounce } from "lodash"
 
 export default function FormVictimsInformation({ props }) {
-  
+
   const debouncedHandleChange = debounce((e) => {
     props.handleChange(e);
-  }, 100); 
+  }, 100);
+
+  const handleAutocompleteChange = (event, newValue) => {
+    props.values.typeIdOfVictim = "abc"
+  };
   return (
     <Box
       sx={{
@@ -38,15 +42,13 @@ export default function FormVictimsInformation({ props }) {
           disablePortal
           size="small"
           id="ID"
-          name="typeIdOfVictim"
           options={ID}
-          onChange={debouncedHandleChange}
-          onBlur={props.handleBlur}
-          helpertext={<ErrorMessage name="typeIdOfVictim" />}
-          error={!!props.errors.typeIdOfVictim}
           sx={{ width: "300px" }}
+          // handleChange={handleAutocompleteChange}
+          // value={props.values.typeIdOfVictim}
           renderInput={(params) => (
-            <TextField {...params} label="Seleccione documento de identidad" />
+            <TextField {...params} label="Seleccione documento de identidad"
+              name="typeIdOfVictim" />
           )}
         ></Autocomplete>
         <TextField
@@ -60,18 +62,18 @@ export default function FormVictimsInformation({ props }) {
           onBlur={props.handleBlur}
           helperText={<ErrorMessage name="victimIdDocument" />}
           error={
-            !!props.errors.victimIdDocument && props.touched.victimIdDocument
+            Boolean(props.errors.victimIdDocument && props.touched.victimIdDocument)
           }
         />
         <TextField
           label="Nombres"
           name="victimName"
           variant="outlined"
-          margin="dense"
+
           onChange={debouncedHandleChange}
           onBlur={props.handleBlur}
           helperText={<ErrorMessage name="victimName" />}
-          error={!!props.errors.victimName && props.touched.victimName}
+          error={Boolean(props.errors.victimName && props.touched.victimName)}
           size="small"
           sx={{ width: "300px" }}
         />

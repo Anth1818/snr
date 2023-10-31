@@ -65,7 +65,7 @@ export default function FormAggressorsDetails() {
           }}
         >
           <TextField
-            id="name"
+            id="nameofAggressor"
             label="Nombres"
             name="nameOfAggressor"
             variant="outlined"
@@ -73,7 +73,7 @@ export default function FormAggressorsDetails() {
             sx={{ width: "300px" }}
           />
           <TextField
-            id="lastname"
+            id="lastNameOfAggressor"
             label="Apellidos"
             name="lastNameOfAggressor"
             variant="outlined"
@@ -81,7 +81,7 @@ export default function FormAggressorsDetails() {
             sx={{ width: "300px" }}
           />
           <TextField
-            id="age"
+            id="ageOfAggressor"
             label="Edad aproximada"
             name="ageOfAggressor"
             variant="outlined"
@@ -92,7 +92,7 @@ export default function FormAggressorsDetails() {
           <Autocomplete
             disablePortal
             size="small"
-            id="levelOfInstrution"
+            id="levelOfInstrutionOfAggressor"
             name="levelOfInstrutionOfAggressor"
             options={NIVELDEINSTRUCCION}
             sx={{ width: "300px" }}
@@ -103,8 +103,8 @@ export default function FormAggressorsDetails() {
           <Autocomplete
             disablePortal
             size="small"
-            id="bond"
-            name="bond"
+            id="bondOfAggressor"
+            name="bondOfAggressor"
             options={VINCULO}
             sx={{ width: "300px" }}
             renderInput={(params) => (
@@ -114,7 +114,7 @@ export default function FormAggressorsDetails() {
           <Autocomplete
             disablePortal
             size="small"
-            id="occupation"
+            id="AggressorOccupation"
             name="AggressorOccupation"
             options={OCUPACION}
             sx={{ width: "300px" }}

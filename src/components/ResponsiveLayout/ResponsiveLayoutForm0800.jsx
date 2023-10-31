@@ -1,123 +1,137 @@
 import {
   CssBaseline,
   Grid,
+  InputLabel,
   Paper,
+  Select,
   TextField,
-  // TextField,
   Toolbar,
   Typography,
-  // FormGroup,
-  // Select,
-  // MenuItem,
-  // InputLabel,
+  FormGroup,
+  MenuItem,
 } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import RenderDrawer from "../Drawer/Drawer";
-// import FormTypesOfCalls from "../Forms/Form0800/FormTypesOfCalls";
-// import { useState } from "react";
+import FormTypesOfCalls from "../Forms/Form0800/FormTypesOfCalls";
+import { useState } from "react";
 import FormVictimsInformation from "../Forms/Form0800/FormVictimsInformation";
-// import FormDataOfTheTypeOfViolence from "../Forms/Form0800/FormDataOfTheTypeOfViolence";
-// import FormAggressorsDetails from "../Forms/Form0800/FormAggressorsDetails";
-// import FormInstitutionalIntervention from "../Forms/Form0800/FormInstitutionalIntervention";
-// import FormContactInformation from "../Forms/Form0800/FormContactInformation";
-// import FormSummaryCall from "../Forms/Form0800/FormSummaryCall";
+import FormDataOfTheTypeOfViolence from "../Forms/Form0800/FormDataOfTheTypeOfViolence";
+import FormAggressorsDetails from "../Forms/Form0800/FormAggressorsDetails";
+import FormInstitutionalIntervention from "../Forms/Form0800/FormInstitutionalIntervention";
+import FormContactInformation from "../Forms/Form0800/FormContactInformation";
+import FormSummaryCall from "../Forms/Form0800/FormSummaryCall";
 import FormButtonSubmit from "../Forms/Form0800/FormButtonSubmit";
-// import {
-//   checkboxesDataInformation,
-//   checkboxesDataIntervention,
-//   checkboxesDataOrientation,
-//   checkboxesDataNotRelevant,
-// } from "../../utils/checkboxesData";
+import {
+  checkboxesDataInformation,
+  checkboxesDataIntervention,
+  checkboxesDataOrientation,
+  checkboxesDataNotRelevant,
+} from "../../utils/checkboxesData";
 import { Formik, Form, ErrorMessage } from "formik";
 import { validationSchema } from "../../utils/validationSchema";
 import { initialValues } from "../../utils/initialValues";
 
 export default function ResponsiveLayoutForm0800() {
-  // const [selectedOption, setSelectedOption] = useState("Orientación");
-  // let componentToRender = null;
+  const [selectedOption, setSelectedOption] = useState("Orientación");
+  let componentToRender = null;
 
-  // switch (selectedOption) {
-  //   case "Orientación":
-  //     componentToRender = (
-  //       <>
-  //         <FormTypesOfCalls
-  //           title={"Subtipos de orientación"}
-  //           checkboxesData={checkboxesDataOrientation}
-  //         />
-  //         <FormVictimsInformation />
-  //         <FormDataOfTheTypeOfViolence />
-  //         <FormAggressorsDetails />
-  //         <FormInstitutionalIntervention />
-  //         <FormContactInformation />
-  //         <FormButtonSubmit />
-  //       </>
-  //     );
-  //     break;
-  //   case "Información":
-  //     componentToRender = (
-  //       <>
-  //         <FormTypesOfCalls
-  //           title={"Subtipos de información"}
-  //           checkboxesData={checkboxesDataInformation}
-  //         />
-  //         <FormSummaryCall />
-  //         <FormButtonSubmit />
-  //       </>
-  //     );
-  //     break;
-  //   case "Intervención":
-  //     componentToRender = (
-  //       <>
-  //         <FormTypesOfCalls
-  //           title={"Subtipos de intervención"}
-  //           checkboxesData={checkboxesDataIntervention}
-  //         />
-  //         <FormVictimsInformation />
-  //         <FormDataOfTheTypeOfViolence />
-  //         <FormAggressorsDetails />
-  //         <FormInstitutionalIntervention />
-  //         <FormButtonSubmit />
-  //       </>
-  //     );
-  //     break;
-  //   case "No relevante":
-  //     componentToRender = (
-  //       <>
-  //         <FormTypesOfCalls
-  //           title={"Subtipos de no relevante"}
-  //           checkboxesData={checkboxesDataNotRelevant}
-  //         />
-  //         <Typography
-  //           variant="h5"
-  //           textAlign={"center"}
-  //           sx={{ marginBottom: "10px", marginTop: "10px" }}
-  //         >
-  //           Resumen de la llamada
-  //         </Typography>
-  //         <FormGroup
-  //           sx={{
-  //             display: "flex",
-  //             gap: "20px",
-  //             flexDirection: "column",
-  //             marginTop: "15px",
-  //             justifyContent: "space-evenly",
-  //             alignItems: "center",
-  //           }}
-  //         >
-  //           <TextField
-  //             multiline
-  //             minRows={5}
-  //             sx={{ width: 500 }}
-  //             label="Resumen de la llamada..."
-  //           ></TextField>
-  //         </FormGroup>
-  //         <FormButtonSubmit />
-  //       </>
-  //     );
-  //     break;
-  //   default:
-  //     componentToRender = null;
-  // }
+  switch (selectedOption) {
+    case "Orientación":
+      componentToRender = (props) => {
+        return (
+          <>
+            <FormTypesOfCalls
+              title={"Subtipos de orientación"}
+              checkboxesData={checkboxesDataOrientation}
+            />
+            <FormVictimsInformation props={props} />
+            <FormDataOfTheTypeOfViolence />
+            <FormAggressorsDetails />
+            <FormInstitutionalIntervention />
+            <FormContactInformation />
+            <FormButtonSubmit />
+          </>
+        )
+      }
+
+      break;
+    case "Información":
+      componentToRender = (props) => {
+        return (
+          <>
+            <FormTypesOfCalls
+              title={"Subtipos de información"}
+              checkboxesData={checkboxesDataInformation}
+            />
+            <FormSummaryCall />
+            <FormButtonSubmit />
+          </>
+
+        )
+
+      }
+      break;
+    case "Intervención":
+      componentToRender = (props) => {
+        return (
+          <>
+            <FormTypesOfCalls
+              title={"Subtipos de intervención"}
+              checkboxesData={checkboxesDataIntervention}
+            />
+            <FormVictimsInformation props={props}/>
+            <FormDataOfTheTypeOfViolence />
+            <FormAggressorsDetails />
+            <FormInstitutionalIntervention />
+            <FormButtonSubmit />
+          </>
+
+        )
+      }
+      break;
+    case "No relevante":
+      componentToRender = (props) => {
+        return (
+          <>
+            <FormTypesOfCalls
+              title={"Subtipos de no relevante"}
+              checkboxesData={checkboxesDataNotRelevant}
+            />
+            <Typography
+              variant="h5"
+              textAlign={"center"}
+              sx={{ marginBottom: "10px", marginTop: "10px" }}
+            >
+              Resumen de la llamada
+            </Typography>
+            <FormGroup
+              sx={{
+                display: "flex",
+                gap: "20px",
+                flexDirection: "column",
+                marginTop: "15px",
+                justifyContent: "space-evenly",
+                alignItems: "center",
+              }}
+            >
+              <TextField
+                multiline
+                minRows={5}
+                sx={{ width: 500 }}
+                label="Resumen de la llamada..."
+              ></TextField>
+            </FormGroup>
+            <FormButtonSubmit />
+          </>
+
+        )
+
+      }
+
+      break;
+    default:
+      componentToRender = null;
+  }
 
   const handleSubmit = (values) => {
     alert(JSON.stringify(values, null, 2));
@@ -163,7 +177,7 @@ export default function ResponsiveLayoutForm0800() {
                   >
                     {(props) => (
                       <Form>
-                        {/* <Box
+                        <Box
                           sx={{
                             display: "flex",
                             flexDirection: "column",
@@ -171,10 +185,8 @@ export default function ResponsiveLayoutForm0800() {
                             justifyContent: "center",
                             alignItems: "center",
                           }}
-                        > */} 
-                        <FormVictimsInformation props={props} />
-                          <FormButtonSubmit />
-                          {/* <InputLabel htmlFor="option-select">
+                        >
+                          <InputLabel htmlFor="option-select">
                             Selecciona una opción
                           </InputLabel>
                           <Select
@@ -188,7 +200,7 @@ export default function ResponsiveLayoutForm0800() {
                             }}
                             sx={{ width: 300 }}
                           >
-                            <MenuItem value={"Orientación"}>
+                            <MenuItem value={"Orientación"} >
                               Orientación
                             </MenuItem>
                             <MenuItem value={"Información"}>
@@ -201,14 +213,13 @@ export default function ResponsiveLayoutForm0800() {
                               No relevante
                             </MenuItem>
                           </Select>
-                          </Box>
-                          {selectedOption !== null ? (
+                        </Box>
+                        {selectedOption !== null ? (
                           <div>
                             {/* Contenido a renderizar si selectedOption no es null */}
-                          {/* {componentToRender} */}
-                          {/* </div> */}
-                          {/* ) : null} */}
-                        {/* // </Box> */}
+                            {componentToRender(props)}
+                          </div>
+                        ) : null}
                       </Form>
                     )}
                   </Formik>
