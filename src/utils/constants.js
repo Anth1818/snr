@@ -162,85 +162,276 @@ export const PARROQUIA = [
 ];
 
 export const ETNIA = [
-  "Blanca",
-  "Negra",
-  "Morena",
-  "Indigena",
-  "Afrodecendiente",
-  "Otra",
+  {
+    label: "Blanca",
+    name: "Blanca",
+  },
+  {
+    label: "Negra",
+    name: "Negra",
+  },
+  {
+    label: "Morena",
+    name: "Morena",
+  },
+  {
+    label: "Indigena",
+    name: "Indigena",
+  },
+  {
+    label: "Afrodescendiente",
+    name: "Afrodescendiente",
+  },
+  {
+    label: "Otra",
+    name: "Otra",
+  },
 ];
 
 export const ESTADOCIVIL = [
-  "Soltera",
-  "Casada",
-  "Divorciada",
-  "Separada",
-  "Concubina",
-  "Exconcubina",
-  "Viuda",
+  {
+    label: "Soltera",
+    name: "Soltera",
+  },
+  {
+    label: "Casada",
+    name: "Casada",
+  },
+  {
+    label: "Divorciada",
+    name: "Divorciada",
+  },
+  {
+    label: "Separada",
+    name: "Separada",
+  },
+  {
+    label: "Concubina",
+    name: "Concubina",
+  },
+  {
+    label: "Exconcubina",
+    name: "Exconcubina",
+  },
+  {
+    label: "Viuda",
+    name: "Viuda",
+  },
 ];
+
 
 export const NIVELDEINSTRUCCION = [
-  "Analfabeta",
-  "Primaria completa",
-  "Secundaria completa",
-  "Técnico medio",
-  "TSU",
-  "Universitaria",
-  "Postgrado",
-  "Primaria incompleta",
-  "Secundaria incompleta",
-  "Ninguna",
+  {
+    label: "Analfabeta",
+    name: "Analfabeta",
+  },
+  {
+    label: "Primaria completa",
+    name: "Primaria completa",
+  },
+  {
+    label: "Secundaria completa",
+    name: "Secundaria completa",
+  },
+  {
+    label: "Técnico medio",
+    name: "Técnico medio",
+  },
+  {
+    label: "TSU",
+    name: "TSU",
+  },
+  {
+    label: "Universitaria",
+    name: "Universitaria",
+  },
+  {
+    label: "Postgrado",
+    name: "Postgrado",
+  },
+  {
+    label: "Primaria incompleta",
+    name: "Primaria incompleta",
+  },
+  {
+    label: "Secundaria incompleta",
+    name: "Secundaria incompleta",
+  },
+  {
+    label: "Ninguna",
+    name: "Ninguna",
+  },
 ];
+
 
 export const OCUPACION = [
-  "Desempleada(o)",
-  "Ama(o) de casa",
-  "Estudiante",
-  "Area de salud",
-  "Area Administrativa",
-  "Empresaria(o)",
-  "Comerciante",
-  "Independiente",
-  "Vendedor(a)",
-  "Artista",
-  "Peluquera(o)",
-  "Costurera(o)",
-  "Jubilada(o)",
-  "Otros",
+  {
+    label: "Desempleada(o)",
+    name: "Desempleada(o)",
+  },
+  {
+    label: "Ama(o) de casa",
+    name: "Ama(o) de casa",
+  },
+  {
+    label: "Estudiante",
+    name: "Estudiante",
+  },
+  {
+    label: "Área de salud",
+    name: "Área de salud",
+  },
+  {
+    label: "Área Administrativa",
+    name: "Área Administrativa",
+  },
+  {
+    label: "Empresaria(o)",
+    name: "Empresaria(o)",
+  },
+  {
+    label: "Comerciante",
+    name: "Comerciante",
+  },
+  {
+    label: "Independiente",
+    name: "Independiente",
+  },
+  {
+    label: "Vendedor(a)",
+    name: "Vendedor(a)",
+  },
+  {
+    label: "Artista",
+    name: "Artista",
+  },
+  {
+    label: "Peluquera(o)",
+    name: "Peluquera(o)",
+  },
+  {
+    label: "Costurera(o)",
+    name: "Costurera(o)",
+  },
+  {
+    label: "Jubilada(o)",
+    name: "Jubilada(o)",
+  },
+  {
+    label: "Otros",
+    name: "Otros",
+  },
 ];
 
+
 export const VINCULO = [
-  "Amigo",
-  "Concubino",
-  "Esposo",
-  "Novio",
-  "Ex concubino",
-  "Ex esposo",
-  "Ex novio",
-  "Hermano",
-  "Padre",
-  "Hijo",
-  "Tío",
-  "Primo",
-  "Vecino",
-  "Desconocido"
-]
+  {
+    label: "Amigo",
+    name: "Amigo",
+  },
+  {
+    label: "Concubino",
+    name: "Concubino",
+  },
+  {
+    label: "Esposo",
+    name: "Esposo",
+  },
+  {
+    label: "Novio",
+    name: "Novio",
+  },
+  {
+    label: "Ex concubino",
+    name: "Ex concubino",
+  },
+  {
+    label: "Ex esposo",
+    name: "Ex esposo",
+  },
+  {
+    label: "Ex novio",
+    name: "Ex novio",
+  },
+  {
+    label: "Hermano",
+    name: "Hermano",
+  },
+  {
+    label: "Padre",
+    name: "Padre",
+  },
+  {
+    label: "Hijo",
+    name: "Hijo",
+  },
+  {
+    label: "Tío",
+    name: "Tío",
+  },
+  {
+    label: "Primo",
+    name: "Primo",
+  },
+  {
+    label: "Vecino",
+    name: "Vecino",
+  },
+  {
+    label: "Desconocido",
+    name: "Desconocido",
+  },
+];
 
 export const INSTITUTIONALINTERVENTIONDATA = [
-  "Acudio en tiempo acordado",
-  "Incumplio tiempo acordado",
-  "No acudio"
-]
+  {
+    label: "Acudió en tiempo acordado",
+    name: "Acudió en tiempo acordado",
+  },
+  {
+    label: "Incumplió tiempo acordado",
+    name: "Incumplió tiempo acordado",
+  },
+  {
+    label: "No acudió",
+    name: "No acudió",
+  },
+];
+
 
 
 export const FINDOUT0800 = [
-  "Radio",
-  "TV",
-  "Internet",
-  "Inamujer",
-  "Prensa",
-  "Amigo(a)",
-  "Familiar",
-  "Otro"
-]
+  {
+    label: "Radio",
+    name: "Radio",
+  },
+  {
+    label: "TV",
+    name: "TV",
+  },
+  {
+    label: "Internet",
+    name: "Internet",
+  },
+  {
+    label: "Inamujer",
+    name: "Inamujer",
+  },
+  {
+    label: "Prensa",
+    name: "Prensa",
+  },
+  {
+    label: "Amigo(a)",
+    name: "Amigo(a)",
+  },
+  {
+    label: "Familiar",
+    name: "Familiar",
+  },
+  {
+    label: "Otro",
+    name: "Otro",
+  },
+];
+

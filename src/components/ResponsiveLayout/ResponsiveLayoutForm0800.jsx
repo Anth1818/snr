@@ -65,7 +65,7 @@ export default function ResponsiveLayoutForm0800() {
               checkboxesData={checkboxesDataInformation}
               props={props}
             />
-            <FormSummaryCall />
+            <FormSummaryCall props={props}/>
             <FormButtonSubmit />
           </>
 
@@ -83,9 +83,9 @@ export default function ResponsiveLayoutForm0800() {
               props={props}
             />
             <FormVictimsInformation props={props}/>
-            <FormDataOfTheTypeOfViolence />
-            <FormAggressorsDetails />
-            <FormInstitutionalIntervention />
+            <FormDataOfTheTypeOfViolence props={props}/>
+            <FormAggressorsDetails props={props}/>
+            <FormInstitutionalIntervention props={props}/>
             <FormButtonSubmit />
           </>
 

@@ -30,6 +30,7 @@ import USERLIST from "../../_mock/user";
 import SimpleBar from "simplebar-react";
 import { Link } from "react-router-dom";
 
+
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -63,7 +64,7 @@ function applySortFilter(array, comparator, query) {
 }
 
 // eslint-disable-next-line react/prop-types
-export default function UserTable({dataHeadTable, dataTitle, pathToForm}) {
+export default function UserTable({ dataHeadTable, dataTitle, pathToForm, handleOpenModal }) {
   const [open, setOpen] = useState(null);
 
   const [page, setPage] = useState(0);
@@ -122,8 +123,10 @@ export default function UserTable({dataHeadTable, dataTitle, pathToForm}) {
 
   const isNotFound = !filteredUsers.length && !!filterName;
 
+
   return (
     <>
+    
       <Container
         sx={{
           width: "100%",
@@ -291,16 +294,18 @@ export default function UserTable({dataHeadTable, dataTitle, pathToForm}) {
           },
         }}
       >
-        <MenuItem>
-          <Iconify icon={"eva:eye-fill"} sx={{ mr: 2 }} />
+
+        <MenuItem onClick={handleOpenModal}>
+          <Iconify icon={"eva:eye-fill"} sx={{ mr: 2 }}></Iconify>
           Ver detalles
         </MenuItem>
-        <MenuItem>
-          <Iconify icon={"eva:edit-fill"} sx={{ mr: 2 }} />
+
+        <MenuItem onClick={handleOpenModal}>
+            <Iconify icon={"eva:edit-fill"} sx={{ mr: 2 }} />
           Editar
         </MenuItem>
 
-        <MenuItem sx={{ color: "error.main" }}>
+        <MenuItem sx={{ color: "error.main" }} onClick={handleOpenModal}>
           <Iconify icon={"eva:trash-2-outline"} sx={{ mr: 2 }} />
           Eliminar
         </MenuItem>

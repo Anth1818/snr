@@ -12,13 +12,20 @@ import {
 import { Box } from "@mui/system";
 import { useState } from "react";
 import { ID } from "../../../utils/constants";
+import { debounce } from "lodash"
+import { ErrorMessage } from "formik";
 
-export default function FormContactInformation() {
+
+export default function FormContactInformation({ props }) {
   const [value, setValue] = useState("No");
 
   const handleChange = (event) => {
     setValue(event.target.value);
   };
+
+  const debouncedHandleChange = debounce((e) => {
+    props.handleChange(e);
+  }, 100);
 
   return (
     <Box
@@ -71,6 +78,12 @@ export default function FormContactInformation() {
             id="ID"
             name="typeOfId"
             options={ID}
+            onChange={(e, value) => {
+              props.setFieldValue(
+                "typeOfId",
+                value !== null ? value.name : initialValues.typeOfId
+              );
+            }}
             sx={{ width: "300px" }}
             renderInput={(params) => (
               <TextField
@@ -82,6 +95,12 @@ export default function FormContactInformation() {
           <TextField
             id="id-document"
             name="idDocument"
+            onChange={debouncedHandleChange}
+            onBlur={props.handleBlur}
+            helperText={<ErrorMessage name="idDocument" />}
+            error={Boolean(
+              props.errors.idDocument && props.touched.idDocument
+            )}
             label="Ingrese documento de identidad"
             variant="outlined"
             size="small"
@@ -90,6 +109,10 @@ export default function FormContactInformation() {
           <TextField
             id="name"
             name="nameOfContact"
+            onChange={debouncedHandleChange}
+            onBlur={props.handleBlur}
+            helperText={<ErrorMessage name="nameOfContact" />}
+            error={Boolean(props.errors.nameOfContact && props.touched.nameOfContact)}
             label="Nombres"
             variant="outlined"
             size="small"
@@ -98,6 +121,10 @@ export default function FormContactInformation() {
           <TextField
             id="last-name"
             name="lastNameOfContact"
+            onChange={debouncedHandleChange}
+            onBlur={props.handleBlur}
+            helperText={<ErrorMessage name="lastNameOfContact" />}
+            error={Boolean(props.errors.lastNameOfContact && props.touched.lastNameOfContact)}
             label="Apellidos"
             variant="outlined"
             size="small"
@@ -106,24 +133,34 @@ export default function FormContactInformation() {
           <TextField
             id="phone-number"
             name="phoneNumberOfContact"
+            onChange={debouncedHandleChange}
+            onBlur={props.handleBlur}
+            helperText={<ErrorMessage name="phoneNumberOfContact" />}
+            error={Boolean(props.errors.phoneNumberOfContact && props.touched.phoneNumberOfContact)}
             label="Telefono"
             variant="outlined"
             size="small"
-            type="number"
             sx={{ width: "300px" }}
           />
           <TextField
             id="phone-number2"
             label="Telefono 2"
             name="phoneNumberOfContact2"
+            onBlur={props.handleBlur}
+            helperText={<ErrorMessage name="phoneNumberOfContact2" />}
+            error={Boolean(props.errors.phoneNumberOfContact2 && props.touched.phoneNumberOfContact2)}
+            onChange={debouncedHandleChange}
             variant="outlined"
             size="small"
-            type="number"
             sx={{ width: "300px" }}
           />
           <TextField
             id="email"
             name="emailOfContact"
+            onChange={debouncedHandleChange}
+            onBlur={props.handleBlur}
+            helperText={<ErrorMessage name="emailOfContact" />}
+            error={Boolean(props.errors.emailOfContact && props.touched.emailOfContact)}
             label="Correo electrónico"
             variant="outlined"
             size="small"

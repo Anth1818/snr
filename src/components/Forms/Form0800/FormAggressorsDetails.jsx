@@ -14,7 +14,7 @@ import { useState } from "react";
 import { NIVELDEINSTRUCCION, VINCULO, OCUPACION } from "../../../utils/constants";
 import { debounce } from "lodash";
 import { initialValues } from "../../../utils/initialValues.js";
-
+import { ErrorMessage } from "formik";
 
 
 
@@ -81,6 +81,9 @@ export default function FormAggressorsDetails({props}) {
             name="nameOfAggressor"
             variant="outlined"
             onChange={debouncedHandleChange}
+            onBlur={props.handleBlur}
+            helperText={<ErrorMessage name="nameOfAggressor" />}
+            error={Boolean(props.errors.nameOfAggressor && props.touched.nameOfAggressor)}
             size="small"
             sx={{ width: "300px" }}
           />
@@ -89,6 +92,9 @@ export default function FormAggressorsDetails({props}) {
             label="Apellidos"
             name="lastNameOfAggressor"
             onChange={debouncedHandleChange}
+            onBlur={props.handleBlur}
+            helperText={<ErrorMessage name="lastNameOfAggressor" />}
+            error={Boolean(props.errors.lastNameOfAggressor && props.touched.lastNameOfAggressor)}
             variant="outlined"
             size="small"
             sx={{ width: "300px" }}
@@ -98,6 +104,9 @@ export default function FormAggressorsDetails({props}) {
             label="Edad aproximada"
             name="ageOfAggressor"
             onChange={debouncedHandleChange}
+            onBlur={props.handleBlur}
+            helperText={<ErrorMessage name="ageOfAggressor" />}
+            error={Boolean(props.errors.ageOfAggressor && props.touched.ageOfAggressor)}
             variant="outlined"
             size="small"
             sx={{ width: "300px" }}

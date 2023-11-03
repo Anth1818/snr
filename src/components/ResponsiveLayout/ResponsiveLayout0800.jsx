@@ -2,9 +2,16 @@ import { CssBaseline, Toolbar } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import RenderDrawer from "../Drawer/Drawer";
 import UserTable from "../UserTable";
+import { useState } from "react";
+import ModalDetails from "../modal/modal";
 
 // eslint-disable-next-line react/prop-types
 export default function ResponsiveLayout0800({ dataHeadTable }) {
+
+  const [open, setOpen] = useState(false);
+  const handleOpenModal = () => setOpen(true);
+  const handleCloseModal = () => setOpen(false);
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -27,7 +34,9 @@ export default function ResponsiveLayout0800({ dataHeadTable }) {
             dataHeadTable={dataHeadTable}
             dataTitle={"Lista de llamadas"}
             pathToForm={"/Pages/PageForm0800"}
+            handleOpenModal={handleOpenModal}
           ></UserTable>
+          <ModalDetails open={open} handleCloseModal={handleCloseModal}></ModalDetails>
         </Container>
       </Box>
     </Box>

@@ -41,7 +41,7 @@ export const initialValues = {
   official: "",
   position: "",
   phone: "",
-  occupation: "",
+  comeOnTime: "",
 
   //data de contacto de quien hizo la llamada
 

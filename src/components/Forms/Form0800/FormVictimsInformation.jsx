@@ -228,6 +228,9 @@ export default function FormVictimsInformation({ props }) {
           name="numberOfChildren"
           variant="outlined"
           onChange={debouncedHandleChange}
+          onBlur={props.handleBlur}
+          helperText={<ErrorMessage name="numberOfChildren" />}
+          error={!!props.errors.numberOfChildren && props.touched.numberOfChildren}
           size="small"
           sx={{ width: "300px", marginBottom: "10px" }}
         />
