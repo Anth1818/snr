@@ -1,9 +1,9 @@
-import { Autocomplete, Button, FormGroup, TextField, Typography } from "@mui/material";
+import { Autocomplete, FormGroup, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { ID, GENDER, MUNICIPIO, PARROQUIA, ISPREGNANT, ESTADOCIVIL, OCUPACION, ETNIA, NIVELDEINSTRUCCION } from '../../../utils/constants.js'
-import { labels as STATES } from "../../Statistics/Statistics0800ByStates.jsx";
-import { ErrorMessage, Field } from "formik";
+import { ID, GENDER, MUNICIPIO, PARROQUIA, ISPREGNANT, ESTADOCIVIL, OCUPACION, ETNIA, NIVELDEINSTRUCCION,STATES } from '../../../utils/constants.js'
+import { ErrorMessage } from "formik";
 import { debounce } from "lodash"
+import { initialValues } from "../../../utils/initialValues.js";
 
 export default function FormVictimsInformation({ props }) {
 
@@ -11,9 +11,6 @@ export default function FormVictimsInformation({ props }) {
     props.handleChange(e);
   }, 100);
 
-  const handleAutocompleteChange = (event, newValue) => {
-    props.values.typeIdOfVictim = "abc"
-  };
   return (
     <Box
       sx={{
@@ -40,15 +37,20 @@ export default function FormVictimsInformation({ props }) {
       >
         <Autocomplete
           disablePortal
+          getOptionLabel={(option) => option.name}
           size="small"
+          name="typeIdOfVictim"
           id="ID"
           options={ID}
           sx={{ width: "300px" }}
-          // handleChange={handleAutocompleteChange}
-          // value={props.values.typeIdOfVictim}
+          onChange={(e, value) => {
+            props.setFieldValue(
+              "typeIdOfVictim",
+              value !== null ? value.name : initialValues.typeIdOfVictim
+            );
+          }}
           renderInput={(params) => (
-            <TextField {...params} label="Seleccione documento de identidad"
-              name="typeIdOfVictim" />
+            <TextField {...params} label="Seleccione documento de identidad" />
           )}
         ></Autocomplete>
         <TextField
@@ -61,15 +63,14 @@ export default function FormVictimsInformation({ props }) {
           onChange={debouncedHandleChange}
           onBlur={props.handleBlur}
           helperText={<ErrorMessage name="victimIdDocument" />}
-          error={
-            Boolean(props.errors.victimIdDocument && props.touched.victimIdDocument)
-          }
+          error={Boolean(
+            props.errors.victimIdDocument && props.touched.victimIdDocument
+          )}
         />
         <TextField
           label="Nombres"
           name="victimName"
           variant="outlined"
-
           onChange={debouncedHandleChange}
           onBlur={props.handleBlur}
           helperText={<ErrorMessage name="victimName" />}
@@ -96,8 +97,13 @@ export default function FormVictimsInformation({ props }) {
           label="Telefono"
           variant="outlined"
           size="small"
-          type="number"
           sx={{ width: "300px" }}
+          onChange={debouncedHandleChange}
+          onBlur={props.handleBlur}
+          helperText={<ErrorMessage name="victimPhoneNumber" />}
+          error={
+            !!props.errors.victimPhoneNumber && props.touched.victimPhoneNumber
+          }
         />
         <TextField
           id="phone-number2"
@@ -105,14 +111,21 @@ export default function FormVictimsInformation({ props }) {
           label="Telefono 2"
           variant="outlined"
           size="small"
-          type="number"
           sx={{ width: "300px" }}
+          onChange={debouncedHandleChange}
+          onBlur={props.handleBlur}
+          helperText={<ErrorMessage name="victimPhoneNumber2" />}
+          error={
+            !!props.errors.victimPhoneNumber2 &&
+            props.touched.victimPhoneNumber2
+          }
         />
         <TextField
           id="date"
           name="victimBirthdate"
           variant="outlined"
           size="small"
+          onChange={debouncedHandleChange}
           type="date"
           sx={{ width: "300px" }}
         />
@@ -122,39 +135,60 @@ export default function FormVictimsInformation({ props }) {
           name="gender"
           id="gender"
           options={GENDER}
+          onChange={(e, value) => {
+            props.setFieldValue(
+              "gender",
+              value !== null ? value.name : initialValues.gender
+            );
+          }}
           sx={{ width: "300px" }}
           renderInput={(params) => (
             <TextField {...params} label="Seleccione un género" />
           )}
         ></Autocomplete>
         <Autocomplete
-          disablePortal
           size="small"
           name="stateLocation"
           id="states"
           options={STATES}
+          onChange={(e, value) => {
+            props.setFieldValue(
+              "stateLocation",
+              value !== null ? value.name : initialValues.stateLocation
+            );
+          }}
           sx={{ width: "300px" }}
           renderInput={(params) => (
             <TextField {...params} label="Seleccione un estado" />
           )}
         ></Autocomplete>
         <Autocomplete
-          disabled
           size="small"
           name="townShipLocation"
           id="municipio"
           options={MUNICIPIO}
+          onChange={(e, value) => {
+            props.setFieldValue(
+              "townShipLocation",
+              value !== null ? value.name : initialValues.townShipLocation
+            );
+          }}
           sx={{ width: "300px" }}
           renderInput={(params) => (
             <TextField {...params} label="Seleccione un municipio" />
           )}
         ></Autocomplete>
         <Autocomplete
-          disabled
           size="small"
           name="parishLocation"
           id="parroquia"
           options={PARROQUIA}
+          onChange={(e, value) => {
+            props.setFieldValue(
+              "parishLocation",
+              value !== null ? value.name : initialValues.parishLocation
+            );
+          }}
           sx={{ width: "300px" }}
           renderInput={(params) => (
             <TextField {...params} label="Seleccione un parroquia" />
@@ -164,6 +198,7 @@ export default function FormVictimsInformation({ props }) {
           id="location"
           name="localLocation"
           label="Dirección"
+          onChange={debouncedHandleChange}
           variant="outlined"
           size="small"
           sx={{ width: "300px" }}
@@ -175,6 +210,12 @@ export default function FormVictimsInformation({ props }) {
           name="isPregnant"
           id="isPregnant"
           options={ISPREGNANT}
+          onChange={(e, value) => {
+            props.setFieldValue(
+              "isPregnant",
+              value !== null ? value.name : initialValues.isPregnant
+            );
+          }}
           sx={{ width: "300px" }}
           renderInput={(params) => (
             <TextField {...params} label="¿Estás embarazada?" />
@@ -186,6 +227,7 @@ export default function FormVictimsInformation({ props }) {
           label="Numero de hijos"
           name="numberOfChildren"
           variant="outlined"
+          onChange={debouncedHandleChange}
           size="small"
           sx={{ width: "300px", marginBottom: "10px" }}
         />
@@ -195,6 +237,12 @@ export default function FormVictimsInformation({ props }) {
           name="ethnicity"
           id="ethnicity"
           options={ETNIA}
+          onChange={(e, value) => {
+            props.setFieldValue(
+              "ethnicity",
+              value !== null ? value.name : initialValues.ethnicity
+            );
+          }}
           sx={{ width: "300px", marginBottom: "10px" }}
           renderInput={(params) => (
             <TextField {...params} label="Seleccione una etnia" />
@@ -206,6 +254,12 @@ export default function FormVictimsInformation({ props }) {
           name="maritalStatus"
           id="maritalStatus"
           options={ESTADOCIVIL}
+          onChange={(e, value) => {
+            props.setFieldValue(
+              "maritalStatus",
+              value !== null ? value.name : initialValues.maritalStatus
+            );
+          }}
           sx={{ width: "300px", marginBottom: "10px" }}
           renderInput={(params) => (
             <TextField {...params} label="Seleccione una estado civil" />
@@ -217,6 +271,12 @@ export default function FormVictimsInformation({ props }) {
           id="levelOfInstruction"
           name="levelOfInstruction"
           options={NIVELDEINSTRUCCION}
+          onChange={(e, value) => {
+            props.setFieldValue(
+              "levelOfInstruction",
+              value !== null ? value.name : initialValues.levelOfInstruction
+            );
+          }}
           sx={{ width: "300px", marginBottom: "10px" }}
           renderInput={(params) => (
             <TextField {...params} label="Seleccione un nivel de instrucción" />
@@ -228,6 +288,12 @@ export default function FormVictimsInformation({ props }) {
           name="ocupation"
           id="ocupation"
           options={OCUPACION}
+          onChange={(e, value) => {
+            props.setFieldValue(
+              "ocupation",
+              value !== null ? value.name : initialValues.ocupation
+            );
+          }}
           sx={{ width: "300px", marginBottom: "10px" }}
           renderInput={(params) => (
             <TextField {...params} label="Seleccione una ocupación" />
@@ -237,6 +303,7 @@ export default function FormVictimsInformation({ props }) {
           name="Summary"
           multiline
           minRows={5}
+          onChange={debouncedHandleChange}
           sx={{ width: 500 }}
           label="Resumen de la llamada..."
         ></TextField>

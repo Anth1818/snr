@@ -12,12 +12,23 @@ import {
 import { Box } from "@mui/system";
 import { useState } from "react";
 import { NIVELDEINSTRUCCION, VINCULO, OCUPACION } from "../../../utils/constants";
-export default function FormAggressorsDetails() {
+import { debounce } from "lodash";
+import { initialValues } from "../../../utils/initialValues.js";
+
+
+
+
+export default function FormAggressorsDetails({props}) {
   const [value, setValue] = useState("No");
 
   const handleChange = (event) => {
     setValue(event.target.value);
   };
+
+  const debouncedHandleChange = debounce((e) => {
+    props.handleChange(e);
+  }, 100);
+
 
   return (
     <Box
@@ -69,6 +80,7 @@ export default function FormAggressorsDetails() {
             label="Nombres"
             name="nameOfAggressor"
             variant="outlined"
+            onChange={debouncedHandleChange}
             size="small"
             sx={{ width: "300px" }}
           />
@@ -76,6 +88,7 @@ export default function FormAggressorsDetails() {
             id="lastNameOfAggressor"
             label="Apellidos"
             name="lastNameOfAggressor"
+            onChange={debouncedHandleChange}
             variant="outlined"
             size="small"
             sx={{ width: "300px" }}
@@ -84,6 +97,7 @@ export default function FormAggressorsDetails() {
             id="ageOfAggressor"
             label="Edad aproximada"
             name="ageOfAggressor"
+            onChange={debouncedHandleChange}
             variant="outlined"
             size="small"
             sx={{ width: "300px" }}
@@ -94,6 +108,14 @@ export default function FormAggressorsDetails() {
             size="small"
             id="levelOfInstrutionOfAggressor"
             name="levelOfInstrutionOfAggressor"
+            onChange={(e, value) => {
+              props.setFieldValue(
+                "levelOfInstrutionOfAggressor",
+                value !== null
+                  ? value.name
+                  : initialValues.levelOfInstrutionOfAggressor
+              );
+            }}
             options={NIVELDEINSTRUCCION}
             sx={{ width: "300px" }}
             renderInput={(params) => (
@@ -105,6 +127,12 @@ export default function FormAggressorsDetails() {
             size="small"
             id="bondOfAggressor"
             name="bondOfAggressor"
+            onChange={(e, value) => {
+              props.setFieldValue(
+                "bondOfAggressor",
+                value !== null ? value.name : initialValues.bondOfAggressor
+              );
+            }}
             options={VINCULO}
             sx={{ width: "300px" }}
             renderInput={(params) => (
@@ -116,6 +144,12 @@ export default function FormAggressorsDetails() {
             size="small"
             id="AggressorOccupation"
             name="AggressorOccupation"
+            onChange={(e, value) => {
+              props.setFieldValue(
+                "AggressorOccupation",
+                value !== null ? value.name : initialValues.AggressorOccupation
+              );
+            }}
             options={OCUPACION}
             sx={{ width: "300px" }}
             renderInput={(params) => (

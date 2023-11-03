@@ -115,7 +115,7 @@ export default function FormContactInformation() {
           <TextField
             id="phone-number2"
             label="Telefono 2"
-            name="phoneNumber2OfContact"
+            name="phoneNumberOfContact2"
             variant="outlined"
             size="small"
             type="number"

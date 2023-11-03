@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import RenderDrawer from "../Drawer/Drawer";
-import FormTypesOfCalls from "../Forms/Form0800/FormTypesOfCalls";
+import FormSubTypesOfCalls from "../Forms/Form0800/FormSubTypesOfCalls";
 import { useState } from "react";
 import FormVictimsInformation from "../Forms/Form0800/FormVictimsInformation";
 import FormDataOfTheTypeOfViolence from "../Forms/Form0800/FormDataOfTheTypeOfViolence";
@@ -27,7 +27,7 @@ import {
   checkboxesDataOrientation,
   checkboxesDataNotRelevant,
 } from "../../utils/checkboxesData";
-import { Formik, Form, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import { validationSchema } from "../../utils/validationSchema";
 import { initialValues } from "../../utils/initialValues";
 
@@ -40,15 +40,16 @@ export default function ResponsiveLayoutForm0800() {
       componentToRender = (props) => {
         return (
           <>
-            <FormTypesOfCalls
+            <FormSubTypesOfCalls
               title={"Subtipos de orientación"}
               checkboxesData={checkboxesDataOrientation}
+              props={props}
             />
             <FormVictimsInformation props={props} />
-            <FormDataOfTheTypeOfViolence />
-            <FormAggressorsDetails />
-            <FormInstitutionalIntervention />
-            <FormContactInformation />
+            <FormDataOfTheTypeOfViolence props={props} />
+            <FormAggressorsDetails props={props} />
+            <FormInstitutionalIntervention props={props} />
+            <FormContactInformation props={props} />
             <FormButtonSubmit />
           </>
         )
@@ -59,9 +60,10 @@ export default function ResponsiveLayoutForm0800() {
       componentToRender = (props) => {
         return (
           <>
-            <FormTypesOfCalls
+            <FormSubTypesOfCalls
               title={"Subtipos de información"}
               checkboxesData={checkboxesDataInformation}
+              props={props}
             />
             <FormSummaryCall />
             <FormButtonSubmit />
@@ -75,9 +77,10 @@ export default function ResponsiveLayoutForm0800() {
       componentToRender = (props) => {
         return (
           <>
-            <FormTypesOfCalls
+            <FormSubTypesOfCalls
               title={"Subtipos de intervención"}
               checkboxesData={checkboxesDataIntervention}
+              props={props}
             />
             <FormVictimsInformation props={props}/>
             <FormDataOfTheTypeOfViolence />
@@ -93,9 +96,10 @@ export default function ResponsiveLayoutForm0800() {
       componentToRender = (props) => {
         return (
           <>
-            <FormTypesOfCalls
+            <FormSubTypesOfCalls
               title={"Subtipos de no relevante"}
               checkboxesData={checkboxesDataNotRelevant}
+              props={props}
             />
             <Typography
               variant="h5"
@@ -173,7 +177,10 @@ export default function ResponsiveLayoutForm0800() {
                   <Formik
                     initialValues={initialValues}
                     validationSchema={validationSchema}
-                    onSubmit={handleSubmit}
+                    onSubmit={(values) => {
+                      handleSubmit(values); // Llama a tu función de manejo de envío
+                      location.reload()// Restablece los valores del formulario después de enviarlo
+                    }}
                   >
                     {(props) => (
                       <Form>
@@ -193,6 +200,7 @@ export default function ResponsiveLayoutForm0800() {
                             value={selectedOption}
                             onChange={(e) => {
                               setSelectedOption(e.target.value);
+                              props.setFieldValue("typeOfCall", e.target.value);
                             }}
                             inputProps={{
                               id: "option-select",
@@ -200,7 +208,7 @@ export default function ResponsiveLayoutForm0800() {
                             }}
                             sx={{ width: 300 }}
                           >
-                            <MenuItem value={"Orientación"} >
+                            <MenuItem value={"Orientación"}>
                               Orientación
                             </MenuItem>
                             <MenuItem value={"Información"}>

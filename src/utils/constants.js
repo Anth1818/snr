@@ -1,4 +1,4 @@
-export const ID = [{ label: "Cédula" }, { label: "Rif" }, { label: "Pasaporte" }];
+export const ID = [{ label: "Cédula", name:"Cédula" }, { label: "Rif", name:"Rif" }, { label: "Pasaporte", name:"Pasaporte" }];
 
 export const TYPEOFCALLS = [
   "Orientación",
@@ -11,28 +11,155 @@ export const TYPEOFCALLS = [
 export const GENDER = [
   {
     label: "Hombre",
-    name: "male",
+    name: "Hombre",
   },
   {
     label: "Mujer",
-    name: "female",
+    name: "Mujer",
   },
 ];
+
+
+export const STATES = [
+  {
+    label: "Amazonas",
+    name: "Amazonas",
+  },
+  {
+    label: "Anzoátegui",
+    name: "Anzoátegui",
+  },
+  {
+    label: "Apure",
+    name: "Apure",
+  },
+  {
+    label: "Aragua",
+    name: "Aragua",
+  },
+  {
+    label: "Barinas",
+    name: "Barinas",
+  },
+  {
+    label: "Bolívar",
+    name: "Bolívar",
+  },
+  {
+    label: "Carabobo",
+    name: "Carabobo",
+  },
+  {
+    label: "Cojedes",
+    name: "Cojedes",
+  },
+  {
+    label: "Delta Amacuro",
+    name: "Delta Amacuro",
+  },
+  {
+    label: "Distrito Capital",
+    name: "Distrito Capital",
+  },
+  {
+    label: "Falcón",
+    name: "Falcón",
+  },
+  {
+    label: "Guárico",
+    name: "Guárico",
+  },
+  {
+    label: "Lara",
+    name: "Lara",
+  },
+  {
+    label: "Mérida",
+    name: "Mérida",
+  },
+  {
+    label: "Miranda",
+    name: "Miranda",
+  },
+  {
+    label: "Monagas",
+    name: "Monagas",
+  },
+  {
+    label: "Nueva Esparta",
+    name: "Nueva Esparta",
+  },
+  {
+    label: "Portuguesa",
+    name: "Portuguesa",
+  },
+  {
+    label: "Sucre",
+    name: "Sucre",
+  },
+  {
+    label: "Táchira",
+    name: "Táchira",
+  },
+  {
+    label: "Trujillo",
+    name: "Trujillo",
+  },
+  {
+    label: "La Guaira",
+    name: "La Guaira",
+  },
+  {
+    label: "Yaracuy",
+    name: "Yaracuy",
+  },
+  {
+    label: "Zulia",
+    name: "Zulia",
+  },
+];
+
 
 export const ISPREGNANT = [
   {
     label: "Si",
-    name: "yes",
+    name: "Si",
   },
   {
     label: "No",
-    name: "no",
+    name: "No",
   },
 ];
 
-export const MUNICIPIO = ["MUNICIPIO 1", "MUNICIPIO 2", "MUNICIPIO 3"];
+export const MUNICIPIO = [
+  {
+    label: "Municipio 1",
+    name: "Municipio 1",
+  },
+  {
+    label: "Municipio 2",
+    name: "Municipio 2",
+  },
+  {
+    label: "Municipio 3",
+    name: "Municipio 3",
+  },
+];
 
-export const PARROQUIA = ["PARROQUIA 1", "PARROQUIA 2", "PARROQUIA 3"];
+export const PARROQUIA = [
+  {
+    label: "Parroquia 1",
+    name: "Parroquia 1",
+  },
+  {
+    label: "Parroquia 2",
+    name: "Parroquia 2",
+  },
+  {
+    label: "Parroquia 3",
+    name: "Parroquia 3",
+  },
+];
 
 export const ETNIA = [
   "Blanca",
