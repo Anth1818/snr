@@ -3,24 +3,26 @@ import { sample } from "lodash";
 
 // ----------------------------------------------------------------------
 
-const users = [...Array(24)].map((_, index) => ({
-  id: faker.datatype.uuid(),
-  name: faker.name.fullName(),
-  company: faker.company.name(),
-  isVerified: faker.datatype.boolean(),
-  status: sample(["active", "banned"]),
-  role: sample([
-    "Leader",
-    "Hr Manager",
-    "UI Designer",
-    "UX Designer",
-    "UI/UX Designer",
-    "Project Manager",
-    "Backend Developer",
-    "Full Stack Designer",
-    "Front End Developer",
-    "Full Stack Developer",
-  ]),
+// Función para obtener los datos desde localStorage o usar datos de muestra
+const obtenerDatosDesdeLocalStorage = () => {
+  const datosGuardados = localStorage.getItem('datosGuardados');
+  const datosGuardadosArray = datosGuardados ? JSON.parse(datosGuardados) : [];
+
+  // Si no hay datos en localStorage, devuelve datos de muestra
+  return datosGuardadosArray;
+};
+
+const users = obtenerDatosDesdeLocalStorage().map((user) => ({
+  caseId: user.caseId,
+  date: user.date,
+  location:
+    user.stateLocation || user.townShipLocation || user.parishLocation
+      ? [user.stateLocation, user.townShipLocation, user.parishLocation].join(
+          "\n"
+        )
+      : "Sin ubicación",
+  user: faker.name.fullName(),
+  status: user.status || sample(["active", "banned"]),
 }));
 
 export default users;

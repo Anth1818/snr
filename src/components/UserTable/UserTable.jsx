@@ -57,7 +57,7 @@ function applySortFilter(array, comparator, query) {
   if (query) {
     return filter(
       array,
-      (_user) => _user.name.toLowerCase().indexOf(query.toLowerCase()) !== -1
+      (_user) => _user.caseId.toLowerCase().indexOf(query.toLowerCase()) !== -1
     );
   }
   return stabilizedThis.map((el) => el[0]);
@@ -70,8 +70,6 @@ export default function UserTable({ dataHeadTable, dataTitle, pathToForm, handle
   const [page, setPage] = useState(0);
 
   const [order, setOrder] = useState("asc");
-
-  const [selected, setSelected] = useState([]);
 
   const [orderBy, setOrderBy] = useState("name");
 
@@ -92,15 +90,13 @@ export default function UserTable({ dataHeadTable, dataTitle, pathToForm, handle
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
-  };
 
-  const handleSelectAllClick = (event) => {
-    if (event.target.checked) {
-      const newSelecteds = USERLIST.map((n) => n.name);
-      setSelected(newSelecteds);
-      return;
+    if (property === "caseId") {
+      filteredUsers.sort((a, b) => {
+        return (a.caseId - b.caseId) * (order === "asc" ? 1 : -1);
+      });
     }
-    setSelected([]);
+
   };
 
   const handleChangePage = (event, newPage) => {
@@ -122,6 +118,8 @@ export default function UserTable({ dataHeadTable, dataTitle, pathToForm, handle
   );
 
   const isNotFound = !filteredUsers.length && !!filterName;
+
+  const filteredUsersReverse = [...filteredUsers].reverse()
 
 
   return (
@@ -155,7 +153,7 @@ export default function UserTable({ dataHeadTable, dataTitle, pathToForm, handle
 
         <Card>
           <UserListToolbar
-            numSelected={selected.length}
+            // numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}
           />
@@ -168,19 +166,22 @@ export default function UserTable({ dataHeadTable, dataTitle, pathToForm, handle
                   orderBy={orderBy}
                   headLabel={dataHeadTable}
                   rowCount={USERLIST.length}
-                  numSelected={selected.length}
+                  // numSelected={selected.length}
                   onRequestSort={handleRequestSort}
-                  onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {filteredUsers
+                  {filteredUsersReverse
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => {
-                      const { id, name, role, status, company, isVerified } =
-                        row;
+                      const {
+                        caseId,
+                        date,
+                        location,
+                        user,
+                      } = row;
 
                       return (
-                        <TableRow hover key={id} tabIndex={-1}>
+                        <TableRow hover key={caseId} tabIndex={-1}>
                           <TableCell
                             component="th"
                             scope="row"
@@ -192,17 +193,17 @@ export default function UserTable({ dataHeadTable, dataTitle, pathToForm, handle
                               spacing={2}
                             >
                               <Typography variant="subtitle2" noWrap>
-                                {name}
+                                {caseId}
                               </Typography>
                             </Stack>
                           </TableCell>
 
-                          <TableCell align="left">{company}</TableCell>
+                          <TableCell align="left">{date}</TableCell>
 
-                          <TableCell align="left">{role}</TableCell>
+                          <TableCell align="left">{location}</TableCell>
 
                           <TableCell align="left">
-                            {isVerified ? "Yes" : "No"}
+                            {user}
                           </TableCell>
 
                           <TableCell align="left">
@@ -300,12 +301,12 @@ export default function UserTable({ dataHeadTable, dataTitle, pathToForm, handle
           Ver detalles
         </MenuItem>
 
-        <MenuItem onClick={handleOpenModal}>
+        <MenuItem>
             <Iconify icon={"eva:edit-fill"} sx={{ mr: 2 }} />
           Editar
         </MenuItem>
 
-        <MenuItem sx={{ color: "error.main" }} onClick={handleOpenModal}>
+        <MenuItem sx={{ color: "error.main" }}>
           <Iconify icon={"eva:trash-2-outline"} sx={{ mr: 2 }} />
           Eliminar
         </MenuItem>

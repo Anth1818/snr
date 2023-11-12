@@ -30,6 +30,7 @@ import {
 import { Formik, Form } from "formik";
 import { validationSchema } from "../../utils/validationSchema";
 import { initialValues } from "../../utils/initialValues";
+import { guardarEnJSON } from "../../utils/saveDataLocalStorage";
 
 export default function ResponsiveLayoutForm0800() {
   const [selectedOption, setSelectedOption] = useState("Orientación");
@@ -119,16 +120,17 @@ export default function ResponsiveLayoutForm0800() {
               }}
             >
               <TextField
+                name="summary"
                 multiline
                 minRows={5}
+                onChange={props.handleChange}
                 sx={{ width: 500 }}
                 label="Resumen de la llamada..."
               ></TextField>
             </FormGroup>
             <FormButtonSubmit />
           </>
-
-        )
+        );
 
       }
 
@@ -138,7 +140,9 @@ export default function ResponsiveLayoutForm0800() {
   }
 
   const handleSubmit = (values) => {
-    alert(JSON.stringify(values, null, 2));
+    // alert(JSON.stringify(values, null, 2));
+    guardarEnJSON(values)
+
   };
 
   return (
@@ -179,7 +183,8 @@ export default function ResponsiveLayoutForm0800() {
                     validationSchema={validationSchema}
                     onSubmit={(values) => {
                       handleSubmit(values); // Llama a tu función de manejo de envío
-                      location.reload()// Restablece los valores del formulario después de enviarlo
+                       location.href = "/pages/Page0800";
+                     
                     }}
                   >
                     {(props) => (

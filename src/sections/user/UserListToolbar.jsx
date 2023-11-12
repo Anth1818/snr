@@ -66,7 +66,7 @@ export default function UserListToolbar({
         <StyledSearch
           value={filterName}
           onChange={onFilterName}
-          placeholder="Buscar usuario..."
+          placeholder="Buscar por n° de caso"
           startAdornment={
             <InputAdornment position="start">
               <Iconify

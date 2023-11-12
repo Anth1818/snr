@@ -1,6 +1,8 @@
 import { CssBaseline, Grid, Paper, Toolbar } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import RenderDrawer from "../Drawer/Drawer";
+import { getData } from "../../utils/getDataLocalStorage";
+
 
 export default function ResponsiveLayoutStatistics() {
   return (
@@ -31,7 +33,8 @@ export default function ResponsiveLayoutStatistics() {
                   flexDirection: "column",
                   height: 240,
                 }}
-              ></Paper>
+              >
+              </Paper>
             </Grid>
             {/* Chart 2 */}
             <Grid item xs={12} md={4} lg={3}>

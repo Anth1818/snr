@@ -2,14 +2,12 @@ import { useEffect, useState } from 'react';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { faker } from '@faker-js/faker';
-import { STATES as labels } from '../../utils/constants';
+import { STATESBYSTATS as labels } from '../../utils/constants';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-
-  
-
 export function Statistics0800ByStates({ selectedYearState }) {
+  
   const generateDataByYear = (year) => {
     return {
       labels,

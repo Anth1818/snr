@@ -119,6 +119,7 @@ export const STATES = [
   },
 ];
 
+export const STATESBYSTATS = STATES.map((state) => state.label);
 
 export const ISPREGNANT = [
   {

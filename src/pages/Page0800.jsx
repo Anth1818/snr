@@ -9,7 +9,7 @@ const defaultTheme = createTheme();
 export default function Page0800() {
 
    const TABLE_HEAD_0800 = [
-     { id: "n_case", label: "Número de caso", alignRight: false },
+     { id: "caseId", label: "Número de caso", alignRight: false },
      { id: "date", label: "Fecha", alignRight: false },
      { id: "location", label: "Ubicación", alignRight: false },
      { id: "user", label: "Usuario", alignRight: false },

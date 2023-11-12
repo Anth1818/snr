@@ -1,8 +1,9 @@
-import * as React from 'react';
+
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { getData } from '../../utils/getDataLocalStorage';
 
 const style = {
     position: 'absolute',
@@ -29,7 +30,7 @@ export default function ModalDetails({ open, handleCloseModal }) {
                     <Button variant='contained' onClick={handleCloseModal}>Cerrar modal</Button>
                     <Box sx={{width:"100%", height:"100%", display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
                         <Typography id="modal-modal-title" variant="h6" component="h2">
-                            Text in a modal
+                           
                         </Typography>
                         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                             Duis mollis, est non commodo luctus, nisi erat porttitor ligula.

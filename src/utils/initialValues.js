@@ -1,3 +1,5 @@
+// import { generateId } from "./generateID";
+
 export const initialValues = {
   //data tipo de llamada y subtipos de llamada
   typeOfCall: "Orientación",
@@ -12,9 +14,9 @@ export const initialValues = {
   victimPhoneNumber2: "",
   victimBirthdate: "",
   gender: "",
-  stateLocation: "",
-  townShipLocation: "",
-  parishLocation: "",
+  stateLocation: null,
+  townShipLocation: null,
+  parishLocation: null,
   localLocation: "",
   isPregnant: "",
   numberOfChildren: "",
@@ -22,7 +24,7 @@ export const initialValues = {
   maritalStatus: "",
   levelOfInstruction: "",
   ocupation: "",
-  Summary: "",
+  summary: "",
 
   //data de formas de violencia
   typeOfViolence: [],
@@ -51,5 +53,7 @@ export const initialValues = {
   lastNameOfContact: "",
   phoneNumberOfContact: "",
   phoneNumberOfContact2: "",
-  emailOfContact:""
+  emailOfContact: "",
+  date: new Date().toLocaleString(),
+  caseId: (Math.random() * 1000000).toString().substring(0, 5)
 };
