@@ -1,6 +1,11 @@
 import { format, getTime, formatDistanceToNow } from "date-fns";
 
 // ----------------------------------------------------------------------
+const timestamp = Date.now();
+
+// Formatea la marca de tiempo en la fecha y hora deseada
+export const formattedDate = format(timestamp, "dd/MM/yyyy HH:mm a");
+
 
 export function fDate(date, newFormat) {
   const fm = newFormat || "dd MMM yyyy";

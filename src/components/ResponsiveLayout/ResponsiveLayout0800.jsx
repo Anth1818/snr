@@ -9,8 +9,10 @@ import ModalDetails from "../modal/modal";
 export default function ResponsiveLayout0800({ dataHeadTable }) {
 
   const [open, setOpen] = useState(false);
-  const handleOpenModal = () => setOpen(true);
+  const [caseId, setCaseId] = useState("");
+  const handleOpenModal = (caseId) => { setOpen(true); setCaseId(caseId) };
   const handleCloseModal = () => setOpen(false);
+ 
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -36,7 +38,7 @@ export default function ResponsiveLayout0800({ dataHeadTable }) {
             pathToForm={"/Pages/PageForm0800"}
             handleOpenModal={handleOpenModal}
           ></UserTable>
-          <ModalDetails open={open} handleCloseModal={handleCloseModal}></ModalDetails>
+          <ModalDetails open={open} handleCloseModal={handleCloseModal} caseId={caseId}></ModalDetails>
         </Container>
       </Box>
     </Box>

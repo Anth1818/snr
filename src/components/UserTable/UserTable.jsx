@@ -78,8 +78,11 @@ export default function UserTable({ dataHeadTable, dataTitle, pathToForm, handle
   // eslint-disable-next-line no-unused-vars
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const handleOpenMenu = (event) => {
+  const [selectedCaseId, setSelectedCaseId] = useState("")
+
+  const handleOpenMenu = (event, caseId) => {
     setOpen(event.currentTarget);
+    setSelectedCaseId(caseId);
   };
 
   const handleCloseMenu = () => {
@@ -124,7 +127,6 @@ export default function UserTable({ dataHeadTable, dataTitle, pathToForm, handle
 
   return (
     <>
-    
       <Container
         sx={{
           width: "100%",
@@ -173,12 +175,7 @@ export default function UserTable({ dataHeadTable, dataTitle, pathToForm, handle
                   {filteredUsersReverse
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => {
-                      const {
-                        caseId,
-                        date,
-                        location,
-                        user,
-                      } = row;
+                      const { caseId, date, location, user } = row;
 
                       return (
                         <TableRow hover key={caseId} tabIndex={-1}>
@@ -202,9 +199,7 @@ export default function UserTable({ dataHeadTable, dataTitle, pathToForm, handle
 
                           <TableCell align="left">{location}</TableCell>
 
-                          <TableCell align="left">
-                            {user}
-                          </TableCell>
+                          <TableCell align="left">{user}</TableCell>
 
                           <TableCell align="left">
                             <Label
@@ -220,7 +215,7 @@ export default function UserTable({ dataHeadTable, dataTitle, pathToForm, handle
                             <IconButton
                               size="large"
                               color="inherit"
-                              onClick={handleOpenMenu}
+                              onClick={(event) => handleOpenMenu(event, caseId)}
                             >
                               <Iconify icon={"eva:more-vertical-fill"} />
                             </IconButton>
@@ -245,14 +240,12 @@ export default function UserTable({ dataHeadTable, dataTitle, pathToForm, handle
                           }}
                         >
                           <Typography variant="h6" paragraph>
-                            Not found
+                            No encontrado
                           </Typography>
 
                           <Typography variant="body2">
-                            No results found for &nbsp;
+                            No hay resultados para &nbsp;
                             <strong>&quot;{filterName}&quot;</strong>.
-                            <br /> Try checking for typos or using complete
-                            words.
                           </Typography>
                         </Paper>
                       </TableCell>
@@ -295,14 +288,13 @@ export default function UserTable({ dataHeadTable, dataTitle, pathToForm, handle
           },
         }}
       >
-
-        <MenuItem onClick={handleOpenModal}>
+        <MenuItem onClick={() => { handleOpenModal(selectedCaseId) }}>
           <Iconify icon={"eva:eye-fill"} sx={{ mr: 2 }}></Iconify>
           Ver detalles
         </MenuItem>
 
         <MenuItem>
-            <Iconify icon={"eva:edit-fill"} sx={{ mr: 2 }} />
+          <Iconify icon={"eva:edit-fill"} sx={{ mr: 2 }} />
           Editar
         </MenuItem>
 

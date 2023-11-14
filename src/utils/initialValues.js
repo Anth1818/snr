@@ -1,4 +1,5 @@
 // import { generateId } from "./generateID";
+import { formattedDate } from "./formatTime";
 
 export const initialValues = {
   //data tipo de llamada y subtipos de llamada
@@ -54,6 +55,6 @@ export const initialValues = {
   phoneNumberOfContact: "",
   phoneNumberOfContact2: "",
   emailOfContact: "",
-  date: new Date().toLocaleString(),
+  date: formattedDate,
   caseId: (Math.random() * 1000000).toString().substring(0, 5)
 };

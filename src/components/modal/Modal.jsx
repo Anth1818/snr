@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { getData } from '../../utils/getDataLocalStorage';
+// import { getData } from '../../utils/getDataLocalStorage';
 
 const style = {
     position: 'absolute',
@@ -18,7 +18,7 @@ const style = {
     p: 4,
 };
 
-export default function ModalDetails({ open, handleCloseModal }) {
+export default function ModalDetails({ open, handleCloseModal, caseId }) {
     return (
         <div>
             <Modal
@@ -33,7 +33,8 @@ export default function ModalDetails({ open, handleCloseModal }) {
                            
                         </Typography>
                         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+              N° de caso 
+                {caseId}
                         </Typography>
 
                     </Box>
