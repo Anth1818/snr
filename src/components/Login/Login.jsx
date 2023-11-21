@@ -82,7 +82,11 @@ export default function Login() {
               label="Password"
             />
           </FormControl>
-          <Button variant="contained" color="secondary" type="submit">
+          <Button
+            variant="contained"
+            type="submit"
+            sx={{ backgroundColor: "#2E219E", color:"white"}}
+          >
             Ingresar
           </Button>
         </form>
