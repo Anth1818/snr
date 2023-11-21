@@ -6,7 +6,6 @@ export default function FormSummaryCall({props}) {
     return (
       <Box
         sx={{
-          border: "solid 1px black",
           marginTop: "20px",
           width: "100%",
           marginLeft: "auto",

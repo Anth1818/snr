@@ -151,12 +151,12 @@ export default function FormAggressorsDetails({props}) {
           <Autocomplete
             disablePortal
             size="small"
-            id="AggressorOccupation"
-            name="AggressorOccupation"
+            id="aggressorOccupation"
+            name="aggressorOccupation"
             onChange={(e, value) => {
               props.setFieldValue(
-                "AggressorOccupation",
-                value !== null ? value.name : initialValues.AggressorOccupation
+                "aggressorOccupation",
+                value !== null ? value.name : initialValues.aggressorOccupation
               );
             }}
             options={OCUPACION}

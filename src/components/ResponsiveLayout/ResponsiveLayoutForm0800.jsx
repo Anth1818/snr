@@ -9,7 +9,11 @@ import {
   Typography,
   FormGroup,
   MenuItem,
+  Snackbar,
+  Button,
 } from "@mui/material";
+import MuiAlert from '@mui/material/Alert';
+import React from "react";
 import { Box, Container } from "@mui/system";
 import RenderDrawer from "../Drawer/Drawer";
 import FormSubTypesOfCalls from "../Forms/Form0800/FormSubTypesOfCalls";
@@ -21,6 +25,7 @@ import FormInstitutionalIntervention from "../Forms/Form0800/FormInstitutionalIn
 import FormContactInformation from "../Forms/Form0800/FormContactInformation";
 import FormSummaryCall from "../Forms/Form0800/FormSummaryCall";
 import FormButtonSubmit from "../Forms/Form0800/FormButtonSubmit";
+import { useFormikContext } from "formik";
 import {
   checkboxesDataInformation,
   checkboxesDataIntervention,
@@ -32,33 +37,48 @@ import { validationSchema } from "../../utils/validationSchema";
 import { initialValues } from "../../utils/initialValues";
 import { guardarEnJSON } from "../../utils/saveDataLocalStorage";
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 export default function ResponsiveLayoutForm0800() {
   const [selectedOption, setSelectedOption] = useState("Orientación");
+  const [showAlert, setShowAlert] = useState(false);
+  const [disableButton, setDisableButton] = useState(false)
   let componentToRender = null;
-
+  
+  
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    
+    setShowAlert(false);
+  }
+  
   switch (selectedOption) {
     case "Orientación":
-      componentToRender = (props) => {
+      componentToRender = (props, disableButton) => {
         return (
           <>
             <FormSubTypesOfCalls
               title={"Subtipos de orientación"}
               checkboxesData={checkboxesDataOrientation}
               props={props}
-            />
+              />
             <FormVictimsInformation props={props} />
             <FormDataOfTheTypeOfViolence props={props} />
             <FormAggressorsDetails props={props} />
             <FormInstitutionalIntervention props={props} />
             <FormContactInformation props={props} />
-            <FormButtonSubmit />
+            <FormButtonSubmit disableButton={disableButton}/>
           </>
         )
       }
 
       break;
     case "Información":
-      componentToRender = (props) => {
+      componentToRender = (props,disableButton) => {
         return (
           <>
             <FormSubTypesOfCalls
@@ -66,8 +86,8 @@ export default function ResponsiveLayoutForm0800() {
               checkboxesData={checkboxesDataInformation}
               props={props}
             />
-            <FormSummaryCall props={props}/>
-            <FormButtonSubmit />
+            <FormSummaryCall props={props} />
+            <FormButtonSubmit disableButton={disableButton}/>
           </>
 
         )
@@ -75,38 +95,38 @@ export default function ResponsiveLayoutForm0800() {
       }
       break;
     case "Intervención":
-      componentToRender = (props) => {
+      componentToRender = (props,disableButton) => {
         return (
           <>
             <FormSubTypesOfCalls
               title={"Subtipos de intervención"}
               checkboxesData={checkboxesDataIntervention}
               props={props}
-            />
-            <FormVictimsInformation props={props}/>
-            <FormDataOfTheTypeOfViolence props={props}/>
-            <FormAggressorsDetails props={props}/>
-            <FormInstitutionalIntervention props={props}/>
-            <FormButtonSubmit />
+              />
+            <FormVictimsInformation props={props} />
+            <FormDataOfTheTypeOfViolence props={props} />
+            <FormAggressorsDetails props={props} />
+            <FormInstitutionalIntervention props={props} />
+            <FormButtonSubmit disableButton={disableButton}/>
           </>
 
         )
       }
       break;
-    case "No relevante":
-      componentToRender = (props) => {
-        return (
+      case "No relevante":
+        componentToRender = (props, disableButton) => {
+          return (
           <>
             <FormSubTypesOfCalls
               title={"Subtipos de no relevante"}
               checkboxesData={checkboxesDataNotRelevant}
               props={props}
-            />
+              />
             <Typography
               variant="h5"
               textAlign={"center"}
               sx={{ marginBottom: "10px", marginTop: "10px" }}
-            >
+              >
               Resumen de la llamada
             </Typography>
             <FormGroup
@@ -126,25 +146,25 @@ export default function ResponsiveLayoutForm0800() {
                 onChange={props.handleChange}
                 sx={{ width: 500 }}
                 label="Resumen de la llamada..."
-              ></TextField>
+                ></TextField>
             </FormGroup>
-            <FormButtonSubmit />
+            <FormButtonSubmit disableButton={disableButton}/>
           </>
         );
-
+        
       }
 
       break;
-    default:
+      default:
       componentToRender = null;
-  }
-
+    }
+    
   const handleSubmit = (values) => {
     // alert(JSON.stringify(values, null, 2));
     guardarEnJSON(values)
-
+    
   };
-
+  
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -153,14 +173,14 @@ export default function ResponsiveLayoutForm0800() {
         component="main"
         sx={{
           backgroundColor: (theme) =>
-            theme.palette.mode === "light"
+          theme.palette.mode === "light"
               ? theme.palette.grey[100]
               : theme.palette.grey[900],
           flexGrow: 1,
           height: "100vh",
           overflow: "auto",
         }}
-      >
+        >
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 10 }}>
           <Grid container>
@@ -169,7 +189,7 @@ export default function ResponsiveLayoutForm0800() {
                 sx={{
                   p: 2,
                 }}
-              >
+                >
                 <Typography variant="h3" textAlign={"center"}>
                   Nuevo registro 0800
                 </Typography>
@@ -183,10 +203,14 @@ export default function ResponsiveLayoutForm0800() {
                     validationSchema={validationSchema}
                     onSubmit={(values) => {
                       handleSubmit(values); // Llama a tu función de manejo de envío
-                       location.href = "/pages/Page0800";
-                     
+                      setShowAlert(true); // Mostrar el Alert al enviar el formulario
+                      setDisableButton(true)
+                      setTimeout(() => {
+                        setDisableButton(false)
+                        location.href = "/pages/Page0800"; // Redireccionar después del tiempo especificado
+                      }, 2500);
                     }}
-                  >
+                    >
                     {(props) => (
                       <Form>
                         <Box
@@ -230,12 +254,17 @@ export default function ResponsiveLayoutForm0800() {
                         {selectedOption !== null ? (
                           <div>
                             {/* Contenido a renderizar si selectedOption no es null */}
-                            {componentToRender(props)}
+                            {componentToRender(props, disableButton)}
                           </div>
                         ) : null}
                       </Form>
                     )}
                   </Formik>
+                  <Snackbar open={showAlert} autoHideDuration={2000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                      Registro exitoso
+                    </Alert>
+                  </Snackbar>
                 </Box>
               </Paper>
             </Grid>

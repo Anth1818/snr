@@ -25,6 +25,8 @@ export const initialValues = {
   maritalStatus: "",
   levelOfInstruction: "",
   ocupation: "",
+
+  // Resumen de llamada
   summary: "",
 
   //data de formas de violencia
@@ -36,7 +38,7 @@ export const initialValues = {
   ageOfAggressor: "",
   levelOfInstrutionOfAggressor: "",
   bondOfAggressor: "",
-  AggressorOccupation: "",
+  aggressorOccupation: "",
 
   //data de inteversion institucional
 
@@ -55,6 +57,9 @@ export const initialValues = {
   phoneNumberOfContact: "",
   phoneNumberOfContact2: "",
   emailOfContact: "",
+
+
+  // fecha de creacion del registro e ID ramdon (ambos datos tiene que venir de la base de datos)
   date: formattedDate,
   caseId: (Math.random() * 1000000).toString().substring(0, 5)
 };
