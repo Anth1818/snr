@@ -73,7 +73,7 @@ export default function ModalDetails({ open, handleCloseModal, caseId }) {
           {filteredData ? (<Box><Typography sx={{ mt: 2 }}>N° de caso {caseId}</Typography>
             <Typography>Tipo de llamada: {filteredData.typeOfCall}</Typography></Box>)
             : (
-              <Typography>No hay datos</Typography>
+              "No hay datos"
             )}
           <Box
             sx={{
@@ -100,12 +100,12 @@ export default function ModalDetails({ open, handleCloseModal, caseId }) {
               {filteredData.subTypesOfCall.length > 0 ? (
                       filteredData.subTypesOfCall.map((element, index) => <li key={index}>{element}</li>)
                     ) : (
-                      <Typography>No hay datos disponibles</Typography>
+                      "No hay datos disponibles"
                     )}
               </Typography>
             </AccordionDetails>
           </Accordion>) : (
-            <Typography>No hay datos</Typography>
+            "No hay datos"
           )}
 
             <Accordion sx={{ width: '100%' }}
@@ -120,11 +120,11 @@ export default function ModalDetails({ open, handleCloseModal, caseId }) {
               </AccordionSummary>
               <AccordionDetails >
                 {filteredData ? (
-                  <Typography>
+                  <Typography component="h4">
                     {filteredData.summary || "No hay datos disponibles"}
                   </Typography>
                 ) : (
-                  <Typography>No hay datos disponibles</Typography>
+                  "No hay datos disponibles"
                 )}
               </AccordionDetails>
             </Accordion>
@@ -206,7 +206,7 @@ export default function ModalDetails({ open, handleCloseModal, caseId }) {
                   </Grid>
 
                 ) : (
-                  <Typography>No hay datos disponibles</Typography>
+                  "No hay datos disponibles"
                 )}
 
               </AccordionDetails>
@@ -227,13 +227,13 @@ export default function ModalDetails({ open, handleCloseModal, caseId }) {
                     {filteredData.typeOfViolence.length > 0 ? (
                       filteredData.typeOfViolence.map((element, index) => <li key={index}>{element}</li>)
                     ) : (
-                      <Typography>No hay datos disponibles</Typography>
+                      "No hay datos disponibles"
                     )}
                   </Typography>
                 </AccordionDetails>
               </Accordion>
             ) : (
-              <Typography>Sin datos</Typography>
+              "Sin datos"
             )}
 
             <Accordion sx={{ width: '100%' }}
@@ -281,7 +281,7 @@ export default function ModalDetails({ open, handleCloseModal, caseId }) {
                   </Grid>
 
                 ) : (
-                  <Typography>No hay datos disponibles</Typography>
+                  "No hay datos disponibles"
                 )}
 
               </AccordionDetails>
@@ -328,7 +328,7 @@ export default function ModalDetails({ open, handleCloseModal, caseId }) {
                   </Grid>
 
                 ) : (
-                  <Typography>No hay datos disponibles</Typography>
+                  "No hay datos disponibles"
                 )}
 
               </AccordionDetails>
@@ -378,7 +378,7 @@ export default function ModalDetails({ open, handleCloseModal, caseId }) {
                   </Grid>
 
                 ) : (
-                  <Typography>No hay datos disponibles</Typography>
+                  "No hay datos disponibles"
                 )}
 
               </AccordionDetails>

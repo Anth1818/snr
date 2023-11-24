@@ -29,6 +29,7 @@ import { UserListHead, UserListToolbar } from "../../sections/user";
 import USERLIST from "../../_mock/user";
 import SimpleBar from "simplebar-react";
 import { Link } from "react-router-dom";
+import { getCaseId } from "../../utils/getCaseId";
 
 
 function descendingComparator(a, b, orderBy) {
@@ -78,7 +79,7 @@ export default function UserTable({ dataHeadTable, dataTitle, pathToForm, handle
   // eslint-disable-next-line no-unused-vars
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const [selectedCaseId, setSelectedCaseId] = useState("")
+  const [selectedCaseId, setSelectedCaseId] = useState(null)
 
   const handleOpenMenu = (event, caseId) => {
     setOpen(event.currentTarget);
@@ -293,10 +294,12 @@ export default function UserTable({ dataHeadTable, dataTitle, pathToForm, handle
           Ver detalles
         </MenuItem>
 
-        <MenuItem>
+        <Link to={"/pages/PageForm0800Edit"}> 
+        <MenuItem onClick={() =>{ getCaseId(selectedCaseId)}}>
           <Iconify icon={"eva:edit-fill"} sx={{ mr: 2 }} />
           Editar
         </MenuItem>
+        </Link>
 
         <MenuItem sx={{ color: "error.main" }}>
           <Iconify icon={"eva:trash-2-outline"} sx={{ mr: 2 }} />

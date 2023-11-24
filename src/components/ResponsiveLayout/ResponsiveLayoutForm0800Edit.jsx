@@ -24,7 +24,6 @@ import FormInstitutionalIntervention from "../Forms/Form0800/FormInstitutionalIn
 import FormContactInformation from "../Forms/Form0800/FormContactInformation";
 import FormSummaryCall from "../Forms/Form0800/FormSummaryCall";
 import FormButtonSubmit from "../Forms/Form0800/FormButtonSubmit";
-import { useFormikContext } from "formik";
 import {
   checkboxesDataInformation,
   checkboxesDataIntervention,
@@ -35,15 +34,24 @@ import { Formik, Form } from "formik";
 import { validationSchema } from "../../utils/validationSchema";
 import { initialValues } from "../../utils/initialValues";
 import { guardarEnJSON } from "../../utils/saveDataLocalStorage";
+import useLocalStorageData from '../../hooks/useLocalStorageData';
+import { getCaseId } from "../../utils/getCaseId";
+
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export default function ResponsiveLayoutForm0800() {
+
+
+export default function ResponsiveLayoutForm0800Edit() {
   const [selectedOption, setSelectedOption] = useState("Orientación");
   const [showAlert, setShowAlert] = useState(false);
   const [disableButton, setDisableButton] = useState(false)
+
+  // const idRegister = getCaseId()
+  // const { filteredData, data } = useLocalStorageData('datosGuardados', caseId);
+  // console.log(idRegister)
   let componentToRender = null;
   
   
