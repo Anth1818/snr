@@ -29,7 +29,7 @@ import { UserListHead, UserListToolbar } from "../../sections/user";
 import USERLIST from "../../_mock/user";
 import SimpleBar from "simplebar-react";
 import { Link } from "react-router-dom";
-import { getCaseId } from "../../utils/getCaseId";
+
 
 
 function descendingComparator(a, b, orderBy) {
@@ -82,7 +82,7 @@ export default function UserTable({ dataHeadTable, dataTitle, pathToForm, handle
   const [selectedCaseId, setSelectedCaseId] = useState(null)
 
   const handleOpenMenu = (event, caseId) => {
-    setOpen(event.currentTarget);
+    setOpen(event.currentTarget);                             
     setSelectedCaseId(caseId);
   };
 
@@ -176,7 +176,7 @@ export default function UserTable({ dataHeadTable, dataTitle, pathToForm, handle
                   {filteredUsersReverse
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => {
-                      const { caseId, date, location, user } = row;
+                      const { caseId, date, location, user, typeOfCall } = row;
 
                       return (
                         <TableRow hover key={caseId} tabIndex={-1}>
@@ -294,8 +294,8 @@ export default function UserTable({ dataHeadTable, dataTitle, pathToForm, handle
           Ver detalles
         </MenuItem>
 
-        <Link to={"/pages/PageForm0800Edit"}> 
-        <MenuItem onClick={() =>{ getCaseId(selectedCaseId)}}>
+        <Link to={`/pages/PageForm0800Edit/${selectedCaseId}`}>
+        <MenuItem>
           <Iconify icon={"eva:edit-fill"} sx={{ mr: 2 }} />
           Editar
         </MenuItem>

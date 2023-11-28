@@ -15,6 +15,7 @@ const obtenerDatosDesdeLocalStorage = () => {
 const users = obtenerDatosDesdeLocalStorage().map((user) => ({
   caseId: user.caseId,
   date: user.date,
+  typeOfCall: user.typeOfCall,
   location:
     user.stateLocation || user.townShipLocation || user.parishLocation
       ? [user.stateLocation, user.townShipLocation, user.parishLocation].join(

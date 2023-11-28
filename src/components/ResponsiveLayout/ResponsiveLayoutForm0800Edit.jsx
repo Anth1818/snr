@@ -10,9 +10,10 @@ import {
   FormGroup,
   MenuItem,
   Snackbar,
+  Button,
 } from "@mui/material";
 import MuiAlert from '@mui/material/Alert';
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Container } from "@mui/system";
 import RenderDrawer from "../Drawer/Drawer";
 import FormSubTypesOfCalls from "../Forms/Form0800/FormSubTypesOfCalls";
@@ -34,8 +35,6 @@ import { Formik, Form } from "formik";
 import { validationSchema } from "../../utils/validationSchema";
 import { initialValues } from "../../utils/initialValues";
 import { guardarEnJSON } from "../../utils/saveDataLocalStorage";
-import useLocalStorageData from '../../hooks/useLocalStorageData';
-import { getCaseId } from "../../utils/getCaseId";
 
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -44,17 +43,31 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 
 
-export default function ResponsiveLayoutForm0800Edit() {
-  const [selectedOption, setSelectedOption] = useState("Orientación");
+export default function ResponsiveLayoutForm0800Edit({caseId, data}) {
   const [showAlert, setShowAlert] = useState(false);
   const [disableButton, setDisableButton] = useState(false)
+  const [selectedOption, setSelectedOption] = useState("");
 
-  // const idRegister = getCaseId()
-  // const { filteredData, data } = useLocalStorageData('datosGuardados', caseId);
-  // console.log(idRegister)
   let componentToRender = null;
-  
-  
+
+  useEffect(() => {
+    const filtrarDatos = () => {
+      // Aquí obtienes los datos del localStorage y actualizas el estado
+      const localStorageData = JSON.parse(localStorage.getItem('datosGuardados')) || {};
+      const filteredData = localStorageData.find(item => item.caseId === caseId);
+      if (filteredData) {
+        setSelectedOption(filteredData.typeOfCall || ''); // Actualizas selectedOption con el typeOfCall del registro filtrado
+      }
+    };
+
+    filtrarDatos(); // Llamas a la función para cargar los datos cuando el componente se monta
+
+    // Si necesitas limpiar algún recurso, puedes hacerlo en el retorno de useEffect
+    return () => {
+      // Código de limpieza si es necesario
+    };
+  }, [caseId]);
+
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -163,7 +176,18 @@ export default function ResponsiveLayoutForm0800Edit() {
 
       break;
       default:
-      componentToRender = null;
+        componentToRender = () => {
+          const edit = alert(`Quiere editar el registro ${caseId}`)
+          return (
+            <>
+            {edit &&(
+              <h2></h2>
+            )}
+            </>
+  
+          )
+  
+        }
     }
     
   const handleSubmit = (values) => {
@@ -198,7 +222,7 @@ export default function ResponsiveLayoutForm0800Edit() {
                 }}
                 >
                 <Typography variant="h3" textAlign={"center"}>
-                  Nuevo registro 0800
+                  Editar registro
                 </Typography>
                 <Box
                   sx={{
@@ -233,6 +257,7 @@ export default function ResponsiveLayoutForm0800Edit() {
                             Selecciona una opción
                           </InputLabel>
                           <Select
+                            disabled
                             value={selectedOption}
                             onChange={(e) => {
                               setSelectedOption(e.target.value);
@@ -261,7 +286,7 @@ export default function ResponsiveLayoutForm0800Edit() {
                         {selectedOption !== null ? (
                           <div>
                             {/* Contenido a renderizar si selectedOption no es null */}
-                            {componentToRender(props, disableButton)}
+                            {componentToRender(props, disableButton, caseId)}
                           </div>
                         ) : null}
                       </Form>
