@@ -70,8 +70,8 @@ export default function ModalDetails({ open, handleCloseModal, caseId }) {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Detalles del registro
           </Typography>
-          {filteredData ? (<Box><Typography sx={{ mt: 2 }}>N° de caso {caseId}</Typography>
-            <Typography>Tipo de llamada: {filteredData.typeOfCall}</Typography></Box>)
+          {filteredData ? (<Box><Typography sx={{ mt: 2 }}>N° de caso: {<strong>{caseId}</strong>}</Typography>
+            <Typography>Tipo de llamada: {<strong>{filteredData.typeOfCall}</strong>}</Typography></Box>)
             : (
               "No hay datos"
             )}

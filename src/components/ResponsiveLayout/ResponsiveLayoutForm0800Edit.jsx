@@ -63,9 +63,6 @@ export default function ResponsiveLayoutForm0800Edit({caseId, data}) {
     filtrarDatos(); // Llamas a la función para cargar los datos cuando el componente se monta
 
     // Si necesitas limpiar algún recurso, puedes hacerlo en el retorno de useEffect
-    return () => {
-      // Código de limpieza si es necesario
-    };
   }, [caseId]);
 
   const handleClose = (event, reason) => {
@@ -76,119 +73,103 @@ export default function ResponsiveLayoutForm0800Edit({caseId, data}) {
     setShowAlert(false);
   }
   
-  switch (selectedOption) {
-    case "Orientación":
-      componentToRender = (props, disableButton) => {
-        return (
-          <>
-            <FormSubTypesOfCalls
-              title={"Subtipos de orientación"}
-              checkboxesData={checkboxesDataOrientation}
-              props={props}
-              />
-            <FormVictimsInformation props={props} />
-            <FormDataOfTheTypeOfViolence props={props} />
-            <FormAggressorsDetails props={props} />
-            <FormInstitutionalIntervention props={props} />
-            <FormContactInformation props={props} />
-            <FormButtonSubmit disableButton={disableButton}/>
-          </>
-        )
-      }
-
-      break;
-    case "Información":
-      componentToRender = (props,disableButton) => {
-        return (
-          <>
-            <FormSubTypesOfCalls
-              title={"Subtipos de información"}
-              checkboxesData={checkboxesDataInformation}
-              props={props}
-            />
-            <FormSummaryCall props={props} />
-            <FormButtonSubmit disableButton={disableButton}/>
-          </>
-
-        )
-
-      }
-      break;
-    case "Intervención":
-      componentToRender = (props,disableButton) => {
-        return (
-          <>
-            <FormSubTypesOfCalls
-              title={"Subtipos de intervención"}
-              checkboxesData={checkboxesDataIntervention}
-              props={props}
-              />
-            <FormVictimsInformation props={props} />
-            <FormDataOfTheTypeOfViolence props={props} />
-            <FormAggressorsDetails props={props} />
-            <FormInstitutionalIntervention props={props} />
-            <FormButtonSubmit disableButton={disableButton}/>
-          </>
-
-        )
-      }
-      break;
-      case "No relevante":
-        componentToRender = (props, disableButton) => {
-          return (
-          <>
-            <FormSubTypesOfCalls
-              title={"Subtipos de no relevante"}
-              checkboxesData={checkboxesDataNotRelevant}
-              props={props}
-              />
-            <Typography
-              variant="h5"
-              textAlign={"center"}
-              sx={{ marginBottom: "10px", marginTop: "10px" }}
-              >
-              Resumen de la llamada
-            </Typography>
-            <FormGroup
-              sx={{
-                display: "flex",
-                gap: "20px",
-                flexDirection: "column",
-                marginTop: "15px",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-              }}
-            >
-              <TextField
-                name="summary"
-                multiline
-                minRows={5}
-                onChange={props.handleChange}
-                sx={{ width: 500 }}
-                label="Resumen de la llamada..."
-                ></TextField>
-            </FormGroup>
-            <FormButtonSubmit disableButton={disableButton}/>
-          </>
-        );
-        
-      }
-
-      break;
-      default:
-        componentToRender = () => {
-          const edit = alert(`Quiere editar el registro ${caseId}`)
-          return (
-            <>
-            {edit &&(
-              <h2></h2>
-            )}
-            </>
-  
-          )
-  
+  const handleConfirmEdit = (props, disableButton, caseId) =>{
+    const edit = confirm(`Quiere editar el registro ${caseId}`)
+    
+    if(edit){
+      switch (selectedOption) {
+        case "Orientación":
+            return (
+              <>
+                <FormSubTypesOfCalls
+                  title={"Subtipos de orientación"}
+                  checkboxesData={checkboxesDataOrientation}
+                  props={props}
+                  />
+                <FormVictimsInformation props={props} />
+                <FormDataOfTheTypeOfViolence props={props} />
+                <FormAggressorsDetails props={props} />
+                <FormInstitutionalIntervention props={props} />
+                <FormContactInformation props={props} />
+                <FormButtonSubmit disableButton={disableButton}/>
+              </>
+            )
+        case "Información":
+            return (
+              <>
+                <FormSubTypesOfCalls
+                  title={"Subtipos de información"}
+                  checkboxesData={checkboxesDataInformation}
+                  props={props}
+                />
+                <FormSummaryCall props={props} />
+                <FormButtonSubmit disableButton={disableButton}/>
+              </>
+    
+            )
+        case "Intervención":
+            return (
+              <>
+                <FormSubTypesOfCalls
+                  title={"Subtipos de intervención"}
+                  checkboxesData={checkboxesDataIntervention}
+                  props={props}
+                  />
+                <FormVictimsInformation props={props} />
+                <FormDataOfTheTypeOfViolence props={props} />
+                <FormAggressorsDetails props={props} />
+                <FormInstitutionalIntervention props={props} />
+                <FormButtonSubmit disableButton={disableButton}/>
+              </>
+    
+            )
+          case "No relevante":
+              return (
+              <>
+                <FormSubTypesOfCalls
+                  title={"Subtipos de no relevante"}
+                  checkboxesData={checkboxesDataNotRelevant}
+                  props={props}
+                  />
+                <Typography
+                  variant="h5"
+                  textAlign={"center"}
+                  sx={{ marginBottom: "10px", marginTop: "10px" }}
+                  >
+                  Resumen de la llamada
+                </Typography>
+                <FormGroup
+                  sx={{
+                    display: "flex",
+                    gap: "20px",
+                    flexDirection: "column",
+                    marginTop: "15px",
+                    justifyContent: "space-evenly",
+                    alignItems: "center",
+                  }}
+                >
+                  <TextField
+                    name="summary"
+                    multiline
+                    minRows={5}
+                    onChange={props.handleChange}
+                    sx={{ width: 500 }}
+                    label="Resumen de la llamada..."
+                    ></TextField>
+                </FormGroup>
+                <FormButtonSubmit disableButton={disableButton}/>
+              </>
+            );
+          default:
+            return null; // Si no coincide con ningún tipo de llamada conocido
         }
-    }
+      } else {
+        return null; // Si el usuario no quiere editar, no se renderiza nada
+      }
+  }
+
+  
+  
     
   const handleSubmit = (values) => {
     // alert(JSON.stringify(values, null, 2));
@@ -283,12 +264,7 @@ export default function ResponsiveLayoutForm0800Edit({caseId, data}) {
                             </MenuItem>
                           </Select>
                         </Box>
-                        {selectedOption !== null ? (
-                          <div>
-                            {/* Contenido a renderizar si selectedOption no es null */}
-                            {componentToRender(props, disableButton, caseId)}
-                          </div>
-                        ) : null}
+                       {handleConfirmEdit(props, disableButton, caseId)}
                       </Form>
                     )}
                   </Formik>
