@@ -7,7 +7,6 @@ import ModalDetails from "../modal/modal";
 
 // eslint-disable-next-line react/prop-types
 export default function ResponsiveLayout0800({ dataHeadTable }) {
-
   const [open, setOpen] = useState(false);
   const [caseId, setCaseId] = useState("");
   const handleOpenModal = (caseId) => { setOpen(true); setCaseId(caseId) };

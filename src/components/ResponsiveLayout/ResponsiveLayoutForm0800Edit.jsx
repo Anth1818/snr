@@ -37,32 +37,33 @@ import { initialValues } from "../../utils/initialValues";
 import { guardarEnJSON } from "../../utils/saveDataLocalStorage";
 
 
+
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 
 
-export default function ResponsiveLayoutForm0800Edit({caseId, data}) {
+export default function ResponsiveLayoutForm0800Edit({caseId}) {
   const [showAlert, setShowAlert] = useState(false);
   const [disableButton, setDisableButton] = useState(false)
   const [selectedOption, setSelectedOption] = useState("");
+  const [filteredData, setFilteredData] = useState("")
 
-  let componentToRender = null;
 
   useEffect(() => {
     const filtrarDatos = () => {
       // Aquí obtienes los datos del localStorage y actualizas el estado
       const localStorageData = JSON.parse(localStorage.getItem('datosGuardados')) || {};
-      const filteredData = localStorageData.find(item => item.caseId === caseId);
-      if (filteredData) {
-        setSelectedOption(filteredData.typeOfCall || ''); // Actualizas selectedOption con el typeOfCall del registro filtrado
+      const foundData = localStorageData.find(item => item.caseId === caseId);
+      if (foundData) {
+        setSelectedOption(foundData.typeOfCall || ''); // Actualizas selectedOption con el typeOfCall del registro filtrado
+        setFilteredData(foundData) 
       }
     };
 
     filtrarDatos(); // Llamas a la función para cargar los datos cuando el componente se monta
 
-    // Si necesitas limpiar algún recurso, puedes hacerlo en el retorno de useEffect
   }, [caseId]);
 
   const handleClose = (event, reason) => {
@@ -73,102 +74,94 @@ export default function ResponsiveLayoutForm0800Edit({caseId, data}) {
     setShowAlert(false);
   }
   
-  const handleConfirmEdit = (props, disableButton, caseId) =>{
-    const edit = confirm(`Quiere editar el registro ${caseId}`)
+
+  const handleRenderForm = (props, disableButton, caseId, filteredData) =>{
     
-    if(edit){
       switch (selectedOption) {
         case "Orientación":
+          const orientationProps = {
+            title: "Subtipos de orientación",
+            checkboxesData: checkboxesDataOrientation,
+            props: props,
+            filteredData: filteredData,
+        
+          };
+          console.log(orientationProps)
             return (
               <>
                 <FormSubTypesOfCalls
                   title={"Subtipos de orientación"}
                   checkboxesData={checkboxesDataOrientation}
                   props={props}
+                  filteredData={filteredData}
                   />
-                <FormVictimsInformation props={props} />
-                <FormDataOfTheTypeOfViolence props={props} />
-                <FormAggressorsDetails props={props} />
-                <FormInstitutionalIntervention props={props} />
-                <FormContactInformation props={props} />
-                <FormButtonSubmit disableButton={disableButton}/>
+                <FormVictimsInformation {...orientationProps}/>
+                <FormDataOfTheTypeOfViolence {...orientationProps} />
+                <FormAggressorsDetails {...orientationProps}/>
+                <FormInstitutionalIntervention {...orientationProps}/>
+                <FormContactInformation {...orientationProps} />
+                <FormButtonSubmit disableButton={disableButton} {...orientationProps}/>
               </>
             )
         case "Información":
+          const informationProps ={
+            title:"Subtipos de información",
+            checkboxesData: checkboxesDataInformation,
+            props: props,
+            filteredData: filteredData,
+        
+          }
             return (
               <>
                 <FormSubTypesOfCalls
-                  title={"Subtipos de información"}
-                  checkboxesData={checkboxesDataInformation}
-                  props={props}
+                 {...informationProps}
                 />
-                <FormSummaryCall props={props} />
+                <FormSummaryCall  {...informationProps} />
                 <FormButtonSubmit disableButton={disableButton}/>
               </>
     
             )
         case "Intervención":
+          const interventionProps = {
+            title: "Subtipos de intervención",
+            checkboxesData: checkboxesDataIntervention,
+            props: props,
+            filteredData: filteredData,
+
+          };
             return (
               <>
                 <FormSubTypesOfCalls
-                  title={"Subtipos de intervención"}
-                  checkboxesData={checkboxesDataIntervention}
-                  props={props}
+                  {...interventionProps}
                   />
-                <FormVictimsInformation props={props} />
-                <FormDataOfTheTypeOfViolence props={props} />
-                <FormAggressorsDetails props={props} />
-                <FormInstitutionalIntervention props={props} />
+                <FormVictimsInformation {...interventionProps} />
+                <FormDataOfTheTypeOfViolence {...interventionProps} />
+                <FormAggressorsDetails {...interventionProps} />
+                <FormInstitutionalIntervention {...interventionProps} />
                 <FormButtonSubmit disableButton={disableButton}/>
               </>
     
             )
           case "No relevante":
+            const notRelevantProps = {
+              title: "Subtipos de no relevante",
+              checkboxesData: checkboxesDataNotRelevant,
+              props: props,
+              filteredData: filteredData,
+            
+            };
               return (
               <>
                 <FormSubTypesOfCalls
-                  title={"Subtipos de no relevante"}
-                  checkboxesData={checkboxesDataNotRelevant}
-                  props={props}
-                  />
-                <Typography
-                  variant="h5"
-                  textAlign={"center"}
-                  sx={{ marginBottom: "10px", marginTop: "10px" }}
-                  >
-                  Resumen de la llamada
-                </Typography>
-                <FormGroup
-                  sx={{
-                    display: "flex",
-                    gap: "20px",
-                    flexDirection: "column",
-                    marginTop: "15px",
-                    justifyContent: "space-evenly",
-                    alignItems: "center",
-                  }}
-                >
-                  <TextField
-                    name="summary"
-                    multiline
-                    minRows={5}
-                    onChange={props.handleChange}
-                    sx={{ width: 500 }}
-                    label="Resumen de la llamada..."
-                    ></TextField>
-                </FormGroup>
+                  {...notRelevantProps}/>
+               <FormSummaryCall {...notRelevantProps}></FormSummaryCall>
                 <FormButtonSubmit disableButton={disableButton}/>
               </>
             );
           default:
             return null; // Si no coincide con ningún tipo de llamada conocido
         }
-      } else {
-        return null; // Si el usuario no quiere editar, no se renderiza nada
       }
-  }
-
-  
   
     
   const handleSubmit = (values) => {
@@ -264,7 +257,7 @@ export default function ResponsiveLayoutForm0800Edit({caseId, data}) {
                             </MenuItem>
                           </Select>
                         </Box>
-                       {handleConfirmEdit(props, disableButton, caseId)}
+                       {handleRenderForm(props, disableButton, caseId, filteredData)}
                       </Form>
                     )}
                   </Formik>

@@ -1,4 +1,4 @@
-export const ID = [{ label: "Cédula", name:"Cédula" }, { label: "Rif", name:"Rif" }, { label: "Pasaporte", name:"Pasaporte" }];
+export const ID = [{ name:"Cédula" }, { name:"Rif" }, { name:"Pasaporte" }];
 
 export const TYPEOFCALLS = [
   "Orientación",

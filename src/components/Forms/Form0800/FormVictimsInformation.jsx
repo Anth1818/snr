@@ -5,7 +5,50 @@ import { ErrorMessage } from "formik";
 import { debounce } from "lodash"
 import { initialValues } from "../../../utils/initialValues.js";
 
-export default function FormVictimsInformation({ props }) {
+export default function FormVictimsInformation({ props, filteredData, isEditing }) {
+  let typeIdOfVictim,
+  victimIdDocument,
+  victimName,
+  victimLastName,
+  victimPhoneNumber,
+  victimPhoneNumber2,
+  victimBirthdate,
+  gender,
+  stateLocation,
+  townShipLocation,
+  parishLocation,
+  localLocation,
+  isPregnant,
+  numberOfChildren,
+  ethnicity,
+  maritalStatus,
+  levelOfInstruction,
+  ocupation,
+  summary;
+
+if (filteredData) {
+  ({
+    typeIdOfVictim,
+    victimIdDocument,
+    victimName,
+    victimLastName,
+    victimPhoneNumber,
+    victimPhoneNumber2,
+    victimBirthdate,
+    gender,
+    stateLocation,
+    townShipLocation,
+    parishLocation,
+    localLocation,
+    isPregnant,
+    numberOfChildren,
+    ethnicity,
+    maritalStatus,
+    levelOfInstruction,
+    ocupation,
+    summary,
+  } = filteredData);
+}
 
   const debouncedHandleChange = debounce((e) => {
     props.handleChange(e);
@@ -41,6 +84,9 @@ export default function FormVictimsInformation({ props }) {
           size="small"
           name="typeIdOfVictim"
           id="ID"
+          defaultValue={
+               ID.find((option) => option.name === typeIdOfVictim) || null
+          }
           options={ID}
           sx={{ width: "300px" }}
           onChange={(e, value) => {
@@ -58,6 +104,7 @@ export default function FormVictimsInformation({ props }) {
           name="victimIdDocument"
           label="Ingrese documento de identidad"
           variant="outlined"
+          value={victimIdDocument}
           size="small"
           sx={{ width: "300px" }}
           onChange={debouncedHandleChange}
@@ -70,6 +117,7 @@ export default function FormVictimsInformation({ props }) {
         <TextField
           label="Nombres"
           name="victimName"
+          value={victimName}
           variant="outlined"
           onChange={debouncedHandleChange}
           onBlur={props.handleBlur}
@@ -81,6 +129,7 @@ export default function FormVictimsInformation({ props }) {
 
         <TextField
           name="victimLastName"
+          value={victimLastName}
           id="last-name"
           label="Apellidos"
           variant="outlined"
@@ -94,6 +143,7 @@ export default function FormVictimsInformation({ props }) {
         <TextField
           id="phone-number"
           name="victimPhoneNumber"
+          value={victimPhoneNumber}
           label="Telefono"
           variant="outlined"
           size="small"
@@ -108,6 +158,7 @@ export default function FormVictimsInformation({ props }) {
         <TextField
           id="phone-number2"
           name="victimPhoneNumber2"
+          value={victimPhoneNumber2}
           label="Telefono 2"
           variant="outlined"
           size="small"
@@ -124,6 +175,7 @@ export default function FormVictimsInformation({ props }) {
           id="date"
           name="victimBirthdate"
           variant="outlined"
+          value={victimBirthdate}
           size="small"
           onChange={debouncedHandleChange}
           type="date"
@@ -134,6 +186,9 @@ export default function FormVictimsInformation({ props }) {
           size="small"
           name="gender"
           id="gender"
+          defaultValue={
+            GENDER.find((option) => option.name === gender) || null
+          }
           options={GENDER}
           onChange={(e, value) => {
             props.setFieldValue(
@@ -151,6 +206,9 @@ export default function FormVictimsInformation({ props }) {
           name="stateLocation"
           id="states"
           options={STATES}
+          defaultValue={
+            STATES.find((option) => option.name === stateLocation) || null
+          }
           onChange={(e, value) => {
             props.setFieldValue(
               "stateLocation",
@@ -167,6 +225,9 @@ export default function FormVictimsInformation({ props }) {
           name="townShipLocation"
           id="municipio"
           options={MUNICIPIO}
+          defaultValue={
+            MUNICIPIO.find((option) => option.name === townShipLocation) || null
+          }
           onChange={(e, value) => {
             props.setFieldValue(
               "townShipLocation",
@@ -183,6 +244,9 @@ export default function FormVictimsInformation({ props }) {
           name="parishLocation"
           id="parroquia"
           options={PARROQUIA}
+          defaultValue={
+            PARROQUIA.find((option) => option.name === parishLocation) || null
+          }
           onChange={(e, value) => {
             props.setFieldValue(
               "parishLocation",
@@ -198,6 +262,7 @@ export default function FormVictimsInformation({ props }) {
           id="location"
           name="localLocation"
           label="Dirección"
+          value={localLocation}
           onChange={debouncedHandleChange}
           variant="outlined"
           size="small"
@@ -209,6 +274,9 @@ export default function FormVictimsInformation({ props }) {
           size="small"
           name="isPregnant"
           id="isPregnant"
+          defaultValue={
+            ISPREGNANT.find((option) => option.name === isPregnant) || null
+          }
           options={ISPREGNANT}
           onChange={(e, value) => {
             props.setFieldValue(
@@ -226,6 +294,7 @@ export default function FormVictimsInformation({ props }) {
           id="numberOfChildren"
           label="Numero de hijos"
           name="numberOfChildren"
+          value={numberOfChildren}
           variant="outlined"
           onChange={debouncedHandleChange}
           onBlur={props.handleBlur}
@@ -239,6 +308,9 @@ export default function FormVictimsInformation({ props }) {
           size="small"
           name="ethnicity"
           id="ethnicity"
+          defaultValue={
+            ETNIA.find((option) => option.name === ethnicity) || null
+          }
           options={ETNIA}
           onChange={(e, value) => {
             props.setFieldValue(
@@ -256,6 +328,9 @@ export default function FormVictimsInformation({ props }) {
           size="small"
           name="maritalStatus"
           id="maritalStatus"
+          defaultValue={
+            ESTADOCIVIL.find((option) => option.name === maritalStatus) || null
+          }
           options={ESTADOCIVIL}
           onChange={(e, value) => {
             props.setFieldValue(

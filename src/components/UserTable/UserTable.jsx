@@ -65,7 +65,7 @@ function applySortFilter(array, comparator, query) {
 }
 
 // eslint-disable-next-line react/prop-types
-export default function UserTable({ dataHeadTable, dataTitle, pathToForm, handleOpenModal }) {
+export default function UserTable({ dataHeadTable, dataTitle, pathToForm, handleOpenModal, }) {
   const [open, setOpen] = useState(null);
 
   const [page, setPage] = useState(0);
