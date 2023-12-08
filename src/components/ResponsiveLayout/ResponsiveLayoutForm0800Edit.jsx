@@ -33,16 +33,14 @@ import {
 } from "../../utils/checkboxesData";
 import { Formik, Form } from "formik";
 import { validationSchema } from "../../utils/validationSchema";
-import { initialValues } from "../../utils/initialValues";
 import { guardarEnJSON } from "../../utils/saveDataLocalStorage";
+import { initialValuesEdit } from "../../utils/initialValuesEdit";
 
 
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
-
-
 
 export default function ResponsiveLayoutForm0800Edit({caseId}) {
   const [showAlert, setShowAlert] = useState(false);
@@ -63,10 +61,10 @@ export default function ResponsiveLayoutForm0800Edit({caseId}) {
     };
 
     filtrarDatos(); // Llamas a la función para cargar los datos cuando el componente se monta
-
+    
   }, [caseId]);
-
-  const handleClose = (event, reason) => {
+  
+  const handleCloseAlert = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -74,7 +72,13 @@ export default function ResponsiveLayoutForm0800Edit({caseId}) {
     setShowAlert(false);
   }
   
+  const handleSubmit = (values) => {
+    // alert(JSON.stringify(values, null, 2));
+    guardarEnJSON(values)  
+  };
 
+  
+  
   const handleRenderForm = (props, disableButton, caseId, filteredData) =>{
     
       switch (selectedOption) {
@@ -86,7 +90,6 @@ export default function ResponsiveLayoutForm0800Edit({caseId}) {
             filteredData: filteredData,
         
           };
-          console.log(orientationProps)
             return (
               <>
                 <FormSubTypesOfCalls
@@ -148,10 +151,10 @@ export default function ResponsiveLayoutForm0800Edit({caseId}) {
               checkboxesData: checkboxesDataNotRelevant,
               props: props,
               filteredData: filteredData,
-            
+              
             };
               return (
-              <>
+                <>
                 <FormSubTypesOfCalls
                   {...notRelevantProps}/>
                <FormSummaryCall {...notRelevantProps}></FormSummaryCall>
@@ -162,15 +165,8 @@ export default function ResponsiveLayoutForm0800Edit({caseId}) {
             return null; // Si no coincide con ningún tipo de llamada conocido
         }
       }
-  
-    
-  const handleSubmit = (values) => {
-    // alert(JSON.stringify(values, null, 2));
-    guardarEnJSON(values)
-    
-  };
-  
-  return (
+      
+      return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <RenderDrawer titlePage={"Formulario 0800"}></RenderDrawer>
@@ -204,7 +200,7 @@ export default function ResponsiveLayoutForm0800Edit({caseId}) {
                   }}
                 >
                   <Formik
-                    initialValues={initialValues}
+                  initialValues={initialValuesEdit}
                     validationSchema={validationSchema}
                     onSubmit={(values) => {
                       handleSubmit(values); // Llama a tu función de manejo de envío
@@ -261,8 +257,8 @@ export default function ResponsiveLayoutForm0800Edit({caseId}) {
                       </Form>
                     )}
                   </Formik>
-                  <Snackbar open={showAlert} autoHideDuration={2000} onClose={handleClose}>
-                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                  <Snackbar open={showAlert} autoHideDuration={2000} onClose={handleCloseAlert}>
+                    <Alert onClose={handleCloseAlert} severity="success" sx={{ width: '100%' }}>
                       Registro exitoso
                     </Alert>
                   </Snackbar>

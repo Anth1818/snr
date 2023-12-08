@@ -11,14 +11,14 @@ const defaultTheme = createTheme();
 
 export default function PageForm0800Edit() {
   const {caseId} = useParams()
-  const {data} = useLocalStorageData('datosGuardados', caseId);
+  // const {data} = useLocalStorageData('datosGuardados', caseId);
 
 
   return (
 
     <ThemeProvider theme={defaultTheme}>
       <CintilloHeader></CintilloHeader>
-        <ResponsiveLayoutForm0800Edit caseId={caseId} data={data}></ResponsiveLayoutForm0800Edit>
+        <ResponsiveLayoutForm0800Edit caseId={caseId}></ResponsiveLayoutForm0800Edit>
       {/* <Footer></Footer> */}
     </ThemeProvider>
   );

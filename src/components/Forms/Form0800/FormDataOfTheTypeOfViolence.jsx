@@ -10,8 +10,16 @@ import {
 import { Box } from "@mui/system";
 import { useState } from "react";
 import { checkboxesDataTypesOfViolence } from "../../../utils/checkboxesData";
-export default function FormDataOfTheTypeOfViolence({props}) {
-  const [value, setValue] = useState("No");
+
+
+
+export default function FormDataOfTheTypeOfViolence({props, filteredData}) {
+
+  const [value, setValue] = useState(filteredData?.typeOfViolence?.length > 0 ? "Si" : "No");
+  const initialTypeOfViolence = filteredData?.typeOfViolence || [];
+
+  const [typeOfViolenceValues, setTypeOfViolenceValues] = useState(initialTypeOfViolence);
+
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -62,6 +70,7 @@ export default function FormDataOfTheTypeOfViolence({props}) {
               control={
                 <Checkbox
                   name={checkbox.name}
+                  checked={typeOfViolenceValues.includes(checkbox.name)}
                   onChange={() => {
                     const { typeOfViolence } = props.values;
                     const { name } = checkbox;

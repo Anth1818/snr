@@ -1,10 +1,15 @@
 /* eslint-disable react/prop-types */
 import { Checkbox, FormControl, FormControlLabel, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import { useState } from "react";
 
 // eslint-disable-next-line react/prop-types
-export default function FormSubTypesOfCalls({ title, checkboxesData, props }) {
+export default function FormSubTypesOfCalls({ title, checkboxesData, props, filteredData}) {
   const error = props.errors.subTypesOfCall
+
+  const initialSubTypeOfCall = filteredData?.subTypesOfCall || [];
+  const [subTypeOfCallValues, setSubTypeOfCallValues] = useState(initialSubTypeOfCall);
+
   return (
     <Box
       sx={{
@@ -25,6 +30,7 @@ export default function FormSubTypesOfCalls({ title, checkboxesData, props }) {
             control={
               <Checkbox
                 name={checkbox.name}
+                checked={subTypeOfCallValues.includes(checkbox.name) || null}
                 onChange={() => {
                   const { subTypesOfCall } = props.values;
                   const { name } = checkbox;

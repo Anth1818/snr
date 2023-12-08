@@ -1,54 +1,55 @@
 import { Autocomplete, FormGroup, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { ID, GENDER, MUNICIPIO, PARROQUIA, ISPREGNANT, ESTADOCIVIL, OCUPACION, ETNIA, NIVELDEINSTRUCCION,STATES } from '../../../utils/constants.js'
+import { ID, GENDER, MUNICIPIO, PARROQUIA, ISPREGNANT, ESTADOCIVIL, OCUPACION, ETNIA, NIVELDEINSTRUCCION, STATES } from '../../../utils/constants.js'
 import { ErrorMessage } from "formik";
 import { debounce } from "lodash"
 import { initialValues } from "../../../utils/initialValues.js";
 
-export default function FormVictimsInformation({ props, filteredData, isEditing }) {
-  let typeIdOfVictim,
-  victimIdDocument,
-  victimName,
-  victimLastName,
-  victimPhoneNumber,
-  victimPhoneNumber2,
-  victimBirthdate,
-  gender,
-  stateLocation,
-  townShipLocation,
-  parishLocation,
-  localLocation,
-  isPregnant,
-  numberOfChildren,
-  ethnicity,
-  maritalStatus,
-  levelOfInstruction,
-  ocupation,
-  summary;
+export let typeIdOfVictim,
+victimIdDocument,
+victimName,
+victimLastName,
+victimPhoneNumber,
+victimPhoneNumber2,
+victimBirthdate,
+gender,
+stateLocation,
+townShipLocation,
+parishLocation,
+localLocation,
+isPregnant,
+numberOfChildren,
+ethnicity,
+maritalStatus,
+levelOfInstruction,
+ocupation,
+summary;
 
-if (filteredData) {
-  ({
-    typeIdOfVictim,
-    victimIdDocument,
-    victimName,
-    victimLastName,
-    victimPhoneNumber,
-    victimPhoneNumber2,
-    victimBirthdate,
-    gender,
-    stateLocation,
-    townShipLocation,
-    parishLocation,
-    localLocation,
-    isPregnant,
-    numberOfChildren,
-    ethnicity,
-    maritalStatus,
-    levelOfInstruction,
-    ocupation,
-    summary,
-  } = filteredData);
-}
+export default function FormVictimsInformation({ props, filteredData}) {
+
+  if (filteredData) {
+    ({
+      typeIdOfVictim,
+      victimIdDocument,
+      victimName,
+      victimLastName,
+      victimPhoneNumber,
+      victimPhoneNumber2,
+      victimBirthdate,
+      gender,
+      stateLocation,
+      townShipLocation,
+      parishLocation,
+      localLocation,
+      isPregnant,
+      numberOfChildren,
+      ethnicity,
+      maritalStatus,
+      levelOfInstruction,
+      ocupation,
+      summary,
+    } = filteredData);
+  }
 
   const debouncedHandleChange = debounce((e) => {
     props.handleChange(e);
@@ -85,7 +86,7 @@ if (filteredData) {
           name="typeIdOfVictim"
           id="ID"
           defaultValue={
-               ID.find((option) => option.name === typeIdOfVictim) || null
+            ID.find((option) => option.name === typeIdOfVictim) || null
           }
           options={ID}
           sx={{ width: "300px" }}
@@ -104,10 +105,14 @@ if (filteredData) {
           name="victimIdDocument"
           label="Ingrese documento de identidad"
           variant="outlined"
-          value={victimIdDocument}
+          defaultValue={victimIdDocument || ""}
           size="small"
           sx={{ width: "300px" }}
-          onChange={debouncedHandleChange}
+          onChange={(e) => {
+            const newValue = e.target.value;
+            props.setFieldValue("victimIdDocument", newValue);
+            debouncedHandleChange(e)
+          }}
           onBlur={props.handleBlur}
           helperText={<ErrorMessage name="victimIdDocument" />}
           error={Boolean(
@@ -117,7 +122,7 @@ if (filteredData) {
         <TextField
           label="Nombres"
           name="victimName"
-          value={victimName}
+          defaultValue={victimName}
           variant="outlined"
           onChange={debouncedHandleChange}
           onBlur={props.handleBlur}
@@ -129,7 +134,7 @@ if (filteredData) {
 
         <TextField
           name="victimLastName"
-          value={victimLastName}
+          defaultValue={victimLastName}
           id="last-name"
           label="Apellidos"
           variant="outlined"
@@ -143,7 +148,7 @@ if (filteredData) {
         <TextField
           id="phone-number"
           name="victimPhoneNumber"
-          value={victimPhoneNumber}
+          defaultValue={victimPhoneNumber}
           label="Telefono"
           variant="outlined"
           size="small"
@@ -158,7 +163,7 @@ if (filteredData) {
         <TextField
           id="phone-number2"
           name="victimPhoneNumber2"
-          value={victimPhoneNumber2}
+          defaultValue={victimPhoneNumber2}
           label="Telefono 2"
           variant="outlined"
           size="small"
@@ -175,7 +180,7 @@ if (filteredData) {
           id="date"
           name="victimBirthdate"
           variant="outlined"
-          value={victimBirthdate}
+          defaultValue={victimBirthdate}
           size="small"
           onChange={debouncedHandleChange}
           type="date"
@@ -262,7 +267,7 @@ if (filteredData) {
           id="location"
           name="localLocation"
           label="Dirección"
-          value={localLocation}
+          defaultValue={localLocation}
           onChange={debouncedHandleChange}
           variant="outlined"
           size="small"
@@ -294,7 +299,7 @@ if (filteredData) {
           id="numberOfChildren"
           label="Numero de hijos"
           name="numberOfChildren"
-          value={numberOfChildren}
+          defaultValue={numberOfChildren}
           variant="outlined"
           onChange={debouncedHandleChange}
           onBlur={props.handleBlur}
@@ -348,6 +353,9 @@ if (filteredData) {
           size="small"
           id="levelOfInstruction"
           name="levelOfInstruction"
+          defaultValue={
+            NIVELDEINSTRUCCION.find((option) => option.name === levelOfInstruction) || null
+          }
           options={NIVELDEINSTRUCCION}
           onChange={(e, value) => {
             props.setFieldValue(
@@ -366,6 +374,9 @@ if (filteredData) {
           name="ocupation"
           id="ocupation"
           options={OCUPACION}
+          defaultValue={
+            OCUPACION.find((option) => option.name === ocupation) || null
+          }
           onChange={(e, value) => {
             props.setFieldValue(
               "ocupation",
@@ -381,6 +392,7 @@ if (filteredData) {
           name="summary"
           multiline
           minRows={5}
+          defaultValue={summary}
           onChange={debouncedHandleChange}
           sx={{ width: 500 }}
           label="Resumen de la llamada..."

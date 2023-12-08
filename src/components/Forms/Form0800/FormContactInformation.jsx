@@ -16,8 +16,20 @@ import { debounce } from "lodash"
 import { ErrorMessage } from "formik";
 
 
-export default function FormContactInformation({ props }) {
-  const [value, setValue] = useState("No");
+export default function FormContactInformation({ props, filteredData }) {
+  const initialState =
+  (filteredData?.typeOfId ||
+    filteredData?.idDocument ||
+    filteredData?.nameOfContact ||
+    filteredData?.lastNameOfContact ||
+    filteredData?.phoneNumberOfContact ||
+    filteredData?.phoneNumberOfContact2 ||
+    filteredData?.emailOfContact) 
+    ? "Si" 
+    : "No";
+
+
+  const [value, setValue] = useState(initialState);
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -75,9 +87,12 @@ export default function FormContactInformation({ props }) {
           <Autocomplete
             disablePortal
             size="small"
-            id="ID"
             name="typeOfId"
+            defaultValue={
+              ID.find((option) => option.name === filteredData?.typeOfId)
+            }
             options={ID}
+            getOptionLabel={(option) => option.name}
             onChange={(e, value) => {
               props.setFieldValue(
                 "typeOfId",
@@ -93,8 +108,8 @@ export default function FormContactInformation({ props }) {
             )}
           ></Autocomplete>
           <TextField
-            id="id-document"
             name="idDocument"
+            defaultValue={filteredData?.idDocument}
             onChange={debouncedHandleChange}
             onBlur={props.handleBlur}
             helperText={<ErrorMessage name="idDocument" />}
@@ -107,8 +122,8 @@ export default function FormContactInformation({ props }) {
             sx={{ width: "300px" }}
           />
           <TextField
-            id="name"
             name="nameOfContact"
+            defaultValue={filteredData?.nameOfContact}
             onChange={debouncedHandleChange}
             onBlur={props.handleBlur}
             helperText={<ErrorMessage name="nameOfContact" />}
@@ -119,7 +134,7 @@ export default function FormContactInformation({ props }) {
             sx={{ width: "300px" }}
           />
           <TextField
-            id="last-name"
+            defaultValue={filteredData?.lastNameOfContact}
             name="lastNameOfContact"
             onChange={debouncedHandleChange}
             onBlur={props.handleBlur}
@@ -131,7 +146,7 @@ export default function FormContactInformation({ props }) {
             sx={{ width: "300px" }}
           />
           <TextField
-            id="phone-number"
+          defaultValue={filteredData?.phoneNumberOfContact}
             name="phoneNumberOfContact"
             onChange={debouncedHandleChange}
             onBlur={props.handleBlur}
@@ -143,7 +158,7 @@ export default function FormContactInformation({ props }) {
             sx={{ width: "300px" }}
           />
           <TextField
-            id="phone-number2"
+           defaultValue={filteredData?.phoneNumberOfContact2}
             label="Telefono 2"
             name="phoneNumberOfContact2"
             onBlur={props.handleBlur}
@@ -155,7 +170,7 @@ export default function FormContactInformation({ props }) {
             sx={{ width: "300px" }}
           />
           <TextField
-            id="email"
+           defaultValue={filteredData?.emailOfContact}
             name="emailOfContact"
             onChange={debouncedHandleChange}
             onBlur={props.handleBlur}

@@ -6,9 +6,18 @@ import { debounce } from "lodash"
 import { ErrorMessage } from "formik";
 
 
-export default function FormInstitutionalIntervention({ props }) {
+export default function FormInstitutionalIntervention({ props, filteredData}) {
 
-  const [value, setValue] = useState('No');
+  const initialState =
+  (filteredData?.receivingOrganism ||
+    filteredData?.official ||
+    filteredData?.position ||
+    filteredData?.phone ||
+    filteredData?.comeOnTime) 
+    ? "Si" 
+    : "No";
+
+  const [value, setValue] = useState(initialState);
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -68,6 +77,7 @@ export default function FormInstitutionalIntervention({ props }) {
             id="receivingOrganism"
             label="Organismo receptor"
             name="receivingOrganism"
+            defaultValue={filteredData?.receivingOrganism}
             onChange={debouncedHandleChange}
             variant="outlined"
             size="small"
@@ -77,6 +87,7 @@ export default function FormInstitutionalIntervention({ props }) {
             id="official"
             label="Funcionario"
             name="official"
+            defaultValue={filteredData?.official}
             variant="outlined"
             onChange={debouncedHandleChange}
             size="small"
@@ -86,6 +97,7 @@ export default function FormInstitutionalIntervention({ props }) {
             id="position"
             label="Cargo"
             name="position"
+            defaultValue={filteredData?.position}
             variant="outlined"
             onChange={debouncedHandleChange}
             size="small"
@@ -95,6 +107,7 @@ export default function FormInstitutionalIntervention({ props }) {
             id="phone"
             label="Teléfono"
             name="phone"
+            defaultValue={filteredData?.phone}
             variant="outlined"
             onChange={debouncedHandleChange}
             onBlur={props.handleBlur}
@@ -109,6 +122,9 @@ export default function FormInstitutionalIntervention({ props }) {
             size="small"
             id="occupation"
             name="comeOnTime"
+            defaultValue={
+              INSTITUTIONALINTERVENTIONDATA.find((option) => option.name === filteredData?.comeOnTime) || null
+            }
             options={INSTITUTIONALINTERVENTIONDATA}
             onChange={(e, value) => {
               props.setFieldValue(

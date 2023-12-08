@@ -18,8 +18,19 @@ import { ErrorMessage } from "formik";
 
 
 
-export default function FormAggressorsDetails({props}) {
-  const [value, setValue] = useState("No");
+export default function FormAggressorsDetails({props,filteredData}) {
+  const initialState =
+  (filteredData?.nameOfAggressor ||
+    filteredData?.lastNameOfAggressor ||
+    filteredData?.ageOfAggressor ||
+    filteredData?.levelOfInstrutionOfAggressor ||
+    filteredData?.bondOfAggressor ||
+    filteredData?.aggressorOccupation) 
+    ? "Si" 
+    : "No";
+
+
+  const [value, setValue] = useState(initialState)
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -79,6 +90,7 @@ export default function FormAggressorsDetails({props}) {
             id="nameofAggressor"
             label="Nombres"
             name="nameOfAggressor"
+            defaultValue= {filteredData?.nameOfAggressor || ""}
             variant="outlined"
             onChange={debouncedHandleChange}
             onBlur={props.handleBlur}
@@ -91,6 +103,7 @@ export default function FormAggressorsDetails({props}) {
             id="lastNameOfAggressor"
             label="Apellidos"
             name="lastNameOfAggressor"
+            defaultValue= {filteredData?.lastNameOfAggressor || ""}
             onChange={debouncedHandleChange}
             onBlur={props.handleBlur}
             helperText={<ErrorMessage name="lastNameOfAggressor" />}
@@ -103,6 +116,7 @@ export default function FormAggressorsDetails({props}) {
             id="ageOfAggressor"
             label="Edad aproximada"
             name="ageOfAggressor"
+            defaultValue= {filteredData?.ageOfAggressor || ""}
             onChange={debouncedHandleChange}
             onBlur={props.handleBlur}
             helperText={<ErrorMessage name="ageOfAggressor" />}
@@ -117,6 +131,9 @@ export default function FormAggressorsDetails({props}) {
             size="small"
             id="levelOfInstrutionOfAggressor"
             name="levelOfInstrutionOfAggressor"
+            defaultValue={
+              NIVELDEINSTRUCCION.find((option) => option.name === filteredData?.levelOfInstrutionOfAggressor) || null
+            }
             onChange={(e, value) => {
               props.setFieldValue(
                 "levelOfInstrutionOfAggressor",
@@ -136,6 +153,9 @@ export default function FormAggressorsDetails({props}) {
             size="small"
             id="bondOfAggressor"
             name="bondOfAggressor"
+            defaultValue={
+              VINCULO.find((option) => option.name === filteredData?.bondOfAggressor) || null
+            }
             onChange={(e, value) => {
               props.setFieldValue(
                 "bondOfAggressor",
@@ -153,6 +173,9 @@ export default function FormAggressorsDetails({props}) {
             size="small"
             id="aggressorOccupation"
             name="aggressorOccupation"
+            defaultValue={
+              OCUPACION.find((option) => option.name === filteredData?.aggressorOccupation) || null
+            }
             onChange={(e, value) => {
               props.setFieldValue(
                 "aggressorOccupation",
