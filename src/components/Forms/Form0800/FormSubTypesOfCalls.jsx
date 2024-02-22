@@ -4,11 +4,12 @@ import { Box } from "@mui/system";
 import { useState } from "react";
 
 // eslint-disable-next-line react/prop-types
-export default function FormSubTypesOfCalls({ title, checkboxesData, props, filteredData}) {
+export default function FormSubTypesOfCalls({ title, checkboxesData, props, filteredData, isEditMode}) {
   const error = props.errors.subTypesOfCall
 
-  const initialSubTypeOfCall = filteredData?.subTypesOfCall || [];
-  const [subTypeOfCallValues, setSubTypeOfCallValues] = useState(initialSubTypeOfCall);
+  const subTypeOfCallValues = isEditMode ? filteredData?.subTypesOfCall
+   : [];
+   
 
   return (
     <Box
@@ -29,8 +30,9 @@ export default function FormSubTypesOfCalls({ title, checkboxesData, props, filt
           <FormControlLabel
             control={
               <Checkbox
+                
                 name={checkbox.name}
-                checked={subTypeOfCallValues.includes(checkbox.name) || null}
+                defaultChecked={subTypeOfCallValues.includes(checkbox.name)}
                 onChange={() => {
                   const { subTypesOfCall } = props.values;
                   const { name } = checkbox;

@@ -31,7 +31,7 @@ import {
   checkboxesDataOrientation,
   checkboxesDataNotRelevant,
 } from "../../utils/checkboxesData";
-import { Formik, Form } from "formik";
+import { Formik, Form, isEmptyArray } from "formik";
 import { validationSchema } from "../../utils/validationSchema";
 import { guardarEnJSON } from "../../utils/saveDataLocalStorage";
 import { initialValuesEdit } from "../../utils/initialValuesEdit";
@@ -97,8 +97,9 @@ export default function ResponsiveLayoutForm0800Edit({caseId}) {
                   checkboxesData={checkboxesDataOrientation}
                   props={props}
                   filteredData={filteredData}
+                  isEditMode
                   />
-                <FormVictimsInformation {...orientationProps}/>
+                <FormVictimsInformation {...orientationProps} isEditMode/>
                 <FormDataOfTheTypeOfViolence {...orientationProps} />
                 <FormAggressorsDetails {...orientationProps}/>
                 <FormInstitutionalIntervention {...orientationProps}/>

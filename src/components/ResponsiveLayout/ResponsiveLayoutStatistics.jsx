@@ -37,7 +37,7 @@ export default function ResponsiveLayoutStatistics() {
             {/* Chart */}
             <Grid item xs={12} md={8} lg={6}>
               <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', maxHeight: '450px' }}>
-                <Select value={selectedYear} onChange={handleYearChange} style={{ width: '90px', height: '20px', marginLeft: '45%' }}>
+                <Select name="selectYear" value={selectedYear} onChange={handleYearChange} style={{ width: '90px', height: '20px', marginLeft: '45%' }}>
                   {years.map((year) => (
                     <MenuItem key={year} value={year}>
                       {year}
@@ -52,7 +52,7 @@ export default function ResponsiveLayoutStatistics() {
             {/* Chart 2 */}
             <Grid item xs={12} md={4} lg={6}>
               <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', maxHeight: '450px' }}>
-                <Select value={selectedYear} onChange={handleYearChange} style={{ width: '90px', height: '20px', marginLeft: '45%' }}>
+                <Select name="selectYear" value={selectedYear} onChange={handleYearChange} style={{ width: '90px', height: '20px', marginLeft: '45%' }}>
                   {years.map((year) => (
                     <MenuItem key={year} value={year}>
                       {year}
@@ -65,7 +65,7 @@ export default function ResponsiveLayoutStatistics() {
             {/* Chart 3*/}
             <Grid item xs={12}>
               <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', maxHeight: '400px' }}>
-                <Select value={selectedYear} onChange={handleYearChange} style={{ width: '90px', height: '20px', marginLeft: '45%' }}>
+                <Select name="selectYear" value={selectedYear} onChange={handleYearChange} style={{ width: '90px', height: '20px', marginLeft: '45%' }}>
                   {years.map((year) => (
                     <MenuItem key={year} value={year}>
                       {year}

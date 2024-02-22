@@ -28,6 +28,10 @@ export default function AccountPopover() {
     setOpen(null);
   };
 
+  const editProfile = () => {
+    setOpen(null);
+  };
+
   return (
     <>
       <IconButton
@@ -85,7 +89,7 @@ export default function AccountPopover() {
 
         <Stack sx={{ p: 1 }}>
           {MENU_OPTIONS.map((option) => (
-            <MenuItem key={option.label} onClick={handleClose}>
+            <MenuItem key={option.label} onClick={editProfile}>
               {option.label}
             </MenuItem>
           ))}

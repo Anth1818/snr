@@ -70,7 +70,7 @@ export default function FormDataOfTheTypeOfViolence({props, filteredData}) {
               control={
                 <Checkbox
                   name={checkbox.name}
-                  checked={typeOfViolenceValues.includes(checkbox.name)}
+                  defaultChecked={typeOfViolenceValues.includes(checkbox.name)}
                   onChange={() => {
                     const { typeOfViolence } = props.values;
                     const { name } = checkbox;

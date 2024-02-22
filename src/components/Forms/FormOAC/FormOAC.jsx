@@ -1,9 +1,9 @@
 import { Autocomplete, FormGroup, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { ID, GENDER, MUNICIPIO, PARROQUIA, ISPREGNANT, ESTADOCIVIL, OCUPACION, ETNIA, NIVELDEINSTRUCCION, STATES } from '../../../utils/constants.js'
+import { GENDER, MUNICIPIO, PARROQUIA, OCUPACION, REFERREDTO, STATES,STATUS, RECEIVEDBY } from '../../../utils/constants.js'
 import { ErrorMessage } from "formik";
 import { debounce } from "lodash"
-import { initialValues } from "../../../utils/initialValues.js";
+import { initialValues} from "../../../utils/initialValues.js";
 
 export let typeIdOfVictim,
 victimIdDocument,
@@ -25,31 +25,7 @@ levelOfInstruction,
 ocupation,
 summary;
 
-export default function FormVictimsInformation({ props, filteredData, isEditMode}) {
-
-  if (filteredData) {
-    ({
-      typeIdOfVictim,
-      victimIdDocument,
-      victimName,
-      victimLastName,
-      victimPhoneNumber,
-      victimPhoneNumber2,
-      victimBirthdate,
-      gender,
-      stateLocation,
-      townShipLocation,
-      parishLocation,
-      localLocation,
-      isPregnant,
-      numberOfChildren,
-      ethnicity,
-      maritalStatus,
-      levelOfInstruction,
-      ocupation,
-      summary,
-    } = filteredData);
-  }
+export default function FormOAC({ props}) {
 
   const debouncedHandleChange = debounce((e) => {
     props.handleChange(e);
@@ -68,7 +44,7 @@ export default function FormVictimsInformation({ props, filteredData, isEditMode
         textAlign={"center"}
         sx={{ marginBottom: "20px" }}
       >
-        Datos de la agraviada
+        Formulario OAC
       </Typography>
       <FormGroup
         sx={{
@@ -79,35 +55,12 @@ export default function FormVictimsInformation({ props, filteredData, isEditMode
           justifyContent: "space-evenly",
         }}
       >
-        <Autocomplete
-          disablePortal
-          getOptionLabel={(option) => option.name}
-          size="small"
-          name="typeIdOfVictim"
-          id="ID"
-          defaultValue={
-            isEditMode ? 
-            ID.find((option) => option.name === typeIdOfVictim) || null
-            : null
-          }
-          options={ID}
-          sx={{ width: "300px" }}
-          onChange={(e, value) => {
-            props.setFieldValue(
-              "typeIdOfVictim",
-              value !== null ? value.name : initialValues.typeIdOfVictim
-            );
-          }}
-          renderInput={(params) => (
-            <TextField {...params} label="Seleccione documento de identidad" />
-          )}
-        ></Autocomplete>
         <TextField
           id="id-document"
           name="victimIdDocument"
           label="Ingrese documento de identidad"
           variant="outlined"
-          defaultValue={isEditMode ? victimIdDocument || "": null}
+
           size="small"
           sx={{ width: "300px" }}
           onChange={(e) => {
@@ -117,26 +70,22 @@ export default function FormVictimsInformation({ props, filteredData, isEditMode
           }}
           onBlur={props.handleBlur}
           helperText={<ErrorMessage name="victimIdDocument" />}
-          error={Boolean(
-            props.errors.victimIdDocument && props.touched.victimIdDocument
-          )}
+        
         />
         <TextField
           label="Nombres"
           name="victimName"
-          defaultValue={isEditMode ? victimName || null: null}
           variant="outlined"
           onChange={debouncedHandleChange}
           onBlur={props.handleBlur}
           helperText={<ErrorMessage name="victimName" />}
-          error={Boolean(props.errors.victimName && props.touched.victimName)}
+         
           size="small"
           sx={{ width: "300px" }}
         />
 
         <TextField
           name="victimLastName"
-          defaultValue={isEditMode ? victimLastName || null : null}
           id="last-name"
           label="Apellidos"
           variant="outlined"
@@ -145,12 +94,12 @@ export default function FormVictimsInformation({ props, filteredData, isEditMode
           onChange={debouncedHandleChange}
           onBlur={props.handleBlur}
           helperText={<ErrorMessage name="victimLastName" />}
-          error={!!props.errors.victimLastName && props.touched.victimLastName}
+         
         />
         <TextField
           id="phone-number"
           name="victimPhoneNumber"
-          defaultValue={isEditMode ? victimPhoneNumber || null: null}
+          
           label="Telefono"
           variant="outlined"
           size="small"
@@ -158,46 +107,24 @@ export default function FormVictimsInformation({ props, filteredData, isEditMode
           onChange={debouncedHandleChange}
           onBlur={props.handleBlur}
           helperText={<ErrorMessage name="victimPhoneNumber" />}
-          error={
-            !!props.errors.victimPhoneNumber && props.touched.victimPhoneNumber
-          }
+          
         />
-        <TextField
-          id="phone-number2"
-          name="victimPhoneNumber2"
-          defaultValue={isEditMode ? victimPhoneNumber2 || null : null}
-          label="Telefono 2"
-          variant="outlined"
-          size="small"
-          sx={{ width: "300px" }}
-          onChange={debouncedHandleChange}
-          onBlur={props.handleBlur}
-          helperText={<ErrorMessage name="victimPhoneNumber2" />}
-          error={
-            !!props.errors.victimPhoneNumber2 &&
-            props.touched.victimPhoneNumber2
-          }
-        />
-        <TextField
-          id="date"
-          name="victimBirthdate"
-          variant="outlined"
-          defaultValue={isEditMode ? victimBirthdate || null: null }
-          size="small"
-          onChange={debouncedHandleChange}
-          type="date"
-          sx={{ width: "300px" }}
-        />
+      <TextField
+            id="ageOfVictim"
+            label="Edad aproximada"
+            name="ageOfVictim"
+            onChange={debouncedHandleChange}
+            onBlur={props.handleBlur}
+            helperText={<ErrorMessage name="ageOfVictim" />}
+            variant="outlined"
+            size="small"
+            sx={{ width: "300px" }}
+          />
         <Autocomplete
           disablePortal
           size="small"
           name="gender"
           id="gender"
-          defaultValue={
-            isEditMode?
-            GENDER.find((option) => option.name === gender) || null
-            :null
-          }
           options={GENDER}
           onChange={(e, value) => {
             props.setFieldValue(
@@ -215,11 +142,6 @@ export default function FormVictimsInformation({ props, filteredData, isEditMode
           name="stateLocation"
           id="states"
           options={STATES}
-          defaultValue={
-            isEditMode ?
-            STATES.find((option) => option.name === stateLocation) || null
-            :null
-          }
           onChange={(e, value) => {
             props.setFieldValue(
               "stateLocation",
@@ -236,11 +158,6 @@ export default function FormVictimsInformation({ props, filteredData, isEditMode
           name="townShipLocation"
           id="municipio"
           options={MUNICIPIO}
-          defaultValue={
-            isEditMode ?
-            MUNICIPIO.find((option) => option.name === townShipLocation) || null
-            :null
-          }
           onChange={(e, value) => {
             props.setFieldValue(
               "townShipLocation",
@@ -257,11 +174,6 @@ export default function FormVictimsInformation({ props, filteredData, isEditMode
           name="parishLocation"
           id="parroquia"
           options={PARROQUIA}
-          defaultValue={
-            isEditMode ?
-            PARROQUIA.find((option) => option.name === parishLocation) || null 
-            : null
-          }
           onChange={(e, value) => {
             props.setFieldValue(
               "parishLocation",
@@ -277,60 +189,41 @@ export default function FormVictimsInformation({ props, filteredData, isEditMode
           id="location"
           name="localLocation"
           label="Dirección"
-          defaultValue={isEditMode ? localLocation || null: null}
           onChange={debouncedHandleChange}
           variant="outlined"
           size="small"
           sx={{ width: "300px" }}
         />
 
-        <Autocomplete
-          disablePortal
-          size="small"
-          name="isPregnant"
-          id="isPregnant"
-          defaultValue={
-            isEditMode ?
-            ISPREGNANT.find((option) => option.name === isPregnant) || null
-            : null
-          }
-          options={ISPREGNANT}
-          onChange={(e, value) => {
-            props.setFieldValue(
-              "isPregnant",
-              value !== null ? value.name : initialValues.isPregnant
-            );
-          }}
-          sx={{ width: "300px" }}
-          renderInput={(params) => (
-            <TextField {...params} label="¿Estás embarazada?" />
-          )}
-        ></Autocomplete>
+            <TextField
+            id="diagnostic"
+            label="Diagnostico"
+            name="diagnostic"
+            onChange={debouncedHandleChange}
+            onBlur={props.handleBlur}
+            helperText={<ErrorMessage name="diagnostic" />}
+            variant="outlined"
+            size="small"
+            sx={{ width: "300px" }}
+          />
 
         <TextField
-          id="numberOfChildren"
-          label="Numero de hijos"
-          name="numberOfChildren"
-          defaultValue={isEditMode ? numberOfChildren || null: null}
+          id="request"
+          label="Solicitud"
+          name="request"
           variant="outlined"
           onChange={debouncedHandleChange}
           onBlur={props.handleBlur}
-          helperText={<ErrorMessage name="numberOfChildren" />}
-          error={!!props.errors.numberOfChildren && props.touched.numberOfChildren}
+          helperText={<ErrorMessage name="request" />}
           size="small"
           sx={{ width: "300px", marginBottom: "10px" }}
         />
         <Autocomplete
           disablePortal
           size="small"
-          name="ethnicity"
-          id="ethnicity"
-          defaultValue={
-            isEditMode ?
-            ETNIA.find((option) => option.name === ethnicity) || null
-            : null
-          }
-          options={ETNIA}
+          name="referredTo"
+          id="referredTo"
+          options={REFERREDTO}
           onChange={(e, value) => {
             props.setFieldValue(
               "ethnicity",
@@ -339,20 +232,15 @@ export default function FormVictimsInformation({ props, filteredData, isEditMode
           }}
           sx={{ width: "300px", marginBottom: "10px" }}
           renderInput={(params) => (
-            <TextField {...params} label="Seleccione una etnia" />
+            <TextField {...params} label="Referido a" />
           )}
         ></Autocomplete>
         <Autocomplete
           disablePortal
           size="small"
-          name="maritalStatus"
-          id="maritalStatus"
-          defaultValue={
-            isEditMode ?
-            ESTADOCIVIL.find((option) => option.name === maritalStatus) || null
-            : null
-          }
-          options={ESTADOCIVIL}
+          name="status"
+          id="status"
+          options={STATUS}
           onChange={(e, value) => {
             props.setFieldValue(
               "maritalStatus",
@@ -361,20 +249,15 @@ export default function FormVictimsInformation({ props, filteredData, isEditMode
           }}
           sx={{ width: "300px", marginBottom: "10px" }}
           renderInput={(params) => (
-            <TextField {...params} label="Seleccione una estado civil" />
+            <TextField {...params} label="Estatus" />
           )}
         ></Autocomplete>
         <Autocomplete
           disablePortal
           size="small"
-          id="levelOfInstruction"
-          name="levelOfInstruction"
-          defaultValue={
-            isEditMode ?
-            NIVELDEINSTRUCCION.find((option) => option.name === levelOfInstruction) || null 
-            : null
-          }
-          options={NIVELDEINSTRUCCION}
+          id="receivedBy"
+          name="receivedBy"
+          options={RECEIVEDBY}
           onChange={(e, value) => {
             props.setFieldValue(
               "levelOfInstruction",
@@ -383,39 +266,27 @@ export default function FormVictimsInformation({ props, filteredData, isEditMode
           }}
           sx={{ width: "300px", marginBottom: "10px" }}
           renderInput={(params) => (
-            <TextField {...params} label="Seleccione un nivel de instrucción" />
+            <TextField {...params} label="Recibido por" />
           )}
         ></Autocomplete>
-        <Autocomplete
-          disablePortal
+       <TextField
+          id="origin"
+          label="Procedencia"
+          name="origin"
+          variant="outlined"
+          onChange={debouncedHandleChange}
+          onBlur={props.handleBlur}
+          helperText={<ErrorMessage name="origin" />}
           size="small"
-          name="ocupation"
-          id="ocupation"
-          options={OCUPACION}
-          defaultValue={
-            isEditMode ?
-            OCUPACION.find((option) => option.name === ocupation) || null
-            : null
-          }
-          onChange={(e, value) => {
-            props.setFieldValue(
-              "ocupation",
-              value !== null ? value.name : initialValues.ocupation
-            );
-          }}
           sx={{ width: "300px", marginBottom: "10px" }}
-          renderInput={(params) => (
-            <TextField {...params} label="Seleccione una ocupación" />
-          )}
-        ></Autocomplete>
+        />
         <TextField
-          name="summary"
+          name="observations"
           multiline
           minRows={5}
-          defaultValue={isEditMode ? summary || null : null}
           onChange={debouncedHandleChange}
-          sx={{ width: 500 }}
-          label="Resumen de la llamada..."
+          sx={{ width: 650 }}
+          label="Observaciones..."
         ></TextField>
       </FormGroup>
       <Box

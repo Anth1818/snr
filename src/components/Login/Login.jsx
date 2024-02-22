@@ -43,7 +43,7 @@ export default function Login() {
         <img
           src={inamujerLogo}
           alt="Logo inamujer"
-          className=" w-20 -mt-24 ml-28"
+          className=" w-28 -mt-24 ml-24"
         />
         <form className="flex flex-col gap-2 p-8 mb-4" onSubmit={handleSubmit}>
           <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined" required>

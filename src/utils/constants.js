@@ -436,3 +436,46 @@ export const FINDOUT0800 = [
   },
 ];
 
+export const REFERREDTO = [
+  {
+    label: "Referido 1",
+    name: "Referido1",
+  },
+  {
+    label: "Referido 2",
+    name: "Referido2",
+  },
+  {
+    label: "Referido 3",
+    name: "Referido3",
+  },
+];
+
+export const STATUS = [
+  {
+    label: "Estatus 1",
+    name: "status1",
+  },
+  {
+    label: "Estatus 2",
+    name: "status2",
+  },
+  {
+    label: "Estatus 3",
+    name: "status3",
+  },
+];
+export const RECEIVEDBY = [
+  {
+    label: "Recibidor 1 ",
+    name: "received1",
+  },
+  {
+    label: "Recibidor 2",
+    name: "received2",
+  },
+  {
+    label: "Recibidor 3",
+    name: "received3",
+  },
+];

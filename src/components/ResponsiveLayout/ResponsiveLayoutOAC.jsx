@@ -2,6 +2,10 @@ import { CssBaseline, Grid, Paper, Toolbar } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import RenderDrawer from "../Drawer/Drawer";
 import { getData } from "../../utils/getDataLocalStorage";
+import FormOAC from "../Forms/FormOAC/FormOAC";
+import { Formik } from "formik";
+import { validationSchema } from "../../utils/validationSchema";
+import { initialValues } from "../../utils/initialValues";
 
 
 export default function ResponsiveLayoutStatistics() {
@@ -25,33 +29,31 @@ export default function ResponsiveLayoutStatistics() {
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           <Grid container spacing={3}>
             {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
+            <Grid item >
               <Paper
                 sx={{
                   p: 2,
                   display: "flex",
                   flexDirection: "column",
-                  height: 240,
                 }}
               >
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={(values) => {
+                      handleSubmit(values); // Llama a tu función de manejo de envío
+                      setShowAlert(true); // Mostrar el Alert al enviar el formulario
+                      setDisableButton(true)
+                      setTimeout(() => {
+                        setDisableButton(false)
+                        location.href = "/pages/Page0800"; // Redireccionar después del tiempo especificado
+                      }, 2500);
+                    }}
+                    >
+                       <FormOAC props></FormOAC>
+                    </Formik>
+               
               </Paper>
-            </Grid>
-            {/* Chart 2 */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper
-                sx={{
-                  p: 2,
-                  display: "flex",
-                  flexDirection: "column",
-                  height: 240,
-                }}
-              ></Paper>
-            </Grid>
-            {/* Chart 3*/}
-            <Grid item xs={12}>
-              <Paper
-                sx={{ p: 2, display: "flex", flexDirection: "column" }}
-              ></Paper>
             </Grid>
           </Grid>
         </Container>
