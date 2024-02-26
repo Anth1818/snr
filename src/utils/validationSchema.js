@@ -92,7 +92,13 @@ phoneNumberOfContact2: Yup.string()
 .max(11, "Máximo 11 digitos"),
 
 emailOfContact: Yup.string()
-.matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "Ingrese un correo válido")
+.matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.a-zA-Z]{2,}$/, "Ingrese un correo válido"),
 
+
+//validaciones Agrega nuevo usuario 
+
+userFirstName: Yup.string().matches(
+  /^[aA-zZ\s]+$/,
+  "Solo se permiten caracteres alfabéticos").max(30, "Máximo 30 caracteres")
 
 });

@@ -8,12 +8,14 @@ import PageStatistics from "./pages/PageStatistics.jsx"
 import PageForm0800 from "./pages/Pageform0800.jsx";
 import PageForm0800Edit from "./pages/PageForm0800Edit.jsx";
 import EditProfile from "./pages/EditProfile.jsx"
+import AddUser from "./pages/AddUser.jsx"
 
 export default function App() {
   return (
     <Routes>
       <Route path="/pages/Page0800" element={<Page0800 />} />
       <Route path="/pages/EditProfile" element={<EditProfile />} />
+      <Route path="/pages/AddUser" element={<AddUser />} />
       <Route path="/pages/PageRCV" element={<PageRCV />} />
       <Route path="/pages/PageOAC" element={<PageOAC />} />
       <Route path="/pages/PageStatistics" element={<PageStatistics />} />

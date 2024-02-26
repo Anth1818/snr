@@ -479,3 +479,32 @@ export const RECEIVEDBY = [
     name: "received3",
   },
 ];
+
+export const OFFICES = [
+  {
+    label: "Departamento 1",
+    name: "Departamento 1"
+  },
+  {
+    label: "Departamento 2",
+    name: "Departamento 2"
+  },
+  {
+    label: "Departamento 3",
+    name: "Departamento 3"
+  },
+]
+export const POSITIONS = [
+  {
+    label: "Cargo 1",
+    name: "Cargo 1"
+  },
+  {
+    label: "Cargo 2",
+    name: "Cargo 2"
+  },
+  {
+    label: "Cargo 3",
+    name: "Cargo 3"
+  },
+]

@@ -24,7 +24,6 @@ import FormInstitutionalIntervention from "../Forms/Form0800/FormInstitutionalIn
 import FormContactInformation from "../Forms/Form0800/FormContactInformation";
 import FormSummaryCall from "../Forms/Form0800/FormSummaryCall";
 import FormButtonSubmit from "../Forms/Form0800/FormButtonSubmit";
-import { useFormikContext } from "formik";
 import {
   checkboxesDataInformation,
   checkboxesDataIntervention,

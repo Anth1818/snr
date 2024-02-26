@@ -13,6 +13,9 @@ import AddIcCallIcon from "@mui/icons-material/AddIcCall";
 import FemaleIcon from "@mui/icons-material/Female";
 import { Tooltip } from "@mui/material";
 import { NavLink } from "react-router-dom"
+import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded';
+
+const IsAdmin = true
 
 export const mainListItems = (
   <React.Fragment>
@@ -48,31 +51,14 @@ export const mainListItems = (
         <ListItemText primary="Estadísticas" />
       </ListItemButton>
     </Tooltip>
+    {IsAdmin && <Tooltip title="Agregar nuevo usuario al sistema" placement="right">
+      <ListItemButton component={NavLink} to={"../pages/AddUser"}>
+        <ListItemIcon>
+          <PersonAddAltRoundedIcon />
+        </ListItemIcon>
+        <ListItemText primary="Agregar nuevo usuario" />
+      </ListItemButton>
+    </Tooltip>}
+    
   </React.Fragment>
 );
-
-// export const secondaryListItems = (
-//   <React.Fragment>
-//     <ListSubheader component="div" inset>
-//       Saved reports
-//     </ListSubheader>
-//     <ListItemButton>
-//       <ListItemIcon>
-//         <AssignmentIcon />
-//       </ListItemIcon>
-//       <ListItemText primary="Current month" />
-//     </ListItemButton>
-//     <ListItemButton>
-//       <ListItemIcon>
-//         <AssignmentIcon />
-//       </ListItemIcon>
-//       <ListItemText primary="Last quarter" />
-//     </ListItemButton>
-//     <ListItemButton>
-//       <ListItemIcon>
-//         <AssignmentIcon />
-//       </ListItemIcon>
-//       <ListItemText primary="Year-end sale" />
-//     </ListItemButton>
-//   </React.Fragment>
-// );
