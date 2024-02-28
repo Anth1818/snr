@@ -1,29 +1,9 @@
 import { Autocomplete, FormGroup, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { GENDER, MUNICIPIO, PARROQUIA, OCUPACION, REFERREDTO, STATES,STATUS, RECEIVEDBY } from '../../../utils/constants.js'
+import { GENDER, MUNICIPIO, PARROQUIA, REFERREDTO, STATES,STATUS, RECEIVEDBY } from '../../../utils/constants.js'
 import { ErrorMessage } from "formik";
 import { debounce } from "lodash"
 import { initialValues} from "../../../utils/initialValues.js";
-
-export let typeIdOfVictim,
-victimIdDocument,
-victimName,
-victimLastName,
-victimPhoneNumber,
-victimPhoneNumber2,
-victimBirthdate,
-gender,
-stateLocation,
-townShipLocation,
-parishLocation,
-localLocation,
-isPregnant,
-numberOfChildren,
-ethnicity,
-maritalStatus,
-levelOfInstruction,
-ocupation,
-summary;
 
 export default function FormOAC({ props}) {
 

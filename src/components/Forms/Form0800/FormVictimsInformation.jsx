@@ -28,8 +28,7 @@ summary;
 export default function FormVictimsInformation({ props, filteredData, isEditMode}) {
 
   if (filteredData) {
-    ({
-      typeIdOfVictim,
+    ({typeIdOfVictim,
       victimIdDocument,
       victimName,
       victimLastName,

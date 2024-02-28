@@ -5,5 +5,9 @@ export const initialValuesNewUser = {
     userPhoneNumber : " ",
     userEmail : " ",
     userGender : "",
-    
+    userOffice: "",
+    userPosition: "",
+    user: "",
+    userPassword:"",
+    userPasswordRepeat:""
 }
