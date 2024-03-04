@@ -6,8 +6,8 @@ export const initialValuesNewUser = {
     userEmail : " ",
     userGender : "",
     userOffice: "",
-    userPosition: "",
-    user: "",
+    userRol: "",
+    userName: "",
     userPassword:"",
     userPasswordRepeat:""
 }

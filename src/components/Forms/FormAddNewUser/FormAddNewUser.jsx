@@ -73,7 +73,7 @@ export default function FormAddNewUser({props}) {
           sx={{ width: "300px" }}
         />
         <TextField
-          label="Teléfono 2"
+          label="Teléfono 2 (Opcional)"
           name="userPhoneNumber2"
           defaultValue={""}
           variant="outlined"
@@ -94,7 +94,7 @@ export default function FormAddNewUser({props}) {
           onChange={props.handleChange}
           onBlur={props.handleBlur}
           helperText={<ErrorMessage name="userEmail" />}
-          error={Boolean(props.errors?.userEmail && props.touched?.userEmail)}
+          error={Boolean(props.errors.userEmail && props.touched.userEmail)}
           size="small"
           sx={{ width: "300px" }}
         />
@@ -112,7 +112,11 @@ export default function FormAddNewUser({props}) {
           }}
           sx={{ width: "300px" }}
           renderInput={(params) => (
-            <TextField {...params} label="Seleccione un género" />
+            <TextField
+            {...params}
+            label="Seleccione un cargo"
+            error={Boolean(props.errors?.userGender && props.touched?.userGender)}
+            helperText={props.touched?.userGender ? props.errors?.userGender : ''} />
           )}
         ></Autocomplete>
         <Autocomplete
@@ -123,39 +127,49 @@ export default function FormAddNewUser({props}) {
           onChange={(e, value) => {
             props.setFieldValue(
               "userOffice",
-              value !== null ? value.name : initialValuesNewUser.useOffice
+              value !== null ? value.name : initialValuesNewUser.userOffice
             );
           }}
           sx={{ width: "300px" }}
           renderInput={(params) => (
-            <TextField {...params} label="Seleccione un departamento" />
+            <TextField
+            {...params}
+            label="Seleccione un cargo"
+            error={Boolean(props.errors?.userOffice && props.touched?.userOffice)}
+            helperText={props.touched?.userOffice ? props.errors?.userOffice : ''} />
           )}
         ></Autocomplete>
         <Autocomplete
           disablePortal
           size="small"
-          name="userPosition"
+          name="userRol"
           options={POSITIONS}
           onChange={(e, value) => {
             props.setFieldValue(
-              "userPosition",
-              value !== null ? value.name : initialValuesNewUser.userPosition
+              "userRol",
+              value !== null ? value.name : initialValuesNewUser.userRol
             );
           }}
           sx={{ width: "300px" }}
           renderInput={(params) => (
-            <TextField {...params} label="Seleccione un cargo" />
+            <TextField
+            {...params}
+            label="Seleccione un cargo"
+            error={Boolean(props.errors?.userRol && props.touched?.userRol)}
+            helperText={props.touched?.userRol ? props.errors?.userRol : ''}
+          />
+      
           )}
         ></Autocomplete>
         <TextField
           label="Usuario"
-          name="user"
+          name="userName"
           defaultValue={""}
           variant="outlined"
           onChange={props.handleChange}
           onBlur={props.handleBlur}
-          helperText={<ErrorMessage name="user" />}
-          error={Boolean(props.errors?.user && props.touched?.user)}
+          helperText={<ErrorMessage name="userName" />}
+          error={Boolean(props.errors?.userName && props.touched?.userName)}
           size="small"
           sx={{ width: "300px" }}
         />
