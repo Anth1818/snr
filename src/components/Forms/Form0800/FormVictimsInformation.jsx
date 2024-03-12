@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { Autocomplete, FormGroup, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { ID, GENDER, MUNICIPIO, PARROQUIA, ISPREGNANT, ESTADOCIVIL, OCUPACION, ETNIA, NIVELDEINSTRUCCION, STATES } from '../../../utils/constants.js'

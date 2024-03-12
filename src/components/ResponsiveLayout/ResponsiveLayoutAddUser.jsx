@@ -8,7 +8,7 @@ import {
 import { Box, Container } from "@mui/system";
 import RenderDrawer from "../Drawer/Drawer";
 import { Formik, } from "formik";
-import { validationSchema } from "../../utils/validationSchema";
+import { validationSchemaAddUser } from "../../utils/validationSchemaAddUser";
 import { initialValuesNewUser } from "../../utils/initialValuesNewUser";
 import FormAddNewUser from "../Forms/FormAddNewUser/FormAddNewUser";
 export default function ResponsiveLayoutAddUser() {
@@ -48,7 +48,7 @@ export default function ResponsiveLayoutAddUser() {
                 <Box>
                   <Formik
                     initialValues={initialValuesNewUser}
-                    validationSchema={validationSchema}
+                    validationSchema={validationSchemaAddUser}
                     onSubmit={""}
                   >
                     {(props) => (

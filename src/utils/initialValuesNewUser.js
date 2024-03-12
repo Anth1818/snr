@@ -3,11 +3,14 @@ export const initialValuesNewUser = {
     userLastName : "",
     userId : "",
     userPhoneNumber : " ",
-    userEmail : " ",
+    userEmail: " ",
+    userStateLocation: " ",
+    userTownShipLocation: " ",
+    userParishLocation:" ",
     userGender : "",
     userOffice: "",
     userRol: "",
     userName: "",
     userPassword:"",
-    userPasswordRepeat:""
+    userPasswordRepeat:"",
 }

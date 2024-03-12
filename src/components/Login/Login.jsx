@@ -5,32 +5,58 @@ import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import {Button} from "@mui/material";
-import React from "react";
+import { Button } from "@mui/material";
+import { useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import inamujerLogo from "/assets/inamujer-logo.jpg"
+import inamujerLogo from "/assets/inamujer-logo.jpg";
 import { useNavigate } from "react-router-dom";
-
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 
 export default function Login() {
+  const base_url = "http://localhost:3000/api/1.0/auth/login";
 
-  // const redirect = "../pages/Page0800" 
-
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [userName] = useState("nicoadmin");
+  const [userPassword] = useState("123456");
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  
-  const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const mutation = useMutation({
+    mutationFn: (formData) => {
+      return axios.post(base_url, formData);
+    },
+  });
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate("/pages/Page0800")
 
-  }
+    // Aquí puedes realizar alguna validación antes de enviar los datos
+
+    const formData = {
+      userName,
+      userPassword,
+    };
+
+    try {
+      // Llama a la función de mutación
+      const result = await mutation.mutate(formData);
+
+      // Imprime la respuesta en la consola
+      console.log(result);
+
+      // Puedes realizar acciones adicionales según la respuesta, como redirigir
+      // o mostrar un mensaje de éxito
+    } catch (error) {
+      // Manejo de errores, por ejemplo, imprimir el error en la consola
+      console.error("Error al realizar la solicitud:", error, formData);
+    }
+  };
 
   return (
     <div className="w-full min-h-screen flex justify-center items-center">
@@ -52,6 +78,7 @@ export default function Login() {
             </InputLabel>
             <OutlinedInput
               id="outlined-adornment-username"
+              name="userName"
               label="Username"
               endAdornment={
                 <InputAdornment position="end">
@@ -66,6 +93,7 @@ export default function Login() {
             </InputLabel>
             <OutlinedInput
               id="outlined-adornment-password"
+              name="userPassword"
               type={showPassword ? "text" : "password"}
               endAdornment={
                 <InputAdornment position="end">
@@ -85,7 +113,7 @@ export default function Login() {
           <Button
             variant="contained"
             type="submit"
-            sx={{ backgroundColor: "#2E219E", color:"white"}}
+            sx={{ backgroundColor: "#2E219E", color: "white" }}
           >
             Ingresar
           </Button>
