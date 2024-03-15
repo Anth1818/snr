@@ -10,14 +10,14 @@ import { useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import inamujerLogo from "/assets/inamujer-logo.jpg";
 import { useNavigate } from "react-router-dom";
+import { login, useLoginMutation } from "../../hooks/useLogin"
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import api from "../../api/API_SNR";
+import { data } from "browserslist";
 
 export default function Login() {
-  const base_url = "http://localhost:3000/api/1.0/auth/login";
-
-  const [userName] = useState("nicoadmin");
-  const [userPassword] = useState("123456");
+  const [userName, setUserName] = useState("");
+  const [userPassword, setUserPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -27,98 +27,98 @@ export default function Login() {
 
   const navigate = useNavigate();
 
+
+   const handleSubmit = async (e) => {
+     e.preventDefault();
+  };
+  
   const mutation = useMutation({
-    mutationFn: (formData) => {
-      return axios.post(base_url, formData);
+    mutationFn: (credentials) => {
+      return api.post("/auth/login", credentials);
     },
   });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
 
-    // Aquí puedes realizar alguna validación antes de enviar los datos
-
-    const formData = {
-      userName,
-      userPassword,
-    };
-
-    try {
-      // Llama a la función de mutación
-      const result = await mutation.mutate(formData);
-
-      // Imprime la respuesta en la consola
-      console.log(result);
-
-      // Puedes realizar acciones adicionales según la respuesta, como redirigir
-      // o mostrar un mensaje de éxito
-    } catch (error) {
-      // Manejo de errores, por ejemplo, imprimir el error en la consola
-      console.error("Error al realizar la solicitud:", error, formData);
-    }
-  };
-
-  return (
-    <div className="w-full min-h-screen flex justify-center items-center">
-      <div className="min-w-fit h-full border-2 border-gray-400 box-border  rounded-lg">
-        <div className="clip-path-mypolygon bg-[#2E219E] h-44 w-full m-0 box-border pt-4 rounded-t-lg">
-          <h2 className="text-center text-white text-2xl font-bold">
-            Iniciar sesión
-          </h2>
-        </div>
-        <img
-          src={inamujerLogo}
-          alt="Logo inamujer"
-          className=" w-28 -mt-24 ml-24"
-        />
-        <form className="flex flex-col gap-2 p-8 mb-4" onSubmit={handleSubmit}>
-          <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined" required>
-            <InputLabel htmlFor="outlined-adornment-username">
-              Usuario
-            </InputLabel>
-            <OutlinedInput
-              id="outlined-adornment-username"
-              name="userName"
-              label="Username"
-              endAdornment={
-                <InputAdornment position="end">
-                  <AccountCircleIcon />
-                </InputAdornment>
-              }
-            />
-          </FormControl>
-          <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined" required>
-            <InputLabel htmlFor="outlined-adornment-password">
-              Contraseña
-            </InputLabel>
-            <OutlinedInput
-              id="outlined-adornment-password"
-              name="userPassword"
-              type={showPassword ? "text" : "password"}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              label="Password"
-            />
-          </FormControl>
-          <Button
-            variant="contained"
-            type="submit"
-            sx={{ backgroundColor: "#2E219E", color: "white" }}
+  if (mutation.isSuccess) {
+    console.log("exito", mutation.data.data.tokenSession)
+  }
+    return (
+      <div className="w-full min-h-screen flex justify-center items-center">
+        <div className="min-w-fit h-full border-2 border-gray-400 box-border  rounded-lg">
+          <div className="clip-path-mypolygon bg-[#2E219E] h-44 w-full m-0 box-border pt-4 rounded-t-lg">
+            <h2 className="text-center text-white text-2xl font-bold">
+              Iniciar sesión
+            </h2>
+          </div>
+          <img
+            src={inamujerLogo}
+            alt="Logo inamujer"
+            className=" w-28 -mt-24 ml-24"
+          />
+          <form
+            className="flex flex-col gap-2 p-8 mb-4"
+            onSubmit={handleSubmit}
           >
-            Ingresar
-          </Button>
-        </form>
+            <FormControl
+              sx={{ m: 1, width: "25ch" }}
+              variant="outlined"
+              required
+            >
+              <InputLabel htmlFor="outlined-adornment-username">
+                Usuario
+              </InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-username"
+                name="userName"
+                onChange={(e) => setUserName(e.target.value)}
+                label="Username"
+                endAdornment={
+                  <InputAdornment position="end">
+                    <AccountCircleIcon />
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+            <FormControl
+              sx={{ m: 1, width: "25ch" }}
+              variant="outlined"
+              required
+            >
+              <InputLabel htmlFor="outlined-adornment-password">
+                Contraseña
+              </InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-password"
+                name="userPassword"
+                onChange={(e) => setUserPassword(e.target.value)}
+                type={showPassword ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                label="Password"
+              />
+            </FormControl>
+            <Button
+              variant="contained"
+              type="submit"
+              onClick={() => {
+                mutation.mutate({ username: userName, password: userPassword });
+              }}
+              sx={{ backgroundColor: "#2E219E", color: "white" }}
+            >
+              Ingresar
+            </Button>
+          </form>
+        </div>
       </div>
-    </div>
-  );
+    );
 }
