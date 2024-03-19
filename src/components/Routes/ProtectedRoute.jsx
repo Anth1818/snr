@@ -3,9 +3,9 @@ import { useUser } from "../../context/userContext";
 
 
 function ProtectedRoute() {
-  const { user } = useUser();
+  const { user, checkTokenLocalStorgare } = useUser();
   
-  if (!user) {
+  if (!user && checkTokenLocalStorgare === "undefined") {
      return <Navigate to={"/login"} replace />;  
   } else {
    return <Outlet />;

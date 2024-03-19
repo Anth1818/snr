@@ -17,9 +17,10 @@ export const UserProvider = ({ children }) => {
       return api.post("/auth/login", credentials);
     },
 
-    onSuccess: (data) => {
-      setUser(data.data);
-      saveTokenLocalStorage(data.data.tokenSession)
+    onSuccess: ({data}) => {
+      setUser(data.data[0]);
+      console.log(data.data[0])
+      saveTokenLocalStorage(data.tokenSession)
      // Almacenar los datos del usuario en el estado local
     },
   });
@@ -34,8 +35,11 @@ export const UserProvider = ({ children }) => {
     removeTokenLocalStorage()// Limpiar todas las consultas en caché cuando el usuario cierra sesión
   };
 
+  const checkTokenLocalStorgare = () =>{
+    return localStorage.getItem("token")
+  }
   return (
-    <UserContext.Provider value={{ user, loginUser, logoutUser }}>
+    <UserContext.Provider value={{ user, loginUser, logoutUser, checkTokenLocalStorgare}}>
       {children}
     </UserContext.Provider>
   );

@@ -6,7 +6,7 @@ import FormControl from "@mui/material/FormControl";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Button } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import inamujerLogo from "/assets/inamujer-logo.jpg";
 import { useUser } from "../../context/userContext";
@@ -25,13 +25,16 @@ export default function Login() {
   const navigate = useNavigate()
 
 
-   const handleSubmit = async (e) => {
-     e.preventDefault();
-     await loginUser({ username: userName, password: userPassword })
-     if (user) {
-       navigate("/Page0800")
-     }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await loginUser({ username: userName, password: userPassword });
   };
+  
+  useEffect(() => {
+    if (user) {
+      navigate("/Page0800");
+    }
+  }, [user]);
  
     return (
       <div className="w-full min-h-screen flex justify-center items-center">
