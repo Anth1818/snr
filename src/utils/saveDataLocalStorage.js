@@ -13,3 +13,11 @@ export const guardarEnJSON = (datos) => {
   // Convertimos el array a formato JSON y lo guardamos
   localStorage.setItem("datosGuardados", JSON.stringify(datosGuardadosArray));
 };
+
+export const saveTokenLocalStorage = (token) => {
+  localStorage.setItem("token",token)
+}
+
+export const removeTokenLocalStorage = () => {
+  localStorage.removeItem("token")
+}

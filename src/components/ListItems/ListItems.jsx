@@ -20,7 +20,7 @@ const IsAdmin = true
 export const mainListItems = (
   <React.Fragment>
     <Tooltip title="0800" placement="right">
-      <ListItemButton component={NavLink} to={"../pages/Page0800"}>
+      <ListItemButton component={NavLink} to={"../Page0800"}>
         <ListItemIcon>
           <AddIcCallIcon />
         </ListItemIcon>
@@ -28,7 +28,7 @@ export const mainListItems = (
       </ListItemButton>
     </Tooltip>
     <Tooltip title="Registro de casos de violencia" placement="right">
-      <ListItemButton component={NavLink} to={"../pages/PageRCV"}>
+      <ListItemButton component={NavLink} to={"../PageRCV"}>
         <ListItemIcon>
           <FemaleIcon />
         </ListItemIcon>
@@ -36,7 +36,7 @@ export const mainListItems = (
       </ListItemButton>
     </Tooltip>
     <Tooltip title="OAC" placement="right">
-      <ListItemButton component={NavLink} to={"../pages/PageOAC"}>
+      <ListItemButton component={NavLink} to={"../PageOAC"}>
         <ListItemIcon>
           <PeopleIcon />
         </ListItemIcon>
@@ -44,7 +44,7 @@ export const mainListItems = (
       </ListItemButton>
     </Tooltip>
     <Tooltip title="Estadísticas" placement="right">
-      <ListItemButton component={NavLink} to={"../pages/PageStatistics"}>
+      <ListItemButton component={NavLink} to={"../PageStatistics"}>
         <ListItemIcon>
           <BarChartIcon />
         </ListItemIcon>
@@ -52,7 +52,7 @@ export const mainListItems = (
       </ListItemButton>
     </Tooltip>
     {IsAdmin && <Tooltip title="Agregar nuevo usuario al sistema" placement="right">
-      <ListItemButton component={NavLink} to={"../pages/AddUser"}>
+      <ListItemButton component={NavLink} to={"../AddUser"}>
         <ListItemIcon>
           <PersonAddAltRoundedIcon />
         </ListItemIcon>

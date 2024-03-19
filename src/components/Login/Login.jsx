@@ -9,11 +9,8 @@ import { Button } from "@mui/material";
 import { useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import inamujerLogo from "/assets/inamujer-logo.jpg";
-import { useNavigate } from "react-router-dom";
-import { login, useLoginMutation } from "../../hooks/useLogin"
-import { useMutation } from "@tanstack/react-query";
-import api from "../../api/API_SNR";
-import { data } from "browserslist";
+import { useUser } from "../../context/userContext";
+import {  useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [userName, setUserName] = useState("");
@@ -24,24 +21,18 @@ export default function Login() {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-
-  const navigate = useNavigate();
+  const { user, loginUser } = useUser();
+  const navigate = useNavigate()
 
 
    const handleSubmit = async (e) => {
      e.preventDefault();
+     await loginUser({ username: userName, password: userPassword })
+     if (user) {
+       navigate("/Page0800")
+     }
   };
-  
-  const mutation = useMutation({
-    mutationFn: (credentials) => {
-      return api.post("/auth/login", credentials);
-    },
-  });
-
-
-  if (mutation.isSuccess) {
-    console.log("exito", mutation.data.data.tokenSession)
-  }
+ 
     return (
       <div className="w-full min-h-screen flex justify-center items-center">
         <div className="min-w-fit h-full border-2 border-gray-400 box-border  rounded-lg">
@@ -110,9 +101,6 @@ export default function Login() {
             <Button
               variant="contained"
               type="submit"
-              onClick={() => {
-                mutation.mutate({ username: userName, password: userPassword });
-              }}
               sx={{ backgroundColor: "#2E219E", color: "white" }}
             >
               Ingresar

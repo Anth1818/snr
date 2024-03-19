@@ -4,25 +4,35 @@ import PageOAC from "./pages/PageOAC.jsx";
 import PageLogin from "./pages/PageLogin.jsx";
 import { Routes, Route } from "react-router-dom";
 import NotFound from "./pages/PageNotFound.jsx";
-import PageStatistics from "./pages/PageStatistics.jsx"
+import PageStatistics from "./pages/PageStatistics.jsx";
 import PageForm0800 from "./pages/Pageform0800.jsx";
 import PageForm0800Edit from "./pages/PageForm0800Edit.jsx";
-import EditProfile from "./pages/EditProfile.jsx"
-import AddUser from "./pages/AddUser.jsx"
+import EditProfile from "./pages/EditProfile.jsx";
+import AddUser from "./pages/AddUser.jsx";
+import { UserProvider } from "./context/userContext.jsx";
+import ProtectedRoute from "./components/Routes/ProtectedRoute.jsx";
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/pages/Page0800" element={<Page0800 />} />
-      <Route path="/pages/EditProfile" element={<EditProfile />} />
-      <Route path="/pages/AddUser" element={<AddUser />} />
-      <Route path="/pages/PageRCV" element={<PageRCV />} />
-      <Route path="/pages/PageOAC" element={<PageOAC />} />
-      <Route path="/pages/PageStatistics" element={<PageStatistics />} />
-      <Route path="/pages/PageForm0800" element={<PageForm0800 />} />
-      <Route path="/pages/PageForm0800Edit/:caseId" element={<PageForm0800Edit />} />
-      <Route path="/" element={<PageLogin />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <UserProvider>
+      <Routes>
+        <Route element={<ProtectedRoute />}>
+          <Route path="/Page0800" element={<Page0800 />} />
+          <Route path="/EditProfile" element={<EditProfile />} />
+          <Route path="/AddUser" element={<AddUser />} />
+          <Route path="/PageRCV" element={<PageRCV />} />
+          <Route path="/PageOAC" element={<PageOAC />} />
+          <Route path="/PageStatistics" element={<PageStatistics />} />
+          <Route path="/PageForm0800" element={<PageForm0800 />} />
+          <Route
+            path="/PageForm0800Edit/:caseId"
+            element={<PageForm0800Edit />}
+          />
+        </Route>
+        <Route path="/login" element={<PageLogin />} />
+        <Route path="/" element={<PageLogin />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </UserProvider>
   );
 }
