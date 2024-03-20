@@ -11,11 +11,15 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import inamujerLogo from "/assets/inamujer-logo.jpg";
 import { useUser } from "../../context/userContext";
 import {  useNavigate } from "react-router-dom";
+import Alert from '@mui/material/Alert';
+
 
 export default function Login() {
   const [userName, setUserName] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => {
@@ -30,7 +34,9 @@ export default function Login() {
     try {
       await loginUser({ username: userName, password: userPassword });
     } catch (error) {
-      console.error("Error al iniciar sesión:", error);
+      // console.error("Error al iniciar sesión:", error);
+      //  return <Alert severity="error">This is an error Alert.</Alert>
+      setShowAlert(true)
     }
     
   };
@@ -65,11 +71,14 @@ export default function Login() {
             className="flex flex-col gap-2 p-8 mb-4"
             onSubmit={handleSubmit}
           >
+            {showAlert && <Alert severity="error">This is an error Alert.</Alert>}
+            
             <FormControl
               sx={{ m: 1, width: "25ch" }}
               variant="outlined"
               required
             >
+
               <InputLabel htmlFor="outlined-adornment-username">
                 Usuario
               </InputLabel>

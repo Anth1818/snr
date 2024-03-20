@@ -2,6 +2,10 @@ import { createContext, useContext, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import api from "../api/API_SNR";
 import { saveTokenLocalStorage, removeTokenLocalStorage } from "../utils/saveDataLocalStorage";
+import Alert from '@mui/material/Alert';
+import IconButton from '@mui/material/IconButton';
+import Collapse from '@mui/material/Collapse';
+import CloseIcon from '@mui/icons-material/Close';
 
 // Crear un contexto para almacenar los datos del usuario
 const UserContext = createContext();
@@ -11,6 +15,7 @@ export const useUser = () => useContext(UserContext);
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const queryClient = useQueryClient();
+  // const [open,setOpen] = useState(false);
 
   const loginMutation = useMutation({
     mutationFn: (credentials) => {
