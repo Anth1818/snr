@@ -17,11 +17,12 @@ export const UserProvider = ({ children }) => {
       return api.post("/auth/login", credentials);
     },
 
-    onSuccess: ({data}) => {
-      setUser(data.data[0]);
-      console.log(data.data[0])
-      saveTokenLocalStorage(data.tokenSession)
-     // Almacenar los datos del usuario en el estado local
+    onSuccess: async ({ data }) => {
+      await setUser(data?.data?.[0]);
+      await saveTokenLocalStorage(data.tokenSession);
+    },
+    onError: (error) => {
+      console.error("Error en la mutación:", error);
     },
   });
 
@@ -36,7 +37,7 @@ export const UserProvider = ({ children }) => {
   };
 
   const checkTokenLocalStorgare = () =>{
-    return localStorage.getItem("token")
+    return localStorage.getItem("token"); 
   }
   return (
     <UserContext.Provider value={{ user, loginUser, logoutUser, checkTokenLocalStorgare}}>

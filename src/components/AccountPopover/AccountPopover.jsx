@@ -4,6 +4,7 @@ import { alpha } from '@mui/material/styles';
 import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton, Popover } from '@mui/material';
 // mocks_
 import account from '../../_mock/account';
+import { Link } from 'react-router-dom';
 
 // ----------------------------------------------------------------------
 
@@ -96,10 +97,12 @@ export default function AccountPopover() {
         </Stack>
 
         <Divider sx={{ borderStyle: 'dashed' }} />
-
+          
+        <Link to="/Logout">
         <MenuItem onClick={handleClose} sx={{ m: 1 }}>
-          Logout
+          Cerrar sesión
         </MenuItem>
+        </Link>
       </Popover>
     </>
   );

@@ -11,6 +11,8 @@ import EditProfile from "./pages/EditProfile.jsx";
 import AddUser from "./pages/AddUser.jsx";
 import { UserProvider } from "./context/userContext.jsx";
 import ProtectedRoute from "./components/Routes/ProtectedRoute.jsx";
+import Logout from "./pages/Logout.jsx";
+
 
 export default function App() {
   return (
@@ -29,7 +31,8 @@ export default function App() {
             element={<PageForm0800Edit />}
           />
         </Route>
-        <Route path="/login" element={<PageLogin />} />
+          <Route path="/Logout" element={<Logout />} />
+        <Route path="/Login" element={<PageLogin />} />
         <Route path="/" element={<PageLogin />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

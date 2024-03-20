@@ -27,12 +27,24 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await loginUser({ username: userName, password: userPassword });
+    try {
+      await loginUser({ username: userName, password: userPassword });
+    } catch (error) {
+      console.error("Error al iniciar sesión:", error);
+    }
+    
   };
   
   useEffect(() => {
-    if (user) {
+    if (user && user.role === "Administradora") {
+      navigate("/AddUser");
+    } else if (user && user.department === "0800") {
       navigate("/Page0800");
+    } else if (user && user.department === "OAC") {
+      navigate("/PageOAC");
+    }
+      else if (user && user.department === "SIN") {
+      navigate("/PageRCV");
     }
   }, [user]);
  

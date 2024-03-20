@@ -34,7 +34,7 @@ export default function ResponsiveLayout0800({ dataHeadTable }) {
           <UserTable
             dataHeadTable={dataHeadTable}
             dataTitle={"Lista de llamadas"}
-            pathToForm={"/Pages/PageForm0800"}
+            pathToForm={"/PageForm0800"}
             handleOpenModal={handleOpenModal}
           ></UserTable>
           <ModalDetails open={open} handleCloseModal={handleCloseModal} caseId={caseId}></ModalDetails>
