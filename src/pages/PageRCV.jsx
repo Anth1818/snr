@@ -1,9 +1,8 @@
 import CintilloHeader from "../components/CintilloHeader/CintilloHeader";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+
 // import Footer from "../components/Footer";
 import ResponsiveLayoutRCV from "../components/ResponsiveLayout/ResponsiveLayoutRCV";
 
-const defaultTheme = createTheme();
 
 export default function Page0800() {
    const TABLE_HEAD_RCV = [
@@ -20,14 +19,11 @@ export default function Page0800() {
    ];
 
   return (
-    <>
-      <ThemeProvider theme={defaultTheme}>
+    <>  
         <CintilloHeader></CintilloHeader>
         <ResponsiveLayoutRCV
           dataHeadTable={TABLE_HEAD_RCV}
         ></ResponsiveLayoutRCV>
-        {/* <Footer></Footer> */}
-      </ThemeProvider>
     </>
   );
 }

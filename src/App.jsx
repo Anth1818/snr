@@ -11,31 +11,34 @@ import EditProfile from "./pages/EditProfile.jsx";
 import AddUser from "./pages/AddUser.jsx";
 import { UserProvider } from "./context/userContext.jsx";
 import ProtectedRoute from "./components/Routes/ProtectedRoute.jsx";
-import Logout from "./pages/Logout.jsx";
-
+import PageLogout from "./pages/PageLogout.jsx";
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "./theme.js";
 
 export default function App() {
   return (
-    <UserProvider>
-      <Routes>
-        <Route element={<ProtectedRoute />}>
-          <Route path="/Page0800" element={<Page0800 />} />
-          <Route path="/EditProfile" element={<EditProfile />} />
-          <Route path="/AddUser" element={<AddUser />} />
-          <Route path="/PageRCV" element={<PageRCV />} />
-          <Route path="/PageOAC" element={<PageOAC />} />
-          <Route path="/PageStatistics" element={<PageStatistics />} />
-          <Route path="/PageForm0800" element={<PageForm0800 />} />
-          <Route
-            path="/PageForm0800Edit/:caseId"
-            element={<PageForm0800Edit />}
-          />
-        </Route>
-          <Route path="/Logout" element={<Logout />} />
-        <Route path="/Login" element={<PageLogin />} />
-        <Route path="/" element={<PageLogin />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </UserProvider>
+    <ThemeProvider theme={theme}>
+      <UserProvider>
+        <Routes>
+          <Route element={<ProtectedRoute />}>
+            <Route path="/Page0800" element={<Page0800 />} />
+            <Route path="/EditProfile" element={<EditProfile />} />
+            <Route path="/AddUser" element={<AddUser />} />
+            <Route path="/PageRCV" element={<PageRCV />} />
+            <Route path="/PageOAC" element={<PageOAC />} />
+            <Route path="/PageStatistics" element={<PageStatistics />} />
+            <Route path="/PageForm0800" element={<PageForm0800 />} />
+            <Route
+              path="/PageForm0800Edit/:caseId"
+              element={<PageForm0800Edit />}
+            />
+          </Route>
+          <Route path="/Logout" element={<PageLogout />} />
+          <Route path="/Login" element={<PageLogin />} />
+          <Route path="/" element={<PageLogin />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </UserProvider>
+    </ThemeProvider>
   );
 }

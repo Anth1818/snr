@@ -1,11 +1,14 @@
 import { Autocomplete, FormGroup, TextField } from "@mui/material";
 import { ErrorMessage, Form } from "formik";
-import { initialValuesNewUser } from "../../../utils/initialValuesNewUser";
-import { GENDER, MUNICIPIO, OFFICES, PARROQUIA, POSITIONS, STATES } from "../../../utils/constants";
+import {
+  GENDER,
+  OFFICES,
+  POSITIONS,
+} from "../../../utils/constants";
 import FormButtonSubmit from "../../Forms/Form0800/FormButtonSubmit";
+import LocationInputs from "../locationInputs";
 
-
-export default function FormAddNewUser({props}) {
+export default function FormAddNewUser({ props, initialValues: initialValuesNewUser }) {
   
   return (
     <Form>
@@ -98,54 +101,7 @@ export default function FormAddNewUser({props}) {
           size="small"
           sx={{ width: "300px" }}
         />
-        <Autocomplete
-          size="small"
-          name="userStateLocation"
-          id="states"
-          options={STATES}
-          onChange={(e, value) => {
-            props.setFieldValue(
-              "stateLocation",
-              value !== null ? value.name : initialValuesNewUser.stateLocation
-            );
-          }}
-          sx={{ width: "300px" }}
-          renderInput={(params) => (
-            <TextField {...params} label="Seleccione un estado" />
-          )}
-        ></Autocomplete>
-        <Autocomplete
-          size="small"
-          name="userTownShipLocation"
-          id="municipio"
-          options={MUNICIPIO}
-          onChange={(e, value) => {
-            props.setFieldValue(
-              "townShipLocation",
-              value !== null ? value.name : initialValuesNewUser.townShipLocation
-            );
-          }}
-          sx={{ width: "300px" }}
-          renderInput={(params) => (
-            <TextField {...params} label="Seleccione un municipio" />
-          )}
-        ></Autocomplete>
-        <Autocomplete
-          size="small"
-          name="userParishLocation"
-          id="parroquia"
-          options={PARROQUIA}
-          onChange={(e, value) => {
-            props.setFieldValue(
-              "parishLocation",
-              value !== null ? value.name : initialValuesNewUser.parishLocation
-            );
-          }}
-          sx={{ width: "300px" }}
-          renderInput={(params) => (
-            <TextField {...params} label="Seleccione un parroquia" />
-          )}
-        ></Autocomplete>
+        <LocationInputs props={props} initialValues={initialValuesNewUser}></LocationInputs>
         <Autocomplete
           disablePortal
           size="small"
@@ -161,10 +117,15 @@ export default function FormAddNewUser({props}) {
           sx={{ width: "300px" }}
           renderInput={(params) => (
             <TextField
-            {...params}
-            label="Seleccione un genero"
-            error={Boolean(props.errors?.userGender && props.touched?.userGender)}
-            helperText={props.touched?.userGender ? props.errors?.userGender : ''} />
+              {...params}
+              label="Seleccione un genero"
+              error={Boolean(
+                props.errors?.userGender && props.touched?.userGender
+              )}
+              helperText={
+                props.touched?.userGender ? props.errors?.userGender : ""
+              }
+            />
           )}
         ></Autocomplete>
         <Autocomplete
@@ -181,10 +142,15 @@ export default function FormAddNewUser({props}) {
           sx={{ width: "300px" }}
           renderInput={(params) => (
             <TextField
-            {...params}
-            label="Seleccione un departamento"
-            error={Boolean(props.errors?.userOffice && props.touched?.userOffice)}
-            helperText={props.touched?.userOffice ? props.errors?.userOffice : ''} />
+              {...params}
+              label="Seleccione un departamento"
+              error={Boolean(
+                props.errors?.userOffice && props.touched?.userOffice
+              )}
+              helperText={
+                props.touched?.userOffice ? props.errors?.userOffice : ""
+              }
+            />
           )}
         ></Autocomplete>
         <Autocomplete
@@ -201,12 +167,11 @@ export default function FormAddNewUser({props}) {
           sx={{ width: "300px" }}
           renderInput={(params) => (
             <TextField
-            {...params}
-            label="Seleccione un cargo"
-            error={Boolean(props.errors?.userRol && props.touched?.userRol)}
-            helperText={props.touched?.userRol ? props.errors?.userRol : ''}
-          />
-      
+              {...params}
+              label="Seleccione un cargo"
+              error={Boolean(props.errors?.userRol && props.touched?.userRol)}
+              helperText={props.touched?.userRol ? props.errors?.userRol : ""}
+            />
           )}
         ></Autocomplete>
         <TextField

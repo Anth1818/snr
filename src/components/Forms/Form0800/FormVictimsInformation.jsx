@@ -233,7 +233,7 @@ export default function FormVictimsInformation({ props, filteredData, isEditMode
         ></Autocomplete>
         <Autocomplete
           size="small"
-          name="townShipLocation"
+          name="municipalityLocation"
           id="municipio"
           options={MUNICIPIO}
           defaultValue={
@@ -243,7 +243,7 @@ export default function FormVictimsInformation({ props, filteredData, isEditMode
           }
           onChange={(e, value) => {
             props.setFieldValue(
-              "townShipLocation",
+              "municipalityLocation",
               value !== null ? value.name : initialValues.townShipLocation
             );
           }}

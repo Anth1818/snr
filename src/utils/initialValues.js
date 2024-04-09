@@ -16,7 +16,7 @@ export const initialValues = {
   victimBirthdate: "",
   gender: "",
   stateLocation: null,
-  townShipLocation: null,
+  municipalityLocation: null,
   parishLocation: null,
   localLocation: "",
   isPregnant: "",

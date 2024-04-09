@@ -31,7 +31,6 @@ import SimpleBar from "simplebar-react";
 import { Link } from "react-router-dom";
 
 
-
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -65,7 +64,12 @@ function applySortFilter(array, comparator, query) {
 }
 
 // eslint-disable-next-line react/prop-types
-export default function UserTable({ dataHeadTable, dataTitle, pathToForm, handleOpenModal, }) {
+export default function UserTable({
+  dataHeadTable,
+  dataTitle,
+  pathToForm,
+  handleOpenModal,
+}) {
   const [open, setOpen] = useState(null);
 
   const [page, setPage] = useState(0);
@@ -79,10 +83,10 @@ export default function UserTable({ dataHeadTable, dataTitle, pathToForm, handle
   // eslint-disable-next-line no-unused-vars
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const [selectedCaseId, setSelectedCaseId] = useState(null)
+  const [selectedCaseId, setSelectedCaseId] = useState(null);
 
   const handleOpenMenu = (event, caseId) => {
-    setOpen(event.currentTarget);                             
+    setOpen(event.currentTarget);
     setSelectedCaseId(caseId);
   };
 
@@ -100,7 +104,6 @@ export default function UserTable({ dataHeadTable, dataTitle, pathToForm, handle
         return (a.caseId - b.caseId) * (order === "asc" ? 1 : -1);
       });
     }
-
   };
 
   const handleChangePage = (event, newPage) => {
@@ -123,8 +126,7 @@ export default function UserTable({ dataHeadTable, dataTitle, pathToForm, handle
 
   const isNotFound = !filteredUsers.length && !!filterName;
 
-  const filteredUsersReverse = [...filteredUsers].reverse()
-
+  const filteredUsersReverse = [...filteredUsers].reverse();
 
   return (
     <>
@@ -148,6 +150,7 @@ export default function UserTable({ dataHeadTable, dataTitle, pathToForm, handle
             <Button
               variant="contained"
               startIcon={<Iconify icon="eva:plus-fill" />}
+             color={"primary"}
             >
               Nuevo Registro
             </Button>
@@ -176,7 +179,7 @@ export default function UserTable({ dataHeadTable, dataTitle, pathToForm, handle
                   {filteredUsersReverse
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => {
-                      const { caseId, date, location, user, typeOfCall } = row;
+                      const { caseId, date, location, user } = row;
 
                       return (
                         <TableRow hover key={caseId} tabIndex={-1}>
@@ -289,16 +292,20 @@ export default function UserTable({ dataHeadTable, dataTitle, pathToForm, handle
           },
         }}
       >
-        <MenuItem onClick={() => { handleOpenModal(selectedCaseId) }}>
+        <MenuItem
+          onClick={() => {
+            handleOpenModal(selectedCaseId);
+          }}
+        >
           <Iconify icon={"eva:eye-fill"} sx={{ mr: 2 }}></Iconify>
           Ver detalles
         </MenuItem>
 
         <Link to={`/pages/PageForm0800Edit/${selectedCaseId}`}>
-        <MenuItem>
-          <Iconify icon={"eva:edit-fill"} sx={{ mr: 2 }} />
-          Editar
-        </MenuItem>
+          <MenuItem>
+            <Iconify icon={"eva:edit-fill"} sx={{ mr: 2 }} />
+            Editar
+          </MenuItem>
         </Link>
 
         <MenuItem sx={{ color: "error.main" }}>

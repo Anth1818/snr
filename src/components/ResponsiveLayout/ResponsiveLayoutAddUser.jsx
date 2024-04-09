@@ -52,7 +52,7 @@ export default function ResponsiveLayoutAddUser() {
                     onSubmit={""}
                   >
                     {(props) => (
-                      <FormAddNewUser props={props}></FormAddNewUser>
+                      <FormAddNewUser props={props} initialValues={initialValuesNewUser}></FormAddNewUser>
                     )}
                   </Formik>
                 </Box>
