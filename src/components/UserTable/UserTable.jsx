@@ -301,7 +301,7 @@ export default function UserTable({
           Ver detalles
         </MenuItem>
 
-        <Link to={`/pages/PageForm0800Edit/${selectedCaseId}`}>
+        <Link to={`/PageForm0800Edit/${selectedCaseId}`}>
           <MenuItem>
             <Iconify icon={"eva:edit-fill"} sx={{ mr: 2 }} />
             Editar

@@ -9,6 +9,7 @@ export const validationSchema = Yup.object().shape({
   // typeIdOfVictim: Yup.string().required("Campo requerido"),
   victimIdDocument: Yup.string()
     .matches(/^[0-9]+$/, "Solo se permiten números")
+    .min(7,"Mínimo 7 digitos")
     .max(9, "Máximo 9 digitos"),
 
   victimName: Yup.string().matches(

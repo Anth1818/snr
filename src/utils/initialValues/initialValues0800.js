@@ -1,5 +1,5 @@
 // import { generateId } from "./generateID";
-import { formattedDate } from "./formatTime";
+import { formattedDate } from "../formatTime";
 
 export const initialValues = {
   //data tipo de llamada y subtipos de llamada

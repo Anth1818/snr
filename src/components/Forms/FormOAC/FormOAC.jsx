@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 import { GENDER, MUNICIPIO, PARROQUIA, REFERREDTO, STATES,STATUS, RECEIVEDBY } from '../../../utils/constants.js'
 import { ErrorMessage } from "formik";
 import { debounce } from "lodash"
-import { initialValues} from "../../../utils/initialValues.js";
+import  initialValues  from "../../../utils/initialValues/initialValuesOAC.js";
 
 export default function FormOAC({ props}) {
 

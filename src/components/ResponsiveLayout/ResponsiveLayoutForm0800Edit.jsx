@@ -4,15 +4,12 @@ import {
   InputLabel,
   Paper,
   Select,
-  TextField,
   Toolbar,
   Typography,
-  FormGroup,
   MenuItem,
   Snackbar,
-  Button,
 } from "@mui/material";
-import MuiAlert from '@mui/material/Alert';
+import MuiAlert from "@mui/material/Alert";
 import React, { useEffect } from "react";
 import { Box, Container } from "@mui/system";
 import RenderDrawer from "../Drawer/Drawer";
@@ -31,143 +28,133 @@ import {
   checkboxesDataOrientation,
   checkboxesDataNotRelevant,
 } from "../../utils/checkboxesData";
-import { Formik, Form, isEmptyArray } from "formik";
-import { validationSchema } from "../../utils/validationSchema";
+import { Formik, Form } from "formik";
+import { validationSchema } from "../../utils/validationsSchemas/validationSchema0800";
 import { guardarEnJSON } from "../../utils/saveDataLocalStorage";
-import { initialValuesEdit } from "../../utils/initialValuesEdit";
-
-
+import { initialValuesEdit } from "../../utils/initialValues/initialValuesEdit";
+import {useNavigate} from "react-router-dom"
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export default function ResponsiveLayoutForm0800Edit({caseId}) {
+export default function ResponsiveLayoutForm0800Edit({ caseId }) {
   const [showAlert, setShowAlert] = useState(false);
-  const [disableButton, setDisableButton] = useState(false)
+  const [disableButton, setDisableButton] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
-  const [filteredData, setFilteredData] = useState("")
-
+  const [filteredData, setFilteredData] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const filtrarDatos = () => {
       // Aquí obtienes los datos del localStorage y actualizas el estado
-      const localStorageData = JSON.parse(localStorage.getItem('datosGuardados')) || {};
-      const foundData = localStorageData.find(item => item.caseId === caseId);
+      const localStorageData =
+        JSON.parse(localStorage.getItem("datosGuardados")) || {};
+      const foundData = localStorageData.find((item) => item.caseId === caseId);
       if (foundData) {
-        setSelectedOption(foundData.typeOfCall || ''); // Actualizas selectedOption con el typeOfCall del registro filtrado
-        setFilteredData(foundData) 
+        setSelectedOption(foundData.typeOfCall || ""); // Actualizas selectedOption con el typeOfCall del registro filtrado
+        setFilteredData(foundData);
       }
     };
 
     filtrarDatos(); // Llamas a la función para cargar los datos cuando el componente se monta
-    
   }, [caseId]);
-  
+
   const handleCloseAlert = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
-    
+
     setShowAlert(false);
-  }
-  
-  const handleSubmit = (values) => {
-    // alert(JSON.stringify(values, null, 2));
-    guardarEnJSON(values)  
   };
 
-  
-  
-  const handleRenderForm = (props, disableButton, caseId, filteredData) =>{
-    
-      switch (selectedOption) {
-        case "Orientación":
-          const orientationProps = {
-            title: "Subtipos de orientación",
-            checkboxesData: checkboxesDataOrientation,
-            props: props,
-            filteredData: filteredData,
-        
-          };
-            return (
-              <>
-                <FormSubTypesOfCalls
-                  title={"Subtipos de orientación"}
-                  checkboxesData={checkboxesDataOrientation}
-                  props={props}
-                  filteredData={filteredData}
-                  isEditMode
-                  />
-                <FormVictimsInformation {...orientationProps} isEditMode/>
-                <FormDataOfTheTypeOfViolence {...orientationProps} />
-                <FormAggressorsDetails {...orientationProps}/>
-                <FormInstitutionalIntervention {...orientationProps}/>
-                <FormContactInformation {...orientationProps} />
-                <FormButtonSubmit disableButton={disableButton} {...orientationProps}/>
-              </>
-            )
-        case "Información":
-          const informationProps ={
-            title:"Subtipos de información",
-            checkboxesData: checkboxesDataInformation,
-            props: props,
-            filteredData: filteredData,
-        
-          }
-            return (
-              <>
-                <FormSubTypesOfCalls
-                 {...informationProps}
-                />
-                <FormSummaryCall  {...informationProps} />
-                <FormButtonSubmit disableButton={disableButton}/>
-              </>
-    
-            )
-        case "Intervención":
-          const interventionProps = {
-            title: "Subtipos de intervención",
-            checkboxesData: checkboxesDataIntervention,
-            props: props,
-            filteredData: filteredData,
+  const handleSubmit = (values) => {
+    // alert(JSON.stringify(values, null, 2));
+    guardarEnJSON(values);
+  };
 
-          };
-            return (
-              <>
-                <FormSubTypesOfCalls
-                  {...interventionProps}
-                  />
-                <FormVictimsInformation {...interventionProps} />
-                <FormDataOfTheTypeOfViolence {...interventionProps} />
-                <FormAggressorsDetails {...interventionProps} />
-                <FormInstitutionalIntervention {...interventionProps} />
-                <FormButtonSubmit disableButton={disableButton}/>
-              </>
-    
-            )
-          case "No relevante":
-            const notRelevantProps = {
-              title: "Subtipos de no relevante",
-              checkboxesData: checkboxesDataNotRelevant,
-              props: props,
-              filteredData: filteredData,
-              
-            };
-              return (
-                <>
-                <FormSubTypesOfCalls
-                  {...notRelevantProps}/>
-               <FormSummaryCall {...notRelevantProps}></FormSummaryCall>
-                <FormButtonSubmit disableButton={disableButton}/>
-              </>
-            );
-          default:
-            return null; // Si no coincide con ningún tipo de llamada conocido
-        }
-      }
-      
-      return (
+  const handleRenderForm = (props, disableButton, caseId, filteredData) => {
+    const orientationProps = {
+      title: "Subtipos de orientación",
+      checkboxesData: checkboxesDataOrientation,
+      props: props,
+      filteredData: filteredData,
+    };
+    const informationProps = {
+      title: "Subtipos de información",
+      checkboxesData: checkboxesDataInformation,
+      props: props,
+      filteredData: filteredData,
+    };
+    const interventionProps = {
+      title: "Subtipos de intervención",
+      checkboxesData: checkboxesDataIntervention,
+      props: props,
+      filteredData: filteredData,
+    };
+     const notRelevantProps = {
+       title: "Subtipos de no relevante",
+       checkboxesData: checkboxesDataNotRelevant,
+       props: props,
+       filteredData: filteredData,
+     };
+    switch (selectedOption) {
+      case "Orientación":
+        return (
+          <>
+            <FormSubTypesOfCalls
+              title={"Subtipos de orientación"}
+              checkboxesData={checkboxesDataOrientation}
+              props={props}
+              filteredData={filteredData}
+              isEditMode
+            />
+            <FormVictimsInformation {...orientationProps} isEditMode />
+            <FormDataOfTheTypeOfViolence {...orientationProps} />
+            <FormAggressorsDetails {...orientationProps} />
+            <FormInstitutionalIntervention {...orientationProps} />
+            <FormContactInformation {...orientationProps} />
+            <FormButtonSubmit
+              disableButton={disableButton}
+              {...orientationProps}
+            />
+          </>
+        );
+      case "Información":
+        
+        return (
+          <>
+            <FormSubTypesOfCalls {...informationProps} />
+            <FormSummaryCall {...informationProps} />
+            <FormButtonSubmit disableButton={disableButton} />
+          </>
+        );
+      case "Intervención":
+        
+        return (
+          <>
+            <FormSubTypesOfCalls {...interventionProps} />
+            <FormVictimsInformation {...interventionProps} />
+            <FormDataOfTheTypeOfViolence {...interventionProps} />
+            <FormAggressorsDetails {...interventionProps} />
+            <FormInstitutionalIntervention {...interventionProps} />
+            <FormButtonSubmit disableButton={disableButton} />
+          </>
+        );
+      case "No relevante":
+        return (
+          <>
+            <FormSubTypesOfCalls {...notRelevantProps} />
+            <FormSummaryCall {...notRelevantProps}></FormSummaryCall>
+            <FormButtonSubmit disableButton={disableButton} />
+          </>
+        );
+      default:
+        return null; // Si no coincide con ningún tipo de llamada conocido
+    }
+  };
+
+  return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <RenderDrawer titlePage={"Formulario 0800"}></RenderDrawer>
@@ -175,14 +162,14 @@ export default function ResponsiveLayoutForm0800Edit({caseId}) {
         component="main"
         sx={{
           backgroundColor: (theme) =>
-          theme.palette.mode === "light"
+            theme.palette.mode === "light"
               ? theme.palette.grey[100]
               : theme.palette.grey[900],
           flexGrow: 1,
           height: "100vh",
           overflow: "auto",
         }}
-        >
+      >
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 10 }}>
           <Grid container>
@@ -191,7 +178,7 @@ export default function ResponsiveLayoutForm0800Edit({caseId}) {
                 sx={{
                   p: 2,
                 }}
-                >
+              >
                 <Typography variant="h3" textAlign={"center"}>
                   Editar registro
                 </Typography>
@@ -201,18 +188,18 @@ export default function ResponsiveLayoutForm0800Edit({caseId}) {
                   }}
                 >
                   <Formik
-                  initialValues={initialValuesEdit}
+                    initialValues={initialValuesEdit}
                     validationSchema={validationSchema}
                     onSubmit={(values) => {
                       handleSubmit(values); // Llama a tu función de manejo de envío
                       setShowAlert(true); // Mostrar el Alert al enviar el formulario
-                      setDisableButton(true)
+                      setDisableButton(true);
                       setTimeout(() => {
-                        setDisableButton(false)
-                        location.href = "/pages/Page0800"; // Redireccionar después del tiempo especificado
+                        setDisableButton(false);
+                        navigate("/Page0800"); // Redireccionar después del tiempo especificado
                       }, 2500);
                     }}
-                    >
+                  >
                     {(props) => (
                       <Form>
                         <Box
@@ -254,12 +241,25 @@ export default function ResponsiveLayoutForm0800Edit({caseId}) {
                             </MenuItem>
                           </Select>
                         </Box>
-                       {handleRenderForm(props, disableButton, caseId, filteredData)}
+                        {handleRenderForm(
+                          props,
+                          disableButton,
+                          caseId,
+                          filteredData
+                        )}
                       </Form>
                     )}
                   </Formik>
-                  <Snackbar open={showAlert} autoHideDuration={2000} onClose={handleCloseAlert}>
-                    <Alert onClose={handleCloseAlert} severity="success" sx={{ width: '100%' }}>
+                  <Snackbar
+                    open={showAlert}
+                    autoHideDuration={2000}
+                    onClose={handleCloseAlert}
+                  >
+                    <Alert
+                      onClose={handleCloseAlert}
+                      severity="success"
+                      sx={{ width: "100%" }}
+                    >
                       Registro exitoso
                     </Alert>
                   </Snackbar>

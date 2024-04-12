@@ -1,4 +1,4 @@
-export const initialValuesOAC = {
+ const initialValuesOAC = {
   typeIdOfVictim: "",
   victimIdDocument: "",
   victimName: "",
@@ -18,3 +18,5 @@ export const initialValuesOAC = {
   levelOfInstruction: "",
   ocupation: "",
 }
+
+export default initialValuesOAC

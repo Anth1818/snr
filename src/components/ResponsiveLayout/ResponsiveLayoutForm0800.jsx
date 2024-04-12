@@ -31,9 +31,10 @@ import {
   checkboxesDataNotRelevant,
 } from "../../utils/checkboxesData";
 import { Formik, Form } from "formik";
-import { validationSchema } from "../../utils/validationSchema";
-import { initialValues } from "../../utils/initialValues";
+import { validationSchema } from "../../utils/validationsSchemas/validationSchema0800";
+import { initialValues } from "../../utils/initialValues/initialValues0800";
 import { guardarEnJSON } from "../../utils/saveDataLocalStorage";
+import {useNavigate} from "react-router-dom"
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -44,6 +45,7 @@ export default function ResponsiveLayoutForm0800() {
   const [showAlert, setShowAlert] = useState(false);
   const [disableButton, setDisableButton] = useState(false)
   let componentToRender = null;
+  const navigate = useNavigate()
   
   
   const handleClose = (event, reason) => {
@@ -205,7 +207,7 @@ export default function ResponsiveLayoutForm0800() {
                       setDisableButton(true)
                       setTimeout(() => {
                         setDisableButton(false)
-                        location.href = "/pages/Page0800"; // Redireccionar después del tiempo especificado
+                        navigate("/Page0800") // Redireccionar después del tiempo especificado
                       }, 2500);
                     }}
                     >

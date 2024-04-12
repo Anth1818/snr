@@ -13,7 +13,7 @@ import { Box } from "@mui/system";
 import { useState } from "react";
 import { NIVELDEINSTRUCCION, VINCULO, OCUPACION } from "../../../utils/constants";
 import { debounce } from "lodash";
-import { initialValues } from "../../../utils/initialValues.js";
+import { initialValues } from "../../../utils/initialValues/initialValues0800.js";
 import { ErrorMessage } from "formik";
 
 

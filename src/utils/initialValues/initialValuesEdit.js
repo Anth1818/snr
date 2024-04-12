@@ -1,5 +1,5 @@
 // import { generateId } from "./generateID";
-import { formattedDate } from "./formatTime";
+import { formattedDate } from "../formatTime";
 import {
     typeIdOfVictim,
     victimIdDocument,
@@ -20,7 +20,7 @@ import {
     levelOfInstruction,
     ocupation,
     summary
-} from "../components/Forms/Form0800/FormVictimsInformation"
+} from "../../components/Forms/Form0800/FormVictimsInformation"
 
 export const initialValuesEdit = {
     //data tipo de llamada y subtipos de llamada

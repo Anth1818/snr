@@ -47,7 +47,6 @@ export default function Login() {
   if (user?.department === "SIN") {
     navigate("/PageRCV");
   }
-
   return (
     <div className="w-full min-h-screen flex justify-center items-center">
       <div className="min-w-fit h-full border-2 border-gray-400 box-border  rounded-lg">

@@ -4,7 +4,7 @@ import { Box } from "@mui/system";
 import { ID, GENDER, MUNICIPIO, PARROQUIA, ISPREGNANT, ESTADOCIVIL, OCUPACION, ETNIA, NIVELDEINSTRUCCION, STATES } from '../../../utils/constants.js'
 import { ErrorMessage } from "formik";
 import { debounce } from "lodash"
-import { initialValues } from "../../../utils/initialValues.js";
+import { initialValues } from "../../../utils/initialValues/initialValues0800.js";
 
 export let typeIdOfVictim,
 victimIdDocument,

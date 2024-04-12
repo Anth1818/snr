@@ -18,6 +18,13 @@ export const saveTokenLocalStorage = (token) => {
   localStorage.setItem("token",token)
 }
 
+export const saveRolUserLocalStorage = (userRol) => {
+  localStorage.setItem("rol", userRol)
+}
+
 export const removeTokenLocalStorage = () => {
   localStorage.removeItem("token")
 }
+export const removeUserRolLocalStorage = () => {
+  localStorage.removeItem("rol");
+};

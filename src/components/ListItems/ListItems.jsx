@@ -10,13 +10,13 @@ import { NavLink } from "react-router-dom"
 import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded';
 import List from "@mui/material/List";
 import { useUser } from "../../context/userContext";
+import { getUserRol } from "../../utils/getDataLocalStorage";
 
 
 
 export default function ListItems() {
   const { user } = useUser()
-
-  const isAdmin = user?.role === "Administradora";
+  const userRolGetLocalStorage = getUserRol()
   return (
     <List component={"nav"}>
       <Tooltip title="0800" placement="right">
@@ -51,7 +51,7 @@ export default function ListItems() {
           <ListItemText primary="Estadísticas" />
         </ListItemButton>
       </Tooltip>
-      {isAdmin && (
+      {userRolGetLocalStorage && (
         <Tooltip title="Agregar nuevo usuario al sistema" placement="right">
           <ListItemButton component={NavLink} to={"../AddUser"}>
             <ListItemIcon>

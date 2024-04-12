@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import api from "../api/API_SNR";
-import { saveTokenLocalStorage, removeTokenLocalStorage } from "../utils/saveDataLocalStorage";
+import { saveTokenLocalStorage, removeTokenLocalStorage, removeUserRolLocalStorage, saveRolUserLocalStorage} from "../utils/saveDataLocalStorage";
 
 // Crear un contexto para almacenar los datos del usuario
 const UserContext = createContext();
@@ -19,7 +19,8 @@ export const UserProvider = ({ children }) => {
 
     onSuccess: async ({ data }) => {
       await setUser(data?.data?.[0]);
-      await saveTokenLocalStorage(data.tokenSession);
+      await saveTokenLocalStorage(data.tokenSession)
+      await saveRolUserLocalStorage(data?.data?.[0].role)
     },
     onError: (error) => {
       console.error("Error en la mutación:", error);
@@ -33,7 +34,9 @@ export const UserProvider = ({ children }) => {
   const logoutUser = () => {
     setUser(null);
     queryClient.clear();
-    removeTokenLocalStorage()// Limpiar todas las consultas en caché cuando el usuario cierra sesión
+    removeTokenLocalStorage()
+    removeUserRolLocalStorage()
+    // Limpiar todas las consultas en caché cuando el usuario cierra sesión
   };
 
   const checkTokenLocalStorgare = () =>{
