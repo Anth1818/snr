@@ -1,5 +1,5 @@
 import api from "../api/API_SNR"
-import { useMutation } from "@tanstack/react-query";
+// import { useMutation } from "@tanstack/react-query";
 
 export function login(userName, userPassword) {
   return api
@@ -14,10 +14,10 @@ export function login(userName, userPassword) {
     });
 }
 
-export function useLoginMutation(credentials) {
-  return useMutation((credentials) =>
-    api
-      .post("/auth/login", credentials)
-      .then((response) => response.data.data[0])
-  );
-}
+// export function useLoginMutation(credentials) {
+//   return useMutation((credentials) =>
+//     api
+//       .post("/auth/login", credentials)
+//       .then((response) => response.data.data[0])
+//   );
+// }

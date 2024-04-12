@@ -5,6 +5,10 @@ export function getData() {
 }
 
 export function getUserRol() {
-  const userRol = localStorage.getItem("rol")
-  return userRol
+  return localStorage.getItem("rol")
+}
+
+export function getTokenFromlocalStorage (){
+return localStorage.getItem("token")
+  
 }

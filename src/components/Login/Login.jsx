@@ -6,7 +6,7 @@ import FormControl from "@mui/material/FormControl";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Button } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import inamujerLogo from "/assets/inamujer-logo.jpg";
 import { useUser } from "../../context/userContext";
@@ -18,6 +18,7 @@ export default function Login() {
   const [userPassword, setUserPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => {
@@ -25,28 +26,41 @@ export default function Login() {
   };
   const { user, loginUser } = useUser();
   const navigate = useNavigate();
+  
+  
 
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await loginUser({ username: userName, password: userPassword });
+      setLoggedIn(true); // Marca al usuario como autenticado
     } catch (error) {
       setShowAlert(true);
     }
   };
-
-  if (user?.role === "Administradora") {
-    navigate("/AddUser");
-  }
-  if (user?.department === "0800") {
-    navigate("/Page0800");
-  }
-  if (user?.department === "OAC") {
-    navigate("/PageOAC");
-  }
-  if (user?.department === "SIN") {
-    navigate("/PageRCV");
-  }
+  useEffect(() => {
+    const checkRolTonavigate = () => {
+      if (user?.role === "Administradora") {
+        navigate("/AddUser");
+      }
+      if (user?.department === "0800") {
+        navigate("/Page0800");
+      }
+      if (user?.department === "OAC") {
+        navigate("/PageOAC");
+      }
+      if (user?.department === "SIN") {
+        navigate("/PageRCV");
+      }
+    };
+  
+    if (loggedIn) {
+      checkRolTonavigate();
+    }
+  }, [loggedIn, user, navigate]);
+  
+ 
   return (
     <div className="w-full min-h-screen flex justify-center items-center">
       <div className="min-w-fit h-full border-2 border-gray-400 box-border  rounded-lg">

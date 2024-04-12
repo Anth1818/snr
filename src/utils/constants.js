@@ -10,10 +10,12 @@ export const TYPEOFCALLS = [
 
 export const GENDER = [
   {
+    id: 1,
     label: "Hombre",
     name: "Hombre",
   },
   {
+    id: 2,
     label: "Mujer",
     name: "Mujer",
   },

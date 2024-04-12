@@ -6,7 +6,7 @@ import {
   POSITIONS,
 } from "../../../utils/constants";
 import FormButtonSubmit from "../../Forms/Form0800/FormButtonSubmit";
-import LocationInputs from "../locationInputs";
+import LocationInputs from "../LocationInputs";
 
 export default function FormAddNewUser({ props, initialValues: initialValuesNewUser }) {
   
@@ -23,7 +23,7 @@ export default function FormAddNewUser({ props, initialValues: initialValuesNewU
       >
         <TextField
           label="Nombres"
-          name="userFirstName"
+          name="first_name"
           defaultValue={""}
           variant="outlined"
           onChange={props.handleChange}
@@ -37,40 +37,40 @@ export default function FormAddNewUser({ props, initialValues: initialValuesNewU
         />
         <TextField
           label="Apellidos"
-          name="userLastName"
+          name="first_last_name"
           defaultValue={""}
           variant="outlined"
           onChange={props.handleChange}
           onBlur={props.handleBlur}
-          helperText={<ErrorMessage name="userLastName" />}
+          helperText={<ErrorMessage name="first_last_name" />}
           error={Boolean(
-            props.errors?.userLastName && props.touched?.userLastName
+            props.errors?.first_last_name && props.touched?.first_last_name
           )}
           size="small"
           sx={{ width: "300px" }}
         />
         <TextField
           label="Cédula"
-          name="userId"
+          name="identity_card"
           defaultValue={""}
           variant="outlined"
           onChange={props.handleChange}
           onBlur={props.handleBlur}
-          helperText={<ErrorMessage name="userId" />}
-          error={Boolean(props.errors?.userId && props.touched?.userId)}
+          helperText={<ErrorMessage name="identity_card" />}
+          error={Boolean(props.errors?.identity_card && props.touched?.identity_card)}
           size="small"
           sx={{ width: "300px" }}
         />
         <TextField
           label="Teléfono"
-          name="userPhoneNumber"
+          name="phone"
           defaultValue={""}
           variant="outlined"
           onChange={props.handleChange}
           onBlur={props.handleBlur}
-          helperText={<ErrorMessage name="userPhoneNumber" />}
+          helperText={<ErrorMessage name="phone" />}
           error={Boolean(
-            props.errors?.userPhoneNumber && props.touched?.userPhoneNumber
+            props.errors?.phone && props.touched?.phone
           )}
           size="small"
           sx={{ width: "300px" }}
@@ -91,13 +91,13 @@ export default function FormAddNewUser({ props, initialValues: initialValuesNewU
         />
         <TextField
           label="Correo electronico"
-          name="userEmail"
+          name="email"
           defaultValue={""}
           variant="outlined"
           onChange={props.handleChange}
           onBlur={props.handleBlur}
-          helperText={<ErrorMessage name="userEmail" />}
-          error={Boolean(props.errors.userEmail && props.touched.userEmail)}
+          helperText={<ErrorMessage name="email" />}
+          error={Boolean(props.errors.email && props.touched.email)}
           size="small"
           sx={{ width: "300px" }}
         />
@@ -105,13 +105,13 @@ export default function FormAddNewUser({ props, initialValues: initialValuesNewU
         <Autocomplete
           disablePortal
           size="small"
-          name="userGender"
+          name="gender_id"
           id="gender"
           options={GENDER}
           onChange={(e, value) => {
             props.setFieldValue(
-              "userGender",
-              value !== null ? value.name : initialValuesNewUser.userGender
+              "gender_id",
+              value !== null ? value.id : initialValuesNewUser.gender_id
             );
           }}
           sx={{ width: "300px" }}
@@ -120,10 +120,10 @@ export default function FormAddNewUser({ props, initialValues: initialValuesNewU
               {...params}
               label="Seleccione un genero"
               error={Boolean(
-                props.errors?.userGender && props.touched?.userGender
+                props.errors?.gender_id && props.touched?.gender_id
               )}
               helperText={
-                props.touched?.userGender ? props.errors?.userGender : ""
+                props.touched?.gender_id ? props.errors?.gender_id : ""
               }
             />
           )}

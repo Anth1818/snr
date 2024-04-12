@@ -1,17 +1,22 @@
-import {
-  CssBaseline,
-  Grid,
-  Paper,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import { CssBaseline, Grid, Paper, Toolbar, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import RenderDrawer from "../Drawer/Drawer";
-import { Formik, } from "formik";
+import { Formik } from "formik";
 import { validationSchemaAddUser } from "../../utils/validationsSchemas/validationSchemaAddUser";
 import { initialValuesNewUser } from "../../utils/initialValues/initialValuesNewUser";
 import FormAddNewUser from "../Forms/FormAddNewUser/FormAddNewUser";
+import useAddUser from "../../hooks/useAddUser";
+
 export default function ResponsiveLayoutAddUser() {
+  const addUserMutation = useAddUser();
+  
+  const handleSubmit = async (values) => {
+      try {
+      await addUserMutation.mutate(values);
+    } catch (error) {
+      console.error("error", error);
+    }
+  };
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -48,11 +53,15 @@ export default function ResponsiveLayoutAddUser() {
                 <Box>
                   <Formik
                     initialValues={initialValuesNewUser}
-                    validationSchema={validationSchemaAddUser}
-                    onSubmit={(values)=>{alert(JSON.stringify(values))}}
+                    onSubmit={(values)=>{
+                      handleSubmit(values)
+                    }}
                   >
                     {(props) => (
-                      <FormAddNewUser props={props} initialValues={initialValuesNewUser}></FormAddNewUser>
+                      <FormAddNewUser
+                        props={props}
+                        initialValues={initialValuesNewUser}
+                      ></FormAddNewUser>
                     )}
                   </Formik>
                 </Box>

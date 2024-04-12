@@ -66,7 +66,7 @@ export default function LocationInputs({ props, initialValues}) {
         onChange={(e, value) => {
           props.setFieldValue(
             "stateLocation",
-            value !== null ? value.name : initialValues.stateLocation
+            value !== null ? value.label : initialValues.stateLocation
           );
           setSelectedState(value);
         }}
@@ -87,7 +87,7 @@ export default function LocationInputs({ props, initialValues}) {
         onChange={(e, value) => {
           props.setFieldValue(
             "municipalityLocation",
-            value !== null ? value.name : initialValues.townShipLocation
+            value !== null ? value.label : initialValues.townShipLocation
           );
           setSelectedMunicipality(value);
         }}
@@ -109,7 +109,7 @@ export default function LocationInputs({ props, initialValues}) {
         onChange={(e, value) => {
           props.setFieldValue(
             "parishLocation",
-            value !== null ? value.name : initialValues.parishLocation
+            value !== null ? value.label : initialValues.parishLocation
           );
         }}
         disableClearable
