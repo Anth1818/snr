@@ -1,4 +1,4 @@
-import { CssBaseline, Grid, Paper, Toolbar, Typography } from "@mui/material";
+import { CssBaseline, Grid, Paper, Snackbar, Toolbar, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import RenderDrawer from "../Drawer/Drawer";
 import { Formik } from "formik";
@@ -6,9 +6,16 @@ import { validationSchemaAddUser } from "../../utils/validationsSchemas/validati
 import { initialValuesNewUser } from "../../utils/initialValues/initialValuesNewUser";
 import FormAddNewUser from "../Forms/FormAddNewUser/FormAddNewUser";
 import useAddUser from "../../hooks/useAddUser";
+import React from "react";
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 
 export default function ResponsiveLayoutAddUser() {
-  const addUserMutation = useAddUser();
+  const {addUserMutation, showAlert, setShowAlert} = useAddUser();
   
   const handleSubmit = async (values) => {
       try {
@@ -53,6 +60,7 @@ export default function ResponsiveLayoutAddUser() {
                 <Box>
                   <Formik
                     initialValues={initialValuesNewUser}
+                    validationSchema={validationSchemaAddUser}
                     onSubmit={(values)=>{
                       handleSubmit(values)
                     }}
@@ -70,6 +78,11 @@ export default function ResponsiveLayoutAddUser() {
           </Grid>
         </Container>
       </Box>
+      {showAlert && <Snackbar open={showAlert} autoHideDuration={4000} onClose={() => setShowAlert(false)}>
+        <Alert severity="success" sx={{ width: '100%' }}>
+          Registro exitoso
+        </Alert>
+      </Snackbar>}
     </Box>
   );
 }

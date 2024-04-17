@@ -1,4 +1,4 @@
-export const ID = [{ name:"Cédula" }, { name:"Rif" }, { name:"Pasaporte" }];
+export const ID = [{ name: "Cédula" }, { name: "Rif" }, { name: "Pasaporte" }];
 
 export const TYPEOFCALLS = [
   "Orientación",
@@ -6,7 +6,6 @@ export const TYPEOFCALLS = [
   "Intervención",
   "No relevante",
 ];
-
 
 export const GENDER = [
   {
@@ -20,7 +19,6 @@ export const GENDER = [
     name: "Mujer",
   },
 ];
-
 
 export const STATES = [
   {
@@ -222,7 +220,6 @@ export const ESTADOCIVIL = [
   },
 ];
 
-
 export const NIVELDEINSTRUCCION = [
   {
     label: "Analfabeta",
@@ -265,7 +262,6 @@ export const NIVELDEINSTRUCCION = [
     name: "Ninguna",
   },
 ];
-
 
 export const OCUPACION = [
   {
@@ -325,7 +321,6 @@ export const OCUPACION = [
     name: "Otros",
   },
 ];
-
 
 export const VINCULO = [
   {
@@ -400,8 +395,6 @@ export const INSTITUTIONALINTERVENTIONDATA = [
     name: "No acudió",
   },
 ];
-
-
 
 export const FINDOUT0800 = [
   {
@@ -484,29 +477,45 @@ export const RECEIVEDBY = [
 
 export const OFFICES = [
   {
-    label: "Departamento 1",
-    name: "Departamento 1"
+    id: 1,
+    label: "0800",
+    name: "0800",
   },
   {
-    label: "Departamento 2",
-    name: "Departamento 2"
+    id: 2,
+    label: "OSTI",
+    name: "OSTI",
   },
   {
-    label: "Departamento 3",
-    name: "Departamento 3"
+    id: 3,
+    label: "OAC",
+    name: "OAC",
   },
-]
+  {
+    id: 4,
+    label: "SIN",
+    name: "SIN",
+  },
+];
 export const POSITIONS = [
   {
-    label: "Cargo 1",
-    name: "Cargo 1"
+    id: 1,
+    label: "Administrador/a",
+    name: "Administrador/a",
   },
   {
-    label: "Cargo 2",
-    name: "Cargo 2"
+    id: 2,
+    label: "Director/a",
+    name: "Director/a",
   },
   {
-    label: "Cargo 3",
-    name: "Cargo 3"
+    id: 3,
+    label: "Analista",
+    name: "Analista",
   },
-]
+  {
+    id: 4,
+    label: "Usuario/a",
+    name: "Usuario/a",
+  },
+];

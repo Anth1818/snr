@@ -22,21 +22,47 @@ export default function FormAddNewUser({ props, initialValues: initialValuesNewU
         }}
       >
         <TextField
-          label="Nombres"
+          label="Cédula"
+          name="identity_card"
+          defaultValue={""}
+          variant="outlined"
+          onChange={props.handleChange}
+          onBlur={props.handleBlur}
+          helperText={<ErrorMessage name="identity_card"/>}
+          error={Boolean(props.errors?.identity_card && props.touched?.identity_card)}
+          size="small"
+          sx={{ width: "300px" }}
+        />
+        <TextField
+          label="Primer nombre"
           name="first_name"
           defaultValue={""}
           variant="outlined"
           onChange={props.handleChange}
           onBlur={props.handleBlur}
-          helperText={<ErrorMessage name="userFirstName" />}
+          helperText={<ErrorMessage name="first_name" />}
           error={Boolean(
-            props.errors?.userFirstName && props.touched?.userFirstName
+            props.errors?.first_name && props.touched?.first_name
           )}
           size="small"
           sx={{ width: "300px" }}
         />
         <TextField
-          label="Apellidos"
+          label="Segundo nombre"
+          name="other_names"
+          defaultValue={""}
+          variant="outlined"
+          onChange={props.handleChange}
+          onBlur={props.handleBlur}
+          helperText={<ErrorMessage name="other_names" />}
+          error={Boolean(
+            props.errors?.other_names && props.touched?.other_names
+          )}
+          size="small"
+          sx={{ width: "300px" }}
+        />
+        <TextField
+          label="Primer apellido"
           name="first_last_name"
           defaultValue={""}
           variant="outlined"
@@ -49,15 +75,17 @@ export default function FormAddNewUser({ props, initialValues: initialValuesNewU
           size="small"
           sx={{ width: "300px" }}
         />
-        <TextField
-          label="Cédula"
-          name="identity_card"
+         <TextField
+          label="Segundo apellido"
+          name="other_last_names"
           defaultValue={""}
           variant="outlined"
           onChange={props.handleChange}
           onBlur={props.handleBlur}
-          helperText={<ErrorMessage name="identity_card" />}
-          error={Boolean(props.errors?.identity_card && props.touched?.identity_card)}
+          helperText={<ErrorMessage name="other_last_names" />}
+          error={Boolean(
+            props.errors?.other_last_names && props.touched?.other_last_names
+          )}
           size="small"
           sx={{ width: "300px" }}
         />
@@ -71,20 +99,6 @@ export default function FormAddNewUser({ props, initialValues: initialValuesNewU
           helperText={<ErrorMessage name="phone" />}
           error={Boolean(
             props.errors?.phone && props.touched?.phone
-          )}
-          size="small"
-          sx={{ width: "300px" }}
-        />
-        <TextField
-          label="Teléfono 2 (Opcional)"
-          name="userPhoneNumber2"
-          defaultValue={""}
-          variant="outlined"
-          onChange={props.handleChange}
-          onBlur={props.handleBlur}
-          helperText={<ErrorMessage name="userPhoneNumber2" />}
-          error={Boolean(
-            props.errors?.userPhoneNumber2 && props.touched?.userPhoneNumber2
           )}
           size="small"
           sx={{ width: "300px" }}
@@ -131,12 +145,12 @@ export default function FormAddNewUser({ props, initialValues: initialValuesNewU
         <Autocomplete
           disablePortal
           size="small"
-          name="userOffice"
+          name="department_id"
           options={OFFICES}
           onChange={(e, value) => {
             props.setFieldValue(
-              "userOffice",
-              value !== null ? value.name : initialValuesNewUser.userOffice
+              "department_id",
+              value !== null ? value.id : initialValuesNewUser.department_id
             );
           }}
           sx={{ width: "300px" }}
@@ -145,10 +159,10 @@ export default function FormAddNewUser({ props, initialValues: initialValuesNewU
               {...params}
               label="Seleccione un departamento"
               error={Boolean(
-                props.errors?.userOffice && props.touched?.userOffice
+                props.errors?.department_id && props.touched?.department_id
               )}
               helperText={
-                props.touched?.userOffice ? props.errors?.userOffice : ""
+                props.touched?.department_id ? props.errors?.department_id : ""
               }
             />
           )}
@@ -156,12 +170,12 @@ export default function FormAddNewUser({ props, initialValues: initialValuesNewU
         <Autocomplete
           disablePortal
           size="small"
-          name="userRol"
+          name="role_id"
           options={POSITIONS}
           onChange={(e, value) => {
             props.setFieldValue(
-              "userRol",
-              value !== null ? value.name : initialValuesNewUser.userRol
+              "role_id",
+              value !== null ? value.id : initialValuesNewUser.role_id
             );
           }}
           sx={{ width: "300px" }}
@@ -169,47 +183,47 @@ export default function FormAddNewUser({ props, initialValues: initialValuesNewU
             <TextField
               {...params}
               label="Seleccione un cargo"
-              error={Boolean(props.errors?.userRol && props.touched?.userRol)}
-              helperText={props.touched?.userRol ? props.errors?.userRol : ""}
+              error={Boolean(props.errors?.role_id && props.touched?.role_id)}
+              helperText={props.touched?.role_id ? props.errors?.role_id : ""}
             />
           )}
         ></Autocomplete>
         <TextField
           label="Usuario"
-          name="userName"
+          name="username"
           defaultValue={""}
           variant="outlined"
           onChange={props.handleChange}
           onBlur={props.handleBlur}
-          helperText={<ErrorMessage name="userName" />}
-          error={Boolean(props.errors?.userName && props.touched?.userName)}
+          helperText={<ErrorMessage name="username" />}
+          error={Boolean(props.errors?.username && props.touched?.username)}
           size="small"
           sx={{ width: "300px" }}
         />
         <TextField
           label="Contraseña"
-          name="userPassword"
+          name="password"
           defaultValue={""}
           variant="outlined"
           onChange={props.handleChange}
           onBlur={props.handleBlur}
-          helperText={<ErrorMessage name="userPassword" />}
+          helperText={<ErrorMessage name="password" />}
           error={Boolean(
-            props.errors?.userPassword && props.touched?.userPassword
+            props.errors?.password && props.touched?.password
           )}
           size="small"
           sx={{ width: "300px" }}
         />
         <TextField
           label="Repetir Contraseña"
-          name="userPasswordRepeat"
+          name="passwordRepeat"
           defaultValue={""}
           variant="outlined"
           onChange={props.handleChange}
           onBlur={props.handleBlur}
-          helperText={<ErrorMessage name="userPasswordRepeat" />}
+          helperText={<ErrorMessage name="passwordRepeat" />}
           error={Boolean(
-            props.errors?.userPasswordRepeat && props.touched?.userPassword
+            props.errors?.passwordRepeat && props.touched?.passwordRepeat
           )}
           size="small"
           sx={{ width: "300px" }}
