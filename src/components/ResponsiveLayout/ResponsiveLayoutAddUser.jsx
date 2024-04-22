@@ -5,17 +5,13 @@ import { Formik } from "formik";
 import { validationSchemaAddUser } from "../../utils/validationsSchemas/validationSchemaAddUser";
 import { initialValuesNewUser } from "../../utils/initialValues/initialValuesNewUser";
 import FormAddNewUser from "../Forms/FormAddNewUser/FormAddNewUser";
-import useAddUser from "../../hooks/useAddUser";
+import useUser from "../../hooks/useUser";
 import React from "react";
-import MuiAlert from '@mui/material/Alert';
-
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
+import Notification from "../Notifications/Notification";
 
 
 export default function ResponsiveLayoutAddUser() {
-  const {addUserMutation, showAlert, setShowAlert} = useAddUser();
+  const {addUserMutation, showAlertSuccess, setShowAlertSuccess, showAlertError, setShowAlertError, errorMessage} = useUser();
   
   const handleSubmit = async (values) => {
       try {
@@ -78,11 +74,8 @@ export default function ResponsiveLayoutAddUser() {
           </Grid>
         </Container>
       </Box>
-      {showAlert && <Snackbar open={showAlert} autoHideDuration={4000} onClose={() => setShowAlert(false)}>
-        <Alert severity="success" sx={{ width: '100%' }}>
-          Registro exitoso
-        </Alert>
-      </Snackbar>}
+      {showAlertSuccess && <Notification openNotification={showAlertSuccess} closeNotification={() => setShowAlertSuccess(false)} message={"Registro exitoso"} severity={"success"}/>}
+      {showAlertError && <Notification openNotification={showAlertError} closeNotification={() => setShowAlertError(false)} message={errorMessage} severity={"error"}/>}
     </Box>
   );
 }

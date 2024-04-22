@@ -41,8 +41,8 @@ export default function Login() {
   };
   useEffect(() => {
     const checkRolTonavigate = () => {
-      if (user?.role === "Administradora") {
-        navigate("/AddUser");
+      if (user?.role === "Administradora" || user?.role === "Administrador") {
+        navigate("/PageUser");
       }
       if (user?.department === "0800") {
         navigate("/Page0800");

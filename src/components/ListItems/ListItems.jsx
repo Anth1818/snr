@@ -7,7 +7,7 @@ import AddIcCallIcon from "@mui/icons-material/AddIcCall";
 import FemaleIcon from "@mui/icons-material/Female";
 import { Tooltip } from "@mui/material";
 import { NavLink } from "react-router-dom"
-import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded';
+import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import List from "@mui/material/List";
 import { useUser } from "../../context/userContext";
 import { getUserRol } from "../../utils/getDataLocalStorage";
@@ -16,7 +16,8 @@ import { getUserRol } from "../../utils/getDataLocalStorage";
 
 export default function ListItems() {
   const { user } = useUser()
-  const userRolGetLocalStorage = getUserRol()
+  const getUserRolLocalStorage = getUserRol()
+  const isAdmin = getUserRolLocalStorage === "Administradora" || getUserRolLocalStorage === "Administrador"
   return (
     <List component={"nav"}>
       <Tooltip title="0800" placement="right">
@@ -51,13 +52,13 @@ export default function ListItems() {
           <ListItemText primary="Estadísticas" />
         </ListItemButton>
       </Tooltip>
-      {userRolGetLocalStorage && (
-        <Tooltip title="Agregar nuevo usuario al sistema" placement="right">
-          <ListItemButton component={NavLink} to={"../AddUser"}>
+      { isAdmin&& (
+        <Tooltip title="Ver usuarios del sistema" placement="right">
+          <ListItemButton component={NavLink} to={"../PageUser"}>
             <ListItemIcon>
-              <PersonAddAltRoundedIcon color="primary" />
+              <PersonRoundedIcon color="primary" />
             </ListItemIcon>
-            <ListItemText primary="Agregar nuevo usuario" />
+            <ListItemText primary="Ver usuarios del sistema" />
           </ListItemButton>
         </Tooltip>
       )}

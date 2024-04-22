@@ -1,7 +1,7 @@
 import { CssBaseline, Toolbar } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import RenderDrawer from "../Drawer/Drawer";
-import UserTable from "../UserTable";
+import {UserTable} from "../Tables/UserTable";
 
 // eslint-disable-next-line react/prop-types
 export default function ResponsiveLayoutRCV({ dataHeadTable }) {

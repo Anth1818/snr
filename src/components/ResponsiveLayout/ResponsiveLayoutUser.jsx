@@ -1,9 +1,11 @@
-import { CssBaseline, Toolbar } from "@mui/material";
-import { Box, Container } from "@mui/system";
+import { Button, CssBaseline, Toolbar, Typography } from "@mui/material";
+import { Box, Container, Stack } from "@mui/system";
 import RenderDrawer from "../Drawer/Drawer";
-import {Table0800} from "../Tables/Table0800";
+import {UserTable} from "../Tables/UserTable";
 import { useState } from "react";
 import ModalDetails from "../modal/modal";
+import { Link } from "react-router-dom";
+import Iconify from "../Iconify";
 
 // eslint-disable-next-line react/prop-types
 export default function ResponsiveLayout0800({ dataHeadTable }) {
@@ -16,7 +18,7 @@ export default function ResponsiveLayout0800({ dataHeadTable }) {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <RenderDrawer titlePage={"0800"}></RenderDrawer>
+      <RenderDrawer titlePage={"Usuarios"}></RenderDrawer>
       <Box
         component="main"
         sx={{
@@ -31,12 +33,26 @@ export default function ResponsiveLayout0800({ dataHeadTable }) {
       >
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-        <Table0800
-            dataHeadTable={dataHeadTable}
-            dataTitle={"Lista de llamadas"}
-            pathToForm={"/PageForm0800"}
-            handleOpenModal={handleOpenModal}
-          ></Table0800>
+        <Typography variant="h4" gutterBottom align="center">
+          Listado de usuarios
+        </Typography>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="center"
+          mb={4}
+        >
+          <Link to={"../AddUser"}>
+            <Button
+              variant="contained"
+              startIcon={<Iconify icon="eva:plus-fill" />}
+             color={"primary"}
+            >
+              Agregar nuevo usuario
+            </Button>
+          </Link>
+        </Stack>
+        <UserTable></UserTable>
           <ModalDetails open={open} handleCloseModal={handleCloseModal} caseId={caseId}></ModalDetails>
         </Container>
       </Box>

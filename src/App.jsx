@@ -14,6 +14,7 @@ import ProtectedRoute from "./components/Routes/ProtectedRoute.jsx";
 import PageLogout from "./pages/PageLogout.jsx";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme.js";
+import PageUser from "./pages/PageUser.jsx";
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
             <Route path="/Page0800" element={<Page0800 />} />
             <Route path="/EditProfile" element={<EditProfile />} />
             <Route path="/AddUser" element={<AddUser />} />
+            <Route path="/PageUser" element={<PageUser />} />
             <Route path="/PageRCV" element={<PageRCV />} />
             <Route path="/PageOAC" element={<PageOAC />} />
             <Route path="/PageStatistics" element={<PageStatistics />} />
