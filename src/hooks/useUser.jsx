@@ -1,8 +1,7 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import api from "../api/API_SNR";
 import { getTokenFromlocalStorage } from "../utils/getDataLocalStorage";
 import { useState } from "react";
-
 
 const useUser = () => {
   const [showAlertSuccess, setShowAlertSuccess] = useState(false);
@@ -21,21 +20,48 @@ const useUser = () => {
 
   const addUserMutation = useMutation({
     mutationFn: (values) => {
-      console.log(values,)
-      return api.put("/users", values, config)
+      console.log(values);
+      return api.put("/users", values, config);
     },
     onSuccess: async ({ data }) => {
-      setShowAlertSuccess(true)
-      console.log(data)
+      setShowAlertSuccess(true);
+      console.log(data);
     },
     onError: async (error) => {
       console.error("Error en la mutación:", error);
-      setShowAlertError(true)
-      setErrorMessage(`${error.response.data.data.error}: ${error.response.data.data.identity_card}`)
+      setShowAlertError(true);
+      setErrorMessage(
+        `${error.response.data.data.error}: ${error.response.data.data.identity_card}`
+      );
     },
-  })
-  return { addUserMutation, showAlertSuccess, setShowAlertSuccess, showAlertError, setShowAlertError, errorMessage }
+  });
 
+  const { isPending, error, data } = useQuery({
+    queryKey: ['repoData'],
+    queryFn: () =>
+     api.get('/users',config)
+    .then(response => response.data.data)
+  })
+
+  // const getUsersData = () =>{
+    // return api.get('/users',config)
+    // .then(response => response)
+    // .then(data => console.log(data));
+  // }
+
+  return {
+    addUserMutation,
+    showAlertSuccess,
+    setShowAlertSuccess,
+    showAlertError,
+    setShowAlertError,
+    errorMessage,
+    // getUsersData
+    data,
+    isPending,
+    error
+  };
 };
 
 export default useUser;
+ //return api.get("users", config).then((res) => res.json());

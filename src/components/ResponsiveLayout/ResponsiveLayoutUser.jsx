@@ -2,17 +2,23 @@ import { Button, CssBaseline, Toolbar, Typography } from "@mui/material";
 import { Box, Container, Stack } from "@mui/system";
 import RenderDrawer from "../Drawer/Drawer";
 import {UserTable} from "../Tables/UserTable";
-import { useState } from "react";
+import {useState } from "react";
 import ModalDetails from "../modal/modal";
 import { Link } from "react-router-dom";
 import Iconify from "../Iconify";
+import useUser from "../../hooks/useUser";
 
 // eslint-disable-next-line react/prop-types
-export default function ResponsiveLayout0800({ dataHeadTable }) {
+export default function ResponsiveLayoutUser() {
   const [open, setOpen] = useState(false);
   const [caseId, setCaseId] = useState("");
   const handleOpenModal = (caseId) => { setOpen(true); setCaseId(caseId) };
   const handleCloseModal = () => setOpen(false);
+ 
+ const {data, isPending, error} = useUser()
+ 
+//  getUsersData()
+console.log(data)
  
 
   return (
@@ -53,6 +59,8 @@ export default function ResponsiveLayout0800({ dataHeadTable }) {
           </Link>
         </Stack>
         <UserTable></UserTable>
+        {isPending && (<p className="w-full text-center">Cargando datos de usuarios...</p>)}
+        {error && (<p className="w-full text-center">Hubo un error al cargar los usuarios.</p>)}
           <ModalDetails open={open} handleCloseModal={handleCloseModal} caseId={caseId}></ModalDetails>
         </Container>
       </Box>
