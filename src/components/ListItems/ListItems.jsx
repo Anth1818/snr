@@ -9,13 +9,11 @@ import { Tooltip } from "@mui/material";
 import { NavLink } from "react-router-dom"
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import List from "@mui/material/List";
-import { useUser } from "../../context/userContext";
 import { getUserRol } from "../../utils/getDataLocalStorage";
 
 
 
 export default function ListItems() {
-  const { user } = useUser()
   const getUserRolLocalStorage = getUserRol()
   const isAdmin = getUserRolLocalStorage === "Administradora" || getUserRolLocalStorage === "Administrador"
   return (

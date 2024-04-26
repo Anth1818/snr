@@ -75,7 +75,7 @@ export default function LocationInputs({ props, initialValues }) {
             disableClearable
             // sx={{ width: "300px" }}
             renderInput={(params) => (
-              <TextField {...params} label="Seleccione un estado" />
+              <TextField {...params} label="Seleccione un estado *" />
             )}
           ></Autocomplete>
         </Grid>
@@ -100,7 +100,7 @@ export default function LocationInputs({ props, initialValues }) {
             disableClearable
             // sx={{ width: "300px" }}
             renderInput={(params) => (
-              <TextField {...params} label="Seleccione un municipio" />
+              <TextField {...params} label="Seleccione un municipio *" />
             )}
             disabled={!selectedState}
           ></Autocomplete>
@@ -124,7 +124,7 @@ export default function LocationInputs({ props, initialValues }) {
             isOptionEqualToValue={(option, value) => option.value === value?.value}
             // sx={{ width: "300px" }}
             renderInput={(params) => (
-              <TextField {...params} label="Seleccione un parroquia" />
+              <TextField {...params} label="Seleccione un parroquia *" />
             )}
             disabled={!selectedMunicipality && !selectedState}
           ></Autocomplete>

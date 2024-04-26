@@ -1,37 +1,36 @@
 import { Autocomplete, FormGroup, Grid, TextField } from "@mui/material";
 import { ErrorMessage, Form } from "formik";
-import {
-  GENDER,
-  OFFICES,
-  POSITIONS,
-} from "../../../utils/constants";
+import { GENDER, OFFICES, POSITIONS } from "../../../utils/constants";
 import FormButtonSubmit from "../../Forms/Form0800/FormButtonSubmit";
 import LocationInputs from "../LocationInputs";
 
-export default function FormAddNewUser({ props, initialValues: initialValuesNewUser }) {
-
+export default function FormAddNewUser({
+  props,
+  initialValues: initialValuesNewUser,
+}) {
   return (
     <Form>
       <FormGroup sx={{ marginTop: "20px" }}>
-        <Grid container spacing={2}>
+        <Grid container spacing={3}>
           <Grid item xs={12} sm={4} md={3}>
             <TextField
-              label="Cédula"
+              label="Cédula *"
               name="identity_card"
               defaultValue={""}
               variant="outlined"
               onChange={props.handleChange}
               onBlur={props.handleBlur}
               helperText={<ErrorMessage name="identity_card" />}
-              error={Boolean(props.errors?.identity_card && props.touched?.identity_card)}
+              error={Boolean(
+                props.errors?.identity_card && props.touched?.identity_card
+              )}
               size="small"
               fullWidth
-            // sx={{ width: "300px" }}
             />
           </Grid>
           <Grid item xs={12} sm={4} md={3}>
             <TextField
-              label="Primer nombre"
+              label="Primer nombre *"
               name="first_name"
               defaultValue={""}
               variant="outlined"
@@ -43,12 +42,11 @@ export default function FormAddNewUser({ props, initialValues: initialValuesNewU
               )}
               size="small"
               fullWidth
-            // sx={{ width: "300px" }}
             />
           </Grid>
           <Grid item xs={12} sm={4} md={3}>
             <TextField
-              label="Segundo nombre"
+              label="Segundo nombre *"
               name="other_names"
               defaultValue={""}
               variant="outlined"
@@ -60,7 +58,6 @@ export default function FormAddNewUser({ props, initialValues: initialValuesNewU
               )}
               size="small"
               fullWidth
-            // sx={{ width: "300px" }}
             />
           </Grid>
           <Grid item xs={12} sm={4} md={3}>
@@ -77,7 +74,6 @@ export default function FormAddNewUser({ props, initialValues: initialValuesNewU
               )}
               size="small"
               fullWidth
-            // sx={{ width: "300px" }}
             />
           </Grid>
           <Grid item xs={12} sm={4} md={3}>
@@ -90,11 +86,11 @@ export default function FormAddNewUser({ props, initialValues: initialValuesNewU
               onBlur={props.handleBlur}
               helperText={<ErrorMessage name="other_last_names" />}
               error={Boolean(
-                props.errors?.other_last_names && props.touched?.other_last_names
+                props.errors?.other_last_names &&
+                  props.touched?.other_last_names
               )}
               size="small"
               fullWidth
-            // sx={{ width: "300px" }}
             />
           </Grid>
           <Grid item xs={12} sm={4} md={3}>
@@ -106,17 +102,14 @@ export default function FormAddNewUser({ props, initialValues: initialValuesNewU
               onChange={props.handleChange}
               onBlur={props.handleBlur}
               helperText={<ErrorMessage name="phone" />}
-              error={Boolean(
-                props.errors?.phone && props.touched?.phone
-              )}
+              error={Boolean(props.errors?.phone && props.touched?.phone)}
               size="small"
               fullWidth
-            // sx={{ width: "300px" }}
             />
           </Grid>
           <Grid item xs={12} sm={4} md={3}>
             <TextField
-              label="Correo electronico"
+              label="Correo electronico *"
               name="email"
               defaultValue={""}
               variant="outlined"
@@ -126,11 +119,30 @@ export default function FormAddNewUser({ props, initialValues: initialValuesNewU
               error={Boolean(props.errors.email && props.touched.email)}
               size="small"
               fullWidth
-            // sx={{ width: "300px" }}
             />
           </Grid>
 
-          <LocationInputs props={props} initialValues={initialValuesNewUser}></LocationInputs>
+          <LocationInputs
+            props={props}
+            initialValues={initialValuesNewUser}
+          ></LocationInputs>
+
+          <Grid item xs={12} sm={4} md={3}>
+            <TextField
+              label="Dirección"
+              name="address"
+              defaultValue={""}
+              variant="outlined"
+              onChange={props.handleChange}
+              onBlur={props.handleBlur}
+              helperText={<ErrorMessage name="address" />}
+              error={Boolean(
+                props.errors?.address && props.touched?.address
+              )}
+              size="small"
+              fullWidth
+            />
+          </Grid>
 
           <Grid item xs={12} sm={4} md={3}>
             <Autocomplete
@@ -146,11 +158,10 @@ export default function FormAddNewUser({ props, initialValues: initialValuesNewU
                   value !== null ? value.id : initialValuesNewUser.gender_id
                 );
               }}
-              // sx={{ width: "300px" }}
               renderInput={(params) => (
                 <TextField
                   {...params}
-                  label="Seleccione un genero"
+                  label="Seleccione un genero *"
                   error={Boolean(
                     props.errors?.gender_id && props.touched?.gender_id
                   )}
@@ -174,16 +185,17 @@ export default function FormAddNewUser({ props, initialValues: initialValuesNewU
                   value !== null ? value.id : initialValuesNewUser.department_id
                 );
               }}
-              // sx={{ width: "300px" }}
               renderInput={(params) => (
                 <TextField
                   {...params}
-                  label="Seleccione un departamento"
+                  label="Seleccione un departamento *"
                   error={Boolean(
                     props.errors?.department_id && props.touched?.department_id
                   )}
                   helperText={
-                    props.touched?.department_id ? props.errors?.department_id : ""
+                    props.touched?.department_id
+                      ? props.errors?.department_id
+                      : ""
                   }
                 />
               )}
@@ -202,20 +214,23 @@ export default function FormAddNewUser({ props, initialValues: initialValuesNewU
                   value !== null ? value.id : initialValuesNewUser.role_id
                 );
               }}
-              // sx={{ width: "300px" }}
               renderInput={(params) => (
                 <TextField
                   {...params}
-                  label="Seleccione un cargo"
-                  error={Boolean(props.errors?.role_id && props.touched?.role_id)}
-                  helperText={props.touched?.role_id ? props.errors?.role_id : ""}
+                  label="Seleccione un cargo *"
+                  error={Boolean(
+                    props.errors?.role_id && props.touched?.role_id
+                  )}
+                  helperText={
+                    props.touched?.role_id ? props.errors?.role_id : ""
+                  }
                 />
               )}
             ></Autocomplete>
           </Grid>
           <Grid item xs={12} sm={4} md={3}>
             <TextField
-              label="Usuario"
+              label="Nombre de usuario *"
               name="username"
               defaultValue={""}
               variant="outlined"
@@ -225,29 +240,25 @@ export default function FormAddNewUser({ props, initialValues: initialValuesNewU
               error={Boolean(props.errors?.username && props.touched?.username)}
               size="small"
               fullWidth
-            // sx={{ width: "300px" }}
             />
           </Grid>
-          <Grid item xs={12} sm={4} md={3}>
+          <Grid item xs={12} sm={6} md={3}>
             <TextField
-              label="Contraseña"
+              label="Contraseña *"
               name="password"
               defaultValue={""}
               variant="outlined"
               onChange={props.handleChange}
               onBlur={props.handleBlur}
               helperText={<ErrorMessage name="password" />}
-              error={Boolean(
-                props.errors?.password && props.touched?.password
-              )}
+              error={Boolean(props.errors?.password && props.touched?.password)}
               size="small"
               fullWidth
-            // sx={{ width: "300px" }}
             />
           </Grid>
-          <Grid item xs={12} sm={4} md={3}>
+          <Grid item xs={12} sm={6} md={12}>
             <TextField
-              label="Repetir Contraseña"
+              label="Repetir Contraseña *"
               name="passwordRepeat"
               defaultValue={""}
               variant="outlined"
@@ -259,7 +270,7 @@ export default function FormAddNewUser({ props, initialValues: initialValuesNewU
               )}
               size="small"
               fullWidth
-            // sx={{ width:{ xs: "300px", sm: "300px", md: "300px", lg:"1000px"} }}
+              // sx={{ width:{ xs: "300px", sm: "300px", md: "300px", lg:"1000px"} }}
             />
           </Grid>
         </Grid>

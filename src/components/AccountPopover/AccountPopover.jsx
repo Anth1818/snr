@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { alpha } from '@mui/material/styles';
 import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton, Popover } from '@mui/material';
 // mocks_
-import account from '../../_mock/account';
 import { Link } from 'react-router-dom';
+import { getUserDataFromStorage } from '../../utils/getDataLocalStorage';
 
 // ----------------------------------------------------------------------
 
@@ -16,10 +16,19 @@ const MENU_OPTIONS = [
 
 ];
 
+
 // ----------------------------------------------------------------------
 
 export default function AccountPopover() {
+  const {role, department, username} = getUserDataFromStorage()
   const [open, setOpen] = useState(null);
+  const account = {
+    displayName: username,
+    appointment: role,
+    department: department,
+    photoURL: '/assets/female-user-profile.png',
+  };
+  
 
   const handleOpen = (event) => {
     setOpen(event.currentTarget);
@@ -32,6 +41,7 @@ export default function AccountPopover() {
   const editProfile = () => {
     setOpen(null);
   };
+  
 
   return (
     <>

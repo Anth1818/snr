@@ -5,7 +5,13 @@ export function getData() {
 }
 
 export function getUserRol() {
-  return localStorage.getItem("rol")
+  const user = JSON.parse(localStorage.getItem("data"))
+ return user.role
+}
+export function getUserDataFromStorage(){
+  const user = JSON.parse(localStorage.getItem("data"))
+  const {role, department, username } = user
+  return {role, department, username } 
 }
 
 export function getTokenFromlocalStorage (){

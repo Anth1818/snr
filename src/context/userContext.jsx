@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import api from "../api/API_SNR";
-import { saveTokenLocalStorage, removeTokenLocalStorage, removeUserRolLocalStorage, saveRolUserLocalStorage} from "../utils/saveDataLocalStorage";
+import { saveTokenLocalStorage, removeTokenLocalStorage, removeUserRolLocalStorage, saveUserDataLocalStorage} from "../utils/saveDataLocalStorage";
 
 // Crear un contexto para almacenar los datos del usuario
 const UserContext = createContext();
@@ -20,7 +20,7 @@ export const UserProvider = ({ children }) => {
     onSuccess: async ({ data }) => {
       await setUser(data?.data?.[0]);
       await saveTokenLocalStorage(data.tokenSession)
-      await saveRolUserLocalStorage(data?.data?.[0].role)
+      await saveUserDataLocalStorage(JSON.stringify(data?.data?.[0]))
     },
     onError: (error) => {
       console.error("Error en la mutación:", error);

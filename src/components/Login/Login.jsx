@@ -17,7 +17,7 @@ export default function Login() {
   const [userName, setUserName] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [showAlert, setShowAlert] = useState(false);
+  const [showAlertError, setShowAlertError] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -36,7 +36,7 @@ export default function Login() {
       await loginUser({ username: userName, password: userPassword });
       setLoggedIn(true); // Marca al usuario como autenticado
     } catch (error) {
-      setShowAlert(true);
+      setShowAlertError(true);
     }
   };
   useEffect(() => {
@@ -75,7 +75,7 @@ export default function Login() {
           className=" w-28 -mt-24 ml-24"
         />
         <form className="flex flex-col gap-2 p-8 mb-4" onSubmit={handleSubmit}>
-          {showAlert && <Alert severity="error">This is an error Alert.</Alert>}
+          {showAlertError && <Alert severity="error">Credenciales incorrectas</Alert>}
 
           <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined" required>
             <InputLabel htmlFor="outlined-adornment-username">

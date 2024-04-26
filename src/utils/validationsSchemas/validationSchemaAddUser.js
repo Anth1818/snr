@@ -7,16 +7,14 @@ export const validationSchemaAddUser = Yup.object().shape({
     .required("Campo requerido"),
   other_names: Yup.string()
     .matches(/^[aA-zZ\s]+$/, "Solo se permiten caracteres alfabéticos")
-    .max(30, "Máximo 30 caracteres")
-    .required("Campo requerido"),
+    .max(30, "Máximo 30 caracteres"),
   first_last_name: Yup.string()
     .matches(/^[aA-zZ\s]+$/, "Solo se permiten caracteres alfabéticos")
     .max(30, "Máximo 30 caracteres")
     .required("Campo requerido"),
   other_last_names: Yup.string()
     .matches(/^[aA-zZ\s]+$/, "Solo se permiten caracteres alfabéticos")
-    .max(30, "Máximo 30 caracteres")
-    .required("Campo requerido"),
+    .max(30, "Máximo 30 caracteres"),
 
   identity_card: Yup.string()
     .required("Campo requerido")
@@ -25,7 +23,6 @@ export const validationSchemaAddUser = Yup.object().shape({
     .max(10, "Máximo 10 digitos"),
 
   phone: Yup.string()
-    .required("Campo requerido")
     .matches(
       /^(0414|0424|0416|0426|0412|0212)\d{7}$/,
       "Ingrese un número válido"

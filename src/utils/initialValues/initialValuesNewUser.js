@@ -16,4 +16,5 @@ export const initialValuesNewUser = {
   username: "",
   password: "",
   passwordRepeat: "",
+  address:"",
 };

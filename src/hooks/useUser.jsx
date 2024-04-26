@@ -7,10 +7,9 @@ const useUser = () => {
   const [showAlertSuccess, setShowAlertSuccess] = useState(false);
   const [showAlertError, setShowAlertError] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
-  // Define el token JWT aquí
   const token = getTokenFromlocalStorage();
 
-  // Configura los headers con el token JWT
+  // Configuracion del header con el token JWT
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -43,12 +42,6 @@ const useUser = () => {
     .then(response => response.data.data)
   })
 
-  // const getUsersData = () =>{
-    // return api.get('/users',config)
-    // .then(response => response)
-    // .then(data => console.log(data));
-  // }
-
   return {
     addUserMutation,
     showAlertSuccess,
@@ -56,7 +49,6 @@ const useUser = () => {
     showAlertError,
     setShowAlertError,
     errorMessage,
-    // getUsersData
     data,
     isPending,
     error
@@ -64,4 +56,3 @@ const useUser = () => {
 };
 
 export default useUser;
- //return api.get("users", config).then((res) => res.json());

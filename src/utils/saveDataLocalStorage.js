@@ -18,13 +18,25 @@ export const saveTokenLocalStorage = (token) => {
   localStorage.setItem("token",token)
 }
 
-export const saveRolUserLocalStorage = (userRol) => {
-  localStorage.setItem("rol", userRol)
+export const saveUserDataLocalStorage = (data) => {
+  localStorage.setItem("data", data)
+}
+export const removeUserDataLocalStorage = () => {
+  localStorage.removeItem("data");
+};
+export const removeTokenLocalStorage = () => {
+    localStorage.removeItem("token")}
+
+export const saveUserApartmentLocalStorage = (userApartment) => {
+  localStorage.setItem("apartment", userApartment)
+}
+export const saveUserFullNameLocalStorage = (userFullName) => {
+  localStorage.setItem("fullName", userFullName)
 }
 
-export const removeTokenLocalStorage = () => {
-  localStorage.removeItem("token")
-}
 export const removeUserRolLocalStorage = () => {
   localStorage.removeItem("rol");
+};
+export const removeUserApartmentLocalStorage = () => {
+  localStorage.removeItem("apartment");
 };

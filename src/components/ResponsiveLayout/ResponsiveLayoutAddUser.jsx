@@ -1,4 +1,4 @@
-import { CssBaseline, Grid, Paper, Snackbar, Toolbar, Typography } from "@mui/material";
+import { CssBaseline, Grid, Paper, Toolbar, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import RenderDrawer from "../Drawer/Drawer";
 import { Formik } from "formik";
@@ -6,7 +6,6 @@ import { validationSchemaAddUser } from "../../utils/validationsSchemas/validati
 import { initialValuesNewUser } from "../../utils/initialValues/initialValuesNewUser";
 import FormAddNewUser from "../Forms/FormAddNewUser/FormAddNewUser";
 import useUser from "../../hooks/useUser";
-import React from "react";
 import Notification from "../Notifications/Notification";
 
 
@@ -51,6 +50,9 @@ export default function ResponsiveLayoutAddUser() {
                 <Box>
                   <Typography variant="h3" component="h2" align="center">
                     Agregar nuevo usuario
+                  </Typography>
+                  <Typography component="p" align="center" fontSize="12px">
+                    Los campos con * son requeridos
                   </Typography>
                 </Box>
                 <Box>
