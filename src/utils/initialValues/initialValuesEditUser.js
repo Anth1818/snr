@@ -1,0 +1,21 @@
+export const initialValuesEditUser = {
+    first_name: "", 
+    other_names: "", 
+    first_last_name: "",
+    other_last_names: "", 
+    identity_card: "",
+    is_foreign: false,
+    email: "", 
+    phone: "", 
+    gender_id: null,
+    stateLocation: "",
+    municipalityLocation: "",
+    parishLocation: "",
+    department_id: null,
+    role_id: null,
+    username: "",
+    password: "",
+    passwordRepeat: "",
+    address:"",
+  };
+  

@@ -4,7 +4,7 @@ import CintilloHeader from "../components/CintilloHeader/CintilloHeader";
 import ResponsiveLayoutRCV from "../components/ResponsiveLayout/ResponsiveLayoutRCV";
 
 
-export default function Page0800() {
+export default function PageRCV() {
    const TABLE_HEAD_RCV = [
      {
        id: "name_and_last_name",

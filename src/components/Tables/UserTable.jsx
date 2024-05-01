@@ -10,13 +10,15 @@ import TableRow from "@mui/material/TableRow";
 import useUser from "../../hooks/useUser";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Collapse, IconButton } from "@mui/material";
+import { Button, Collapse, IconButton, Typography } from "@mui/material";
 import InfoIcon from "@mui/icons-material/Info";
 import React from "react";
-import { Box } from "@mui/system";
+import { Box, width } from "@mui/system";
+import Divider from "@mui/material/Divider";
+import { Link } from "react-router-dom";
 
 const columns = [
-  { id: "details_user", label: "Detalles", align: "center"},
+  { id: "details_user", label: "Detalles", align: "center" },
   { id: "identity_card", label: "Cédula", minWidth: 170, align: "center" },
   { id: "username", label: "Usuario", minWidth: 100, align: "center" },
   {
@@ -122,12 +124,35 @@ export function UserTable() {
                       unmountOnExit
                     >
                       {/* Contenido de los detalles del usuario */}
-                      <Box padding={2}>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Soluta neque maxime dolorum vero odit repellat
-                        voluptatem aliquid temporibus dolor animi quae tempore,
-                        numquam, laboriosam itaque asperiores quis nostrum,
-                        natus ullam!
+                      <Box padding={3}
+                        sx={{ display: "flex", flexDirection: "column", justifyContent: "center", width: "100%", gap: "20px" }}>
+
+                        <Box sx={{ display: "flex", justifyContent: "center", width: "100%", flexWrap: "wrap", gap: "10px" }} >
+                          <div>
+                            <b>Nombre completo:</b> {row.first_name} {row.other_names} {row.first_last_name} {row.other_last_names
+                            }
+                          </div>
+                          <div>
+                            <b>Telefono:</b> {row.phone === "" ? "Sin datos" : row.phone}
+                          </div>
+                          <div>
+                            <b>Correo:</b> {row.email === "" ? "Sin datos" : row.email}
+                          </div>
+                          <div>
+                            <b>Genero:</b> {row.gender === "" ? "Sin datos" : row.gender}
+                          </div>
+                          <div>
+                            <b>Dirreción:</b> {row.address === undefined ? "Caracas - el Valle - Libertador - calle 6 " : row.address}
+                          </div><div>
+                            <b>Estatus:</b> {row.is_active ? "Activo " : "Inactivo"}
+                          </div>
+                        </Box>
+                        <Box sx={{ display: "flex", justifyContent: "center", alignContent: "center", width: "100%", gap: "10px" }}>
+                          <Link to={`/EditUser/${row.identity_card}`} style={{ textDecoration: "none" }}>
+                            <Button variant="contained" color={"secondary"}>Editar</Button>
+                          </Link>
+                          <Button variant="contained" color={"error"}>Eliminar</Button>
+                        </Box>
                       </Box>
                     </Collapse>
                   </TableCell>

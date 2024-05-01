@@ -27,7 +27,7 @@ export default function NotFound() {
         404
       </Typography>
       <Typography variant="h6" style={{ color: "white" }}>
-        La pagina que estas buscando no existe
+        La página que estás buscando no existe
       </Typography>
       <Button variant="contained" onClick={handleGoBack}>Volver</Button>
     </Box>

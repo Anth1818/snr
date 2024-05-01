@@ -5,8 +5,9 @@ import { useUser } from "../../context/userContext";
 function ProtectedRoute() {
   const { user, checkTokenLocalStorgare } = useUser();
   const checkToken = checkTokenLocalStorgare()
- 
-  if (!user && !checkToken) {
+  const isActive = user?.is_active
+
+  if (!isActive && !checkToken) {
      return <Navigate to={"/login"} replace />;  
   } else {
    return <Outlet />;

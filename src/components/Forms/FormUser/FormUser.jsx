@@ -1,12 +1,13 @@
 import { Autocomplete, FormGroup, Grid, TextField } from "@mui/material";
 import { ErrorMessage, Form } from "formik";
 import { GENDER, OFFICES, POSITIONS } from "../../../utils/constants";
-import FormButtonSubmit from "../../Forms/Form0800/FormButtonSubmit";
+import FormButtonSubmit from "../Form0800/FormButtonSubmit";
 import LocationInputs from "../LocationInputs";
 
-export default function FormAddNewUser({
+export default function FormUser({
   props,
   initialValues: initialValuesNewUser,
+  isEdit
 }) {
   return (
     <Form>
@@ -275,7 +276,7 @@ export default function FormAddNewUser({
           </Grid>
         </Grid>
       </FormGroup>
-      <FormButtonSubmit></FormButtonSubmit>
+      <FormButtonSubmit isEdit={isEdit}></FormButtonSubmit>
     </Form>
   );
 }

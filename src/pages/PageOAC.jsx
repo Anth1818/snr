@@ -4,7 +4,7 @@ import CintilloHeader from "../components/CintilloHeader/CintilloHeader";
 import ResponsiveLayoutOAC from "../components/ResponsiveLayout/ResponsiveLayoutOAC";
 // TODO remove, this demo shouldn't need to reset the theme.
 
-export default function Statistics() {
+export default function PageOAC() {
   return (
     <>
       <CintilloHeader></CintilloHeader>

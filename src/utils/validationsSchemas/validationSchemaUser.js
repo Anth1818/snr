@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
-export const validationSchemaAddUser = Yup.object().shape({
+const validationSchemaUser = Yup.object().shape({
   first_name: Yup.string()
     .matches(/^[aA-zZ\s]+$/, "Solo se permiten caracteres alfabéticos")
     .max(30, "Máximo 30 caracteres")
@@ -55,3 +55,5 @@ export const validationSchemaAddUser = Yup.object().shape({
 
   gender_id: Yup.string().required("Campo requerido"),
 });
+
+export default validationSchemaUser;

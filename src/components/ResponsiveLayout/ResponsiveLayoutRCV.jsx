@@ -23,10 +23,10 @@ export default function ResponsiveLayoutRCV({ dataHeadTable }) {
       >
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <UserTable
+          {/* <UserTable
             dataHeadTable={dataHeadTable}
             dataTitle={"Lista de mujeres registradas"}
-          ></UserTable>
+          ></UserTable> */}
         </Container>
       </Box>
     </Box>

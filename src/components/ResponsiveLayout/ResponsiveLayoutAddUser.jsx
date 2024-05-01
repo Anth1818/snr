@@ -2,9 +2,9 @@ import { CssBaseline, Grid, Paper, Toolbar, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import RenderDrawer from "../Drawer/Drawer";
 import { Formik } from "formik";
-import { validationSchemaAddUser } from "../../utils/validationsSchemas/validationSchemaAddUser";
+import  validationSchemaUser  from "../../utils/validationsSchemas/validationSchemaUser";
 import { initialValuesNewUser } from "../../utils/initialValues/initialValuesNewUser";
-import FormAddNewUser from "../Forms/FormAddNewUser/FormAddNewUser";
+import FormAddNewUser from "../Forms/FormUser/FormUser";
 import useUser from "../../hooks/useUser";
 import Notification from "../Notifications/Notification";
 
@@ -58,7 +58,7 @@ export default function ResponsiveLayoutAddUser() {
                 <Box>
                   <Formik
                     initialValues={initialValuesNewUser}
-                    validationSchema={validationSchemaAddUser}
+                    validationSchema={validationSchemaUser}
                     onSubmit={(values)=>{
                       handleSubmit(values)
                     }}

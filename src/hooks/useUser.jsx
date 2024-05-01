@@ -2,8 +2,10 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import api from "../api/API_SNR";
 import { getTokenFromlocalStorage } from "../utils/getDataLocalStorage";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 const useUser = () => {
+  const { userId } = useParams();
   const [showAlertSuccess, setShowAlertSuccess] = useState(false);
   const [showAlertError, setShowAlertError] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -30,7 +32,7 @@ const useUser = () => {
       console.error("Error en la mutación:", error);
       setShowAlertError(true);
       setErrorMessage(
-        `${error.response.data.data.error}: ${error.response.data.data.identity_card}`
+        `${error.response.data.data.error}: ${error.response.data.data.identity_card === undefined ? error.response.data.data.username : error.response.data.data.identity_card}`
       );
     },
   });
@@ -42,6 +44,16 @@ const useUser = () => {
     .then(response => response.data.data)
   })
 
+  // const { isPending: isPendingUserEdit, error: errorUserEdit, data: dataUserEdit } = useQuery({
+  //   queryKey: ['repoDataUserEdit'],
+  //   queryFn: () =>
+  //    api.get(`/users/${userId}`,config)
+  //   .then(response => response.data.data)
+  // })
+// console.log(dataUserEdit)
+// console.log(errorUserEdit)
+// console.log(isPendingUserEdit)
+  
   return {
     addUserMutation,
     showAlertSuccess,
@@ -51,7 +63,10 @@ const useUser = () => {
     errorMessage,
     data,
     isPending,
-    error
+    error,
+    // isPendingUserEdit,
+    // errorUserEdit,
+    // dataUserEdit
   };
 };
 

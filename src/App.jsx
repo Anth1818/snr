@@ -15,6 +15,7 @@ import PageLogout from "./pages/PageLogout.jsx";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme.js";
 import PageUser from "./pages/PageUser.jsx";
+import PageEditUser from "./pages/PageEditUser.jsx";
 
 export default function App() {
   return (
@@ -30,6 +31,7 @@ export default function App() {
             <Route path="/PageOAC" element={<PageOAC />} />
             <Route path="/PageStatistics" element={<PageStatistics />} />
             <Route path="/PageForm0800" element={<PageForm0800 />} />
+            <Route path="/EditUser/:userId" element={<PageEditUser />} />
             <Route
               path="/PageForm0800Edit/:caseId"
               element={<PageForm0800Edit />}

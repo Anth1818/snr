@@ -1,14 +1,15 @@
-
 import CintilloHeader from "../components/CintilloHeader/CintilloHeader";
 
-// import Footer from "../components/Footer/Footer";
-import ResponsiveLayoutAddUser from "../components/ResponsiveLayout/ResponsiveLayoutAddUser";
 
-export default function AddUser() {
+// import Footer from "../components/Footer/Footer";
+import ResponsiveLayoutEditUser from "../components/ResponsiveLayout/ResponsiveLayoutEditUser";
+
+export default function PageEditUser() {
+  
   return (
     <>
       <CintilloHeader></CintilloHeader>
-      <ResponsiveLayoutAddUser></ResponsiveLayoutAddUser>
+      <ResponsiveLayoutEditUser ></ResponsiveLayoutEditUser>
     </>
       
 )}
