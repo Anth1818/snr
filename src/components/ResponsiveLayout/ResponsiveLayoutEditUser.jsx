@@ -11,9 +11,12 @@ import Notification from "../Notifications/Notification";
 
 
 export default function ResponsiveLayoutEditUser() {
-    const { dataUserEdit, showAlertSuccess, setShowAlertSuccess, showAlertError, setShowAlertError, errorMessage, isPendingUserEdit, errorUserEdit } = useUser();
+    const { dataUserEdit, showAlertSuccess, setShowAlertSuccess, showAlertError, setShowAlertError, errorMessage, isPendingUserEdit, errorUserEdit, successDataEdit } = useUser();
 
-        console.log(dataUserEdit);
+    // if(successDataEdit){
+    //     console.log(dataUserEdit)
+    // }
+        // console.log(dataUserEdit);
         // console.log(errorUserEdit);
         // console.log(isPendingUserEdit);
        

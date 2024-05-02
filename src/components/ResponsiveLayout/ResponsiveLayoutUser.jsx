@@ -9,11 +9,8 @@ import useUser from "../../hooks/useUser";
 
 // eslint-disable-next-line react/prop-types
 export default function ResponsiveLayoutUser() {
- const {data, isPending, error} = useUser()
+ const { isPending, error, } = useUser()
  
-console.log(data)
- 
-
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />

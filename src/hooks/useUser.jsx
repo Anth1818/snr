@@ -43,8 +43,11 @@ const useUser = () => {
 
   const { isPending, error, data, isSuccess} = useQuery({
     queryKey: ["repoData"],
-    queryFn: () =>
-      api.get("/users", config).then((response) => response.data.data),
+    queryFn: async () =>{
+      const data = await api.get("/users", config)
+      return data.data.data
+    }
+   
   });
 
   const {
