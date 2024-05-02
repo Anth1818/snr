@@ -3,12 +3,23 @@ import { ErrorMessage, Form } from "formik";
 import { GENDER, OFFICES, POSITIONS } from "../../../utils/constants";
 import FormButtonSubmit from "../Form0800/FormButtonSubmit";
 import LocationInputs from "../LocationInputs";
-
+// import useUser from "../../../hooks/useUser";
+// import { useEffect, useState } from "react";
 export default function FormUser({
   props,
   initialValues: initialValuesNewUser,
-  isEdit
-}) {
+  isEdit,
+})
+{
+  // const [userDataEdit, setUserDataEdit] = useState({})
+  // const {successDataEdit,dataUserEdit} = useUser()
+
+//   const {dataUserEdit} = useUser()
+// useEffect(()=>{
+//   setUserDataEdit(dataUserEdit)
+// },[])
+
+
   return (
     <Form>
       <FormGroup sx={{ marginTop: "20px" }}>

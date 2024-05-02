@@ -22,7 +22,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <UserProvider>
         <Routes>
-          <Route element={<ProtectedRoute />}>
+          <Route element={<ProtectedRoute /> }>
             <Route path="/Page0800" element={<Page0800 />} />
             <Route path="/EditProfile" element={<EditProfile />} />
             <Route path="/AddUser" element={<AddUser />} />

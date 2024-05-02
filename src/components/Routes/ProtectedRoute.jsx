@@ -7,7 +7,7 @@ function ProtectedRoute() {
   const checkToken = checkTokenLocalStorgare()
   const isActive = user?.is_active
 
-  if (!isActive && !checkToken) {
+  if (isActive === false && !checkToken) {
      return <Navigate to={"/login"} replace />;  
   } else {
    return <Outlet />;

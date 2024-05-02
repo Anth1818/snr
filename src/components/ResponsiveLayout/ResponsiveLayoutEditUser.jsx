@@ -7,25 +7,24 @@ import { initialValuesEditUser } from "../../utils/initialValues/initialValuesEd
 import FormUser from "../Forms/FormUser/FormUser";
 import useUser from "../../hooks/useUser";
 import Notification from "../Notifications/Notification";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
 
 export default function ResponsiveLayoutEditUser() {
-    const { dataUserId, showAlertSuccess, setShowAlertSuccess, showAlertError, setShowAlertError, errorMessage, isPendingUserEdit, errorUserEdit } = useUser();
+    const { dataUserEdit, showAlertSuccess, setShowAlertSuccess, showAlertError, setShowAlertError, errorMessage, isPendingUserEdit, errorUserEdit } = useUser();
 
-    useEffect(() => {
-        // console.log(dataUserId);
+        console.log(dataUserEdit);
         // console.log(errorUserEdit);
         // console.log(isPendingUserEdit);
        
-    })
-    const handleSubmit = async (values) => {
-        try {
-            await addUserMutation.mutate(values);
-        } catch (error) {
-            console.error("error", error);
-        }
-    };
+
+    // const handleSubmit = async (values) => {
+    //     try {
+    //         await addUserMutation.mutate(values);
+    //     } catch (error) {
+    //         console.error("error", error);
+    //     }
+    // };
 
     return (
         <Box sx={{ display: "flex" }}>
@@ -64,17 +63,18 @@ export default function ResponsiveLayoutEditUser() {
                                 </Box>
                                 <Box>
                                     <Formik
-                                        initialValues={initialValuesEditUser}
+                                        initialValues={dataUserEdit}
                                         validationSchema={validationSchemaUser}
                                         onSubmit={(values) => {
-                                            handleSubmit(values)
+                                            alert(values)
                                         }}
                                     >
                                         {(props) => (
                                             <FormUser
                                                 props={props}
-                                                initialValues={initialValuesEditUser}
+                                                values={dataUserEdit}
                                                 isEdit={true}
+                                                pending={isPendingUserEdit}
                                             ></FormUser>
                                         )}
                                     </Formik>

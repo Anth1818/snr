@@ -19,6 +19,7 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [showAlertError, setShowAlertError] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [noActiveMsg, setNoActiveMsg] = useState(false)
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => {
@@ -26,10 +27,7 @@ export default function Login() {
   };
   const { user, loginUser } = useUser();
   const navigate = useNavigate();
-  
-  
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -40,27 +38,30 @@ export default function Login() {
     }
   };
   useEffect(() => {
-    const checkRolTonavigate = () => {
-      if (user?.role === "Administradora" || user?.role === "Administrador") {
-        navigate("/PageUser");
+    if (user?.is_active) {
+      const checkRolTonavigate = () => {
+        if (user?.role === "Administradora" || user?.role === "Administrador") {
+          navigate("/PageUser");
+        }
+        if (user?.department === "0800") {
+          navigate("/Page0800");
+        }
+        if (user?.department === "OAC") {
+          navigate("/PageOAC");
+        }
+        if (user?.department === "SIN") {
+          navigate("/PageRCV");
+        }
+      };
+      if (loggedIn) {
+        checkRolTonavigate();
       }
-      if (user?.department === "0800") {
-        navigate("/Page0800");
-      }
-      if (user?.department === "OAC") {
-        navigate("/PageOAC");
-      }
-      if (user?.department === "SIN") {
-        navigate("/PageRCV");
-      }
-    };
-  
-    if (loggedIn) {
-      checkRolTonavigate();
+    }else if(user?.is_active ===false){
+      setNoActiveMsg(true)
     }
   }, [loggedIn, user, navigate]);
-  
- 
+
+
   return (
     <div className="w-full min-h-screen flex justify-center items-center">
       <div className="min-w-fit h-full border-2 border-gray-400 box-border  rounded-lg">
@@ -75,9 +76,17 @@ export default function Login() {
           className=" w-28 -mt-24 ml-24"
         />
         <form className="flex flex-col gap-2 p-8 mb-4" onSubmit={handleSubmit}>
-          {showAlertError && <Alert severity="error">Credenciales incorrectas</Alert>}
+          {showAlertError && (
+            <Alert severity="error">Credenciales incorrectas</Alert>
+          )}
 
-          <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined" required>
+          {
+            noActiveMsg && (
+              <Alert severity="error">Usuario inactivo, conctate al administrador</Alert>
+            )
+          }
+
+          <FormControl sx={{ m: 1,}} variant="outlined" required>
             <InputLabel htmlFor="outlined-adornment-username">
               Usuario
             </InputLabel>
@@ -93,7 +102,7 @@ export default function Login() {
               }
             />
           </FormControl>
-          <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined" required>
+          <FormControl sx={{ m: 1, }} variant="outlined" required>
             <InputLabel htmlFor="outlined-adornment-password">
               Contraseña
             </InputLabel>

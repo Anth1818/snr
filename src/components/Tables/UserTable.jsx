@@ -10,11 +10,11 @@ import TableRow from "@mui/material/TableRow";
 import useUser from "../../hooks/useUser";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Button, Collapse, IconButton, Typography } from "@mui/material";
+import { Button, Collapse, IconButton, } from "@mui/material";
 import InfoIcon from "@mui/icons-material/Info";
 import React from "react";
-import { Box, width } from "@mui/system";
-import Divider from "@mui/material/Divider";
+import { Box, } from "@mui/system";
+
 import { Link } from "react-router-dom";
 
 const columns = [
@@ -148,7 +148,7 @@ export function UserTable() {
                           </div>
                         </Box>
                         <Box sx={{ display: "flex", justifyContent: "center", alignContent: "center", width: "100%", gap: "10px" }}>
-                          <Link to={`/EditUser/${row.identity_card}`} style={{ textDecoration: "none" }}>
+                          <Link to={`/EditUser/${row.id}`} style={{ textDecoration: "none" }}>
                             <Button variant="contained" color={"secondary"}>Editar</Button>
                           </Link>
                           <Button variant="contained" color={"error"}>Eliminar</Button>

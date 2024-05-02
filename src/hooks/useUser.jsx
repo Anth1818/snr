@@ -32,28 +32,40 @@ const useUser = () => {
       console.error("Error en la mutación:", error);
       setShowAlertError(true);
       setErrorMessage(
-        `${error.response.data.data.error}: ${error.response.data.data.identity_card === undefined ? error.response.data.data.username : error.response.data.data.identity_card}`
+        `${error.response.data.data.error}: ${
+          error.response.data.data.identity_card === undefined
+            ? error.response.data.data.username
+            : error.response.data.data.identity_card
+        }`
       );
     },
   });
 
-  const { isPending, error, data } = useQuery({
-    queryKey: ['repoData'],
+  const { isPending, error, data, isSuccess} = useQuery({
+    queryKey: ["repoData"],
     queryFn: () =>
-     api.get('/users',config)
-    .then(response => response.data.data)
-  })
+      api.get("/users", config).then((response) => response.data.data),
+  });
 
-  // const { isPending: isPendingUserEdit, error: errorUserEdit, data: dataUserEdit } = useQuery({
-  //   queryKey: ['repoDataUserEdit'],
-  //   queryFn: () =>
-  //    api.get(`/users/${userId}`,config)
-  //   .then(response => response.data.data)
-  // })
-// console.log(dataUserEdit)
-// console.log(errorUserEdit)
-// console.log(isPendingUserEdit)
-  
+  const {
+    isPending: isPendingUserEdit,
+    error: errorUserEdit,
+    data: dataUserEdit,
+    isSuccess: successDataEdit
+  } = useQuery({
+    queryKey: ["repoDataUserEdit"],
+    queryFn: () => {
+      if (userId) {
+        return api
+          .get(`/users/${userId}`, config)
+          .then((response) => response.data.data[0]);
+      } else {
+        return null; 
+      }
+    },
+  });
+
+
   return {
     addUserMutation,
     showAlertSuccess,
@@ -64,9 +76,11 @@ const useUser = () => {
     data,
     isPending,
     error,
-    // isPendingUserEdit,
-    // errorUserEdit,
-    // dataUserEdit
+    isSuccess,
+    isPendingUserEdit,
+    errorUserEdit,
+    dataUserEdit,
+    successDataEdit
   };
 };
 
