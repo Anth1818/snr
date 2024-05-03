@@ -67,6 +67,7 @@ export default function ResponsiveLayoutAddUser() {
                       <FormAddNewUser
                         props={props}
                         initialValues={initialValuesNewUser}
+                        isEdit={false}
                       ></FormAddNewUser>
                     )}
                   </Formik>

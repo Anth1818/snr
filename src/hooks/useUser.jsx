@@ -50,12 +50,7 @@ const useUser = () => {
    
   });
 
-  const {
-    isPending: isPendingUserEdit,
-    error: errorUserEdit,
-    data: dataUserEdit,
-    isSuccess: successDataEdit
-  } = useQuery({
+  const getUserById = useQuery({
     queryKey: ["repoDataUserEdit"],
     queryFn: () => {
       if (userId) {
@@ -66,7 +61,31 @@ const useUser = () => {
         return null; 
       }
     },
-  });
+    onSuccess: (data) =>{
+      return data
+    },
+    onError: (error) =>{
+      return error
+    }
+  })
+
+  // const {
+  //   isPending: isPendingUserEdit,
+  //   error: errorUserEdit,
+  //   data: dataUserEdit,
+  //   isSuccess: successDataEdit
+  // } = useQuery({
+  //   queryKey: ["repoDataUserEdit"],
+  //   queryFn: () => {
+  //     if (userId) {
+  //       return api
+  //         .get(`/users/${userId}`, config)
+  //         .then((response) => response.data.data[0]);
+  //     } else {
+  //       return null; 
+  //     }
+  //   },
+  // });
 
 
   return {
@@ -80,10 +99,11 @@ const useUser = () => {
     isPending,
     error,
     isSuccess,
-    isPendingUserEdit,
-    errorUserEdit,
-    dataUserEdit,
-    successDataEdit
+    getUserById
+    // isPendingUserEdit,
+    // errorUserEdit,
+    // dataUserEdit,
+    // successDataEdit
   };
 };
 

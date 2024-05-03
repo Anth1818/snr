@@ -85,7 +85,7 @@ export function UserTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {users?.map((row) => (
+            {users?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
               <React.Fragment key={row.id}>
                 <TableRow hover tabIndex={-1}>
                   {columns.map((column) => {
