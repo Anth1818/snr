@@ -2,93 +2,114 @@ import { CssBaseline, Grid, Paper, Toolbar, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import RenderDrawer from "../Drawer/Drawer";
 import { Formik } from "formik";
-import validationSchemaUser from "../../utils/validationsSchemas/validationSchemaUser";
+import validationSchemaEditUser from "../../utils/validationsSchemas/validationSchemaEditUser";
 import { initialValuesEditUser } from "../../utils/initialValues/initialValuesEditUser";
 import FormUser from "../Forms/FormUser/FormUser";
 import useUser from "../../hooks/useUser";
 import Notification from "../Notifications/Notification";
 // import { useEffect } from "react";
 
-
 export default function ResponsiveLayoutEditUser() {
-    const { dataUserEdit, showAlertSuccess, setShowAlertSuccess, showAlertError, setShowAlertError, errorMessage, isPendingUserEdit, errorUserEdit, successDataEdit } = useUser();
+  const {
+    showAlertSuccess,
+    setShowAlertSuccess,
+    showAlertError,
+    setShowAlertError,
+    errorMessage,
+    isPendingUserEdit,
+  } = useUser();
+  const { getUserById } = useUser();
 
-    // if(successDataEdit){
-    //     console.log(dataUserEdit)
-    // }
-        // console.log(dataUserEdit);
-        // console.log(errorUserEdit);
-        // console.log(isPendingUserEdit);
-       
+  const { data, isSuccess } = getUserById;
+    console.log(data)
 
-    // const handleSubmit = async (values) => {
-    //     try {
-    //         await addUserMutation.mutate(values);
-    //     } catch (error) {
-    //         console.error("error", error);
-    //     }
-    // };
+  let initialValueUser = {};
 
-    return (
-        <Box sx={{ display: "flex" }}>
-            <CssBaseline />
-            <RenderDrawer titlePage={"Editar usuario"}></RenderDrawer>
-            <Box
-                component="main"
+  if (isSuccess) {
+    initialValueUser = {
+      user: { columns: ["identity_card"], values: [] },
+      location: { columns: [], values: [] },
+      resetPassword: false
+    };
+  }
+
+  return (
+    <Box sx={{ display: "flex" }}>
+      <CssBaseline />
+      <RenderDrawer titlePage={"Editar usuario"}></RenderDrawer>
+      <Box
+        component="main"
+        sx={{
+          backgroundColor: (theme) =>
+            theme.palette.mode === "light"
+              ? theme.palette.grey[100]
+              : theme.palette.grey[900],
+          flexGrow: 1,
+          height: "100vh",
+          overflow: "auto",
+        }}
+      >
+        <Toolbar />
+        <Container maxWidth="lg" sx={{ mt: 4, mb: 10 }}>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <Paper
                 sx={{
-                    backgroundColor: (theme) =>
-                        theme.palette.mode === "light"
-                            ? theme.palette.grey[100]
-                            : theme.palette.grey[900],
-                    flexGrow: 1,
-                    height: "100vh",
-                    overflow: "auto",
+                  p: 2,
+                  display: "flex",
+                  flexDirection: "column",
                 }}
-            >
-                <Toolbar />
-                <Container maxWidth="lg" sx={{ mt: 4, mb: 10 }}>
-                    <Grid container spacing={3}>
-                        <Grid item xs={12}>
-                            <Paper
-                                sx={{
-                                    p: 2,
-                                    display: "flex",
-                                    flexDirection: "column",
-                                }}
-                            >
-                                <Box>
-                                    <Typography variant="h3" component="h2" align="center">
-                                        Editar usuario
-                                    </Typography>
-                                    <Typography component="p" align="center" fontSize="12px">
-                                        Los campos con * son requeridos
-                                    </Typography>
-                                </Box>
-                                <Box>
-                                    <Formik
-                                        initialValues={dataUserEdit}
-                                        validationSchema={validationSchemaUser}
-                                        onSubmit={(values) => {
-                                            alert(values)
-                                        }}
-                                    >
-                                        {(props) => (
-                                            <FormUser
-                                                props={props}
-                                                values={dataUserEdit}
-                                                isEdit={true}
-                                                pending={isPendingUserEdit}
-                                            ></FormUser>
-                                        )}
-                                    </Formik>
-                                </Box>
-                            </Paper>
-                        </Grid>
-                    </Grid>
-                </Container>
-            </Box>
-            {showAlertSuccess && <Notification openNotification={showAlertSuccess} closeNotification={() => setShowAlertSuccess(false)} message={"Registro exitoso"} severity={"success"} />}
-            {showAlertError && <Notification openNotification={showAlertError} closeNotification={() => setShowAlertError(false)} message={errorMessage} severity={"error"} />}
-        </Box>
-    );
+              >
+                <Box>
+                  <Typography variant="h3" component="h2" align="center">
+                    Editar usuario
+                  </Typography>
+                  <Typography component="p" align="center" fontSize="12px">
+                    Los campos con * son requeridos
+                  </Typography>
+                </Box>
+                <Box>
+                  {!isSuccess && <p>Cargando...</p>}
+                  {isSuccess && (
+                    <Formik
+                      initialValues={initialValueUser}
+                      validationSchema={validationSchemaEditUser}
+                      onSubmit={(values) => {
+                        console.log(values);
+                      }}
+                    >
+                      {(props) => (
+                        <FormUser
+                          props={props}
+                          initialValuesEdit={initialValueUser}
+                          isEdit={true}
+                          pending={isPendingUserEdit}
+                        ></FormUser>
+                      )}
+                    </Formik>
+                  )}
+                </Box>
+              </Paper>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+      {showAlertSuccess && (
+        <Notification
+          openNotification={showAlertSuccess}
+          closeNotification={() => setShowAlertSuccess(false)}
+          message={"Registro exitoso"}
+          severity={"success"}
+        />
+      )}
+      {showAlertError && (
+        <Notification
+          openNotification={showAlertError}
+          closeNotification={() => setShowAlertError(false)}
+          message={errorMessage}
+          severity={"error"}
+        />
+      )}
+    </Box>
+  );
 }

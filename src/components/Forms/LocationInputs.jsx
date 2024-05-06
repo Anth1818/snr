@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
-import api from "../../api/API_SNR"
+import api from "../../api/API_SNR";
 import { Autocomplete, Grid, TextField } from "@mui/material";
 
-export default function LocationInputs({ props, initialValues }) {
+export default function LocationInputs({
+  props,
+  initialValues,
+  isEdit,
+  location,
+}) {
   const [locationState, setLocationState] = useState([]);
   const [locationMunicipality, setLocationMunicipality] = useState([]);
   const [locationParish, setLocationParish] = useState([]);
@@ -52,83 +57,165 @@ export default function LocationInputs({ props, initialValues }) {
     }
   }, [selectedMunicipality, selectedState]);
 
+  console.log("render")
   return (
     <>
-        <Grid item xs={12} sm={4} md={3}>
-          <Autocomplete
-            size="small"
-            fullWidth
-            name="state"
-            id="states"
-            options={locationState?.map((item) => ({
-              label: item.state,
-              value: item.id,
-            }))}
-            isOptionEqualToValue={(option, value) => option.value === value?.value}
-            onChange={(e, value) => {
-              props.setFieldValue(
-                "state_id",
-                value !== null ? value.value: initialValues.state_id
-              );
-              setSelectedState(value);
-            }}
-            disableClearable
-            // sx={{ width: "300px" }}
-            renderInput={(params) => (
-              <TextField {...params} label="Seleccione un estado *" />
-            )}
-          ></Autocomplete>
-        </Grid>
-        <Grid item xs={12} sm={4} md={3}>
-          <Autocomplete
-            size="small"
-            fullWidth
-            name="municipality"
-            id="municipio"
-            options={locationMunicipality?.map((item) => ({
-              label: item.municipality,
-              value: item.id,
-            }))}
-            onChange={(e, value) => {
-              props.setFieldValue(
-                "municipality_id",
-                value !== null ? value.value: initialValues.municipality_id
-              );
-              setSelectedMunicipality(value);
-            }}
-            isOptionEqualToValue={(option, value) => option.value === value?.value}
-            disableClearable
-            // sx={{ width: "300px" }}
-            renderInput={(params) => (
-              <TextField {...params} label="Seleccione un municipio *" />
-            )}
-            disabled={!selectedState}
-          ></Autocomplete>
-        </Grid>
-        <Grid item xs={12} sm={4} md={3}>
-          <Autocomplete
-            size="small"
-            fullWidth
-            name="parish"
-            options={locationParish?.map((item) => ({
-              label: item.parish,
-              value: item.id,
-            }))}
-            onChange={(e, value) => {
-              props.setFieldValue(
-                "parish_id",
-                value !== null ? value.value : initialValues.parish_id
-              );
-            }}
-            disableClearable
-            isOptionEqualToValue={(option, value) => option.value === value?.value}
-            // sx={{ width: "300px" }}
-            renderInput={(params) => (
-              <TextField {...params} label="Seleccione un parroquia *" />
-            )}
-            disabled={!selectedMunicipality && !selectedState}
-          ></Autocomplete>
-        </Grid>
+    {isEdit && (
+      <>
+       <Grid item xs={12} sm={4} md={3}>
+        <Autocomplete
+          size="small"
+          fullWidth
+          name="state_id"
+          freeSolo
+          defaultValue={isEdit ? location.state : ""}
+          id="states"
+          options={locationState?.map((item) => ({
+            label: item.state,
+            value: item.id,
+          }))}
+          onChange={(e, value) => {
+            props.setFieldValue(
+              "state_id",
+              value !== null ? value.value : initialValues.state_id
+            );
+            setSelectedState(value);
+          }}
+          disableClearable
+          // sx={{ width: "300px" }}
+          renderInput={(params) => (
+            <TextField {...params} label="Estado *" />
+          )}
+        ></Autocomplete>
+      </Grid>
+      <Grid item xs={12} sm={4} md={3}>
+        <Autocomplete
+          size="small"
+          fullWidth
+          name="municipality_id"
+          id="municipio"
+          defaultValue={location.municipality}
+          options={locationMunicipality?.map((item) => ({
+            label: item.municipality,
+            value: item.id,
+          }))}
+          onChange={(e, value) => {
+            props.setFieldValue(
+              "municipality_id",
+              value !== null ? value.value : initialValues.municipality_id
+            );
+            setSelectedMunicipality(value);
+          }}
+          freeSolo
+          disableClearable
+          // sx={{ width: "300px" }}
+          renderInput={(params) => (
+            <TextField {...params} label="Municipio *" />
+          )}
+          
+        ></Autocomplete>
+      </Grid>
+      <Grid item xs={12} sm={4} md={3}>
+        <Autocomplete
+          size="small"
+          fullWidth
+          name="parish_id"
+          defaultValue={location.parish}
+          options={locationParish?.map((item) => ({
+            label: item.parish,
+            value: item.id,
+          }))}
+          onChange={(e, value) => {
+            props.setFieldValue(
+              "parish_id",
+              value !== null ? value.value : initialValues.parish_id
+            );
+          }}
+          disableClearable
+          renderInput={(params) => (
+            <TextField {...params} label="Parroquia *" />
+          )}
+          
+        ></Autocomplete>
+      </Grid>
+      </>
+    )}
+    {!isEdit && (
+      <>
+       <Grid item xs={12} sm={4} md={3}>
+        <Autocomplete
+          size="small"
+          fullWidth
+          name="state_id"
+          id="states"
+          options={locationState?.map((item) => ({
+            label: item.state,
+            value: item.id,
+          }))}
+          onChange={(e, value) => {
+            props.setFieldValue(
+              "state_id",
+              value !== null ? value.value : initialValues.state_id
+            );
+            setSelectedState(value);
+          }}
+          disableClearable
+          // sx={{ width: "300px" }}
+          renderInput={(params) => (
+            <TextField {...params} label="Estado * " />
+          )}
+        ></Autocomplete>
+      </Grid>
+      <Grid item xs={12} sm={4} md={3}>
+        <Autocomplete
+          size="small"
+          fullWidth
+          name="municipality_id"
+          id="municipio"
+          options={locationMunicipality?.map((item) => ({
+            label: item.municipality,
+            value: item.id,
+          }))}
+          onChange={(e, value) => {
+            props.setFieldValue(
+              "municipality_id",
+              value !== null ? value.value : initialValues.municipality_id
+            );
+            setSelectedMunicipality(value);
+          }}
+          disableClearable
+          // sx={{ width: "300px" }}
+          renderInput={(params) => (
+            <TextField {...params} label="Municipio *" />
+          )}
+          
+        ></Autocomplete>
+      </Grid>
+      <Grid item xs={12} sm={4} md={3}>
+        <Autocomplete
+          size="small"
+          fullWidth
+          name="parish_id"
+          options={locationParish?.map((item) => ({
+            label: item.parish,
+            value: item.id,
+          }))}
+          onChange={(e, value) => {
+            props.setFieldValue(
+              "parish_id",
+              value !== null ? value.value : initialValues.parish_id
+            );
+          }}
+          disableClearable
+          renderInput={(params) => (
+            <TextField {...params} label="Parroquía *" />
+          )}
+          
+        ></Autocomplete>
+      </Grid>
+      </>
+    )}
+     
     </>
   );
 }

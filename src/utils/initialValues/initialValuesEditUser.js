@@ -8,14 +8,11 @@ export const initialValuesEditUser = {
     email: "", 
     phone: "", 
     gender_id: null,
-    stateLocation: "",
-    municipalityLocation: "",
-    parishLocation: "",
+    state_id: "",
+    municipality_id: "",
+    parish_id: "",
     department_id: null,
     role_id: null,
-    username: "",
-    password: "",
-    passwordRepeat: "",
     address:"",
   };
   

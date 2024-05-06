@@ -41,6 +41,24 @@ const useUser = () => {
     },
   });
 
+  // const getUser = useQuery({
+  //   queryKey: ["repoDataUserEdit"],
+  //   queryFn: () => {
+  //     if (userId) {
+  //       return api
+  //         .get(`/users/${userId}`, config)
+  //         .then((response) => response.data.data[0]);
+  //     } else {
+  //       return null; 
+  //     }
+  //   },
+  //   onSuccess: (data) =>{
+  //     return data
+  //   },
+  //   onError: (error) =>{
+  //     return error
+  //   }
+  // })
   const { isPending, error, data, isSuccess} = useQuery({
     queryKey: ["repoData"],
     queryFn: async () =>{
