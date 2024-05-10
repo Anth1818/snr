@@ -83,7 +83,14 @@ export default function LocationInputs({
           disableClearable
           // sx={{ width: "300px" }}
           renderInput={(params) => (
-            <TextField {...params} label="Estado *" />
+            <TextField {...params} label="Estado *"
+            error={Boolean(
+              props.errors?.state_id && props.touched?.state_id
+            )}
+            helperText={
+              props.touched?.state_id ? props.errors?.state_id : ""
+            } />
+            
           )}
         ></Autocomplete>
       </Grid>

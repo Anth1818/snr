@@ -7,18 +7,11 @@ import { Link } from "react-router-dom";
 import Iconify from "../Iconify";
 import { useQuery } from "@tanstack/react-query";
 import api from "../../api/API_SNR";
-import { getTokenFromlocalStorage } from "../../utils/getDataLocalStorage";
+import config from "../../utils/config";
 
 // eslint-disable-next-line react/prop-types
 export default function ResponsiveLayoutUser() {
   
-  const token = getTokenFromlocalStorage();
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  };
   const { isPending, error, data, isSuccess} = useQuery({
     queryKey: ["repoData"],
     queryFn: async () =>{

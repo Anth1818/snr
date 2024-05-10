@@ -7,7 +7,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import useUser from "../../hooks/useUser";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Button, Collapse, IconButton, } from "@mui/material";
@@ -129,8 +128,8 @@ export function UserTable({data}) {
 
                         <Box sx={{ display: "flex", justifyContent: "center", width: "100%", flexWrap: "wrap", gap: "10px" }} >
                           <div>
-                            <b>Nombre completo:</b> {row.first_name} {row.other_names} {row.first_last_name} {row.other_last_names
-                            }
+                            <b>Nombre completo:</b> {row.names} {row.last_names} 
+                            
                           </div>
                           <div>
                             <b>Telefono:</b> {row.phone === "" ? "Sin datos" : row.phone}

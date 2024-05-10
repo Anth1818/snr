@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import api from "../api/API_SNR";
-import { getTokenFromlocalStorage } from "../utils/getDataLocalStorage";
+import config from "../utils/config";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -9,15 +9,7 @@ const useUser = () => {
   const [showAlertSuccess, setShowAlertSuccess] = useState(false);
   const [showAlertError, setShowAlertError] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
-  const token = getTokenFromlocalStorage();
-
-  // Configuracion del header con el token JWT
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  };
+ 
 
   const addUserMutation = useMutation({
     mutationFn: (values) => {
@@ -39,21 +31,21 @@ const useUser = () => {
   });
 
 
-  const getUserById = useQuery({
-    queryKey: ["repoDataUserEdit"],
-    queryFn: () => {
-        return api
-          .get(`/users/${userId}`, config)
-          .then((response) => response.data.data[0]);
+  // const getUserById = useQuery({
+  //   queryKey: ["repoDataUserEdit"],
+  //   queryFn: () => {
+  //       return api
+  //         .get(`/users/${userId}`, config)
+  //         .then((response) => response.data.data[0]);
      
-    },
-    onSuccess: async (data) =>{
-      return data
-    },
-    onError: (error) =>{
-      return error
-    }
-  })
+  //   },
+  //   onSuccess: async (data) =>{
+  //     return data
+  //   },
+  //   onError: (error) =>{
+  //     return error
+  //   }
+  // })
 
 
   return {
@@ -63,7 +55,6 @@ const useUser = () => {
     showAlertError,
     setShowAlertError,
     errorMessage,
-    getUserById
    
   };
 };

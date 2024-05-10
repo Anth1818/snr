@@ -3,8 +3,6 @@ import { ErrorMessage, Form } from "formik";
 import { GENDER, OFFICES, POSITIONS } from "../../../utils/constants";
 import FormButtonSubmit from "../Form0800/FormButtonSubmit";
 import LocationInputs from "../LocationInputs";
-import useUser from "../../../hooks/useUser";
-import { initialValuesEditUser } from "../../../utils/initialValues/initialValuesEditUser";
 
 // import { useEffect, useState } from "react";
 export default function FormUser({
@@ -12,27 +10,28 @@ export default function FormUser({
   initialValues: initialValuesNewUser,
   initialValues: initialValuesEditUser,
   isEdit,
+  dataUserEdit ,
+  isSuccessUserEdit,
+  isLoadingUserEdit,
 }) {
-  const { getUserById } = useUser();
 
-  const { data, isSuccess, isLoading } = getUserById;
-  
    
   return (
     <>
       {isEdit && (
         <Form>
-          {isLoading && <p>Cargando formulario...</p>}
-          {!isSuccess && <p>Error al cargar formulario...</p>}
-          {isSuccess && data && isEdit && (
+          {isLoadingUserEdit && <p>Cargando formulario...</p>}
+          {!isSuccessUserEdit && <p>Error al cargar formulario...</p>}
+          {isSuccessUserEdit && dataUserEdit && isEdit && (
             <>
               <FormGroup sx={{ marginTop: "20px" }}>
                 <Grid container spacing={3}>
                   <Grid item xs={12} sm={4} md={3}>
                     <TextField
                       label="Cédula *"
+                      type="number"
                       name="identity_card"
-                      defaultValue={data ? data.identity_card : ""}
+                      defaultValue={dataUserEdit ? dataUserEdit.identity_card : ""}
                       variant="outlined"
                       onChange={props.handleChange}
                       onBlur={props.handleBlur}
@@ -49,7 +48,7 @@ export default function FormUser({
                     <TextField
                       label="Nombres *"
                       name="names"
-                      defaultValue={data ? data.names : ""}
+                      defaultValue={dataUserEdit ? dataUserEdit.names : ""}
                       variant="outlined"
                       onChange={props.handleChange}
                       onBlur={props.handleBlur}
@@ -65,7 +64,7 @@ export default function FormUser({
                     <TextField
                       label="Apellidos *"
                       name="last_names"
-                      defaultValue={data ? data.last_names : ""}
+                      defaultValue={dataUserEdit ? dataUserEdit.last_names : ""}
                       variant="outlined"
                       onChange={props.handleChange}
                       onBlur={props.handleBlur}
@@ -82,7 +81,7 @@ export default function FormUser({
                     <TextField
                       label="Teléfono"
                       name="phone"
-                      defaultValue={data ? data.phone : ""}
+                      defaultValue={dataUserEdit ? dataUserEdit.phone : ""}
                       variant="outlined"
                       onChange={props.handleChange}
                       onBlur={props.handleBlur}
@@ -98,7 +97,7 @@ export default function FormUser({
                     <TextField
                       label="Correo electronico *"
                       name="email"
-                      defaultValue={data ? data.email : ""}
+                      defaultValue={dataUserEdit ? dataUserEdit.email : ""}
                       variant="outlined"
                       onChange={props.handleChange}
                       onBlur={props.handleBlur}
@@ -113,14 +112,14 @@ export default function FormUser({
                     props={props}
                     initialValues={initialValuesEditUser}
                     isEdit={true}
-                    location={data}
+                    location={dataUserEdit}
                   ></LocationInputs>
 
                   <Grid item xs={12} sm={4} md={3}>
                     <TextField
                       label="Dirección"
                       name="address"
-                      defaultValue={data ? data.address : ""}
+                      defaultValue={dataUserEdit ? dataUserEdit.address : ""}
                       variant="outlined"
                       onChange={props.handleChange}
                       onBlur={props.handleBlur}
@@ -136,13 +135,14 @@ export default function FormUser({
                   <Grid item xs={12} sm={4} md={3}>
                     <Autocomplete
                       disablePortal
-                      defaultValue={GENDER.find(gender => gender.id === data.gender_id)?.label || "no valor"}
+                      defaultValue={GENDER.find(gender => gender.id === dataUserEdit.gender_id)?.label || "no valor"}
                       freeSolo
                       size="small"
                       fullWidth
                       name="gender_id"
                       id="gender"
                       options={GENDER}
+                      disableClearable
                       onChange={(e, value) => {
                         props.setFieldValue(
                           "gender_id",
@@ -170,10 +170,11 @@ export default function FormUser({
                   <Grid item xs={12} sm={4} md={3}>
                     <Autocomplete
                       disablePortal
+                      disableClearable
                       size="small"
                       fullWidth
                       name="department_id"
-                      defaultValue={OFFICES.find(office => office.id === data.department_id)?.label || "no valor"}
+                      defaultValue={OFFICES.find(office => office.id === dataUserEdit.department_id)?.label || "no valor"}
                       freeSolo
                       options={OFFICES}
                       onChange={(e, value) => {
@@ -204,10 +205,11 @@ export default function FormUser({
                   <Grid item xs={12} sm={4} md={3}>
                     <Autocomplete
                       disablePortal
+                      disableClearable
                       size="small"
                       fullWidth
                       name="role_id"
-                      defaultValue={POSITIONS.find(position => position.id === data.role_id)?.label || "no valor"}
+                      defaultValue={POSITIONS.find(position => position.id === dataUserEdit.role_id)?.label || "no valor"}
                       freeSolo
                       options={POSITIONS}
                       onChange={(e, value) => {
@@ -237,7 +239,7 @@ export default function FormUser({
                     </Grid>            
                 </Grid>
               </FormGroup>
-              <FormButtonSubmit isEdit={isEdit}></FormButtonSubmit>
+              <FormButtonSubmit isEdit={isEdit} ></FormButtonSubmit>
             </>
           )}
         </Form>
@@ -434,7 +436,7 @@ export default function FormUser({
                   )}
                 ></Autocomplete>
               </Grid>
-              <Grid item xs={12} sm={4} md={3}>
+              <Grid item xs={12} sm={4} md={4}>
                 <TextField
                   label="Nombre de usuario *"
                   name="username"
@@ -450,7 +452,7 @@ export default function FormUser({
                   fullWidth
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={3}>
+              <Grid item xs={12} sm={4} md={4}>
                 <TextField
                   label="Contraseña *"
                   name="password"
@@ -466,7 +468,7 @@ export default function FormUser({
                   fullWidth
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={12}>
+              <Grid item xs={12} sm={4} md={4}>
                 <TextField
                   label="Repetir Contraseña *"
                   name="passwordRepeat"

@@ -3,36 +3,61 @@ import { Box, Container } from "@mui/system";
 import RenderDrawer from "../Drawer/Drawer";
 import { Formik } from "formik";
 import validationSchemaEditUser from "../../utils/validationsSchemas/validationSchemaEditUser";
-import { initialValuesEditUser } from "../../utils/initialValues/initialValuesEditUser";
 import FormUser from "../Forms/FormUser/FormUser";
-import useUser from "../../hooks/useUser";
+import config from "../../utils/config";
 import Notification from "../Notifications/Notification";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import api from "../../api/API_SNR";
+import { useParams } from "react-router-dom";
+import { useState } from "react";
 // import { useEffect } from "react";
 
 export default function ResponsiveLayoutEditUser() {
+  const [updateSuccessMsg, setUpdateSuccessMsg] = useState("")
+  const { userId } = useParams();
 
-  const { getUserById } = useUser();
+  const { data, isSuccess, isLoading } = useQuery({
+    queryKey: ["repoDataUserEdit"],
+    queryFn: () => {
+      return api
+        .get(`/users/${userId}`, config)
+        .then((response) => response.data.data[0]);
+    },
+  });
+  const updateUserData = useMutation({
+    mutationFn: (values) => {
+      return api.patch(`/users/${userId}`, values, config);
+    },
+    onSuccess: async ({ data }) => {
+      setUpdateSuccessMsg(data.data.msg)
+    },
+    onError: async (error) => {
+      console.error("Error en la mutación:", error);  
 
-  const { data, isSuccess, isLoading } = getUserById;
+  }})
 
-  let initialValueEditUser= {};
-  
+  const handleUpdateUser = (values)=>{
+    updateUserData.mutateAsync(values)
+  }
+
+
+  let initialValueEditUser = {};
 
   if (isSuccess && data) {
     initialValueEditUser = {
       identity_card: data?.identity_card,
-      names: data?.names,  
-      last_names: data?.last_names, 
+      names: data?.names,
+      last_names: data?.last_names,
       is_foreign: data?.is_foreign,
-      email: data?.email, 
-      phone: data?.phone, 
+      email: data?.email,
+      phone: data?.phone,
       gender_id: data?.gender_id,
       state_id: data?.state_id,
       municipality_id: data?.municipality_id,
       parish_id: data?.parish_id,
       department_id: data?.department_id,
       role_id: data?.role_id,
-      address:data?.address,
+      address: data?.address,
       resetPassword: false,
     };
   }
@@ -79,7 +104,7 @@ export default function ResponsiveLayoutEditUser() {
                       initialValues={initialValueEditUser}
                       validationSchema={validationSchemaEditUser}
                       onSubmit={(values) => {
-                        console.log(values);
+                        handleUpdateUser(values);
                       }}
                     >
                       {(props) => (
@@ -87,6 +112,10 @@ export default function ResponsiveLayoutEditUser() {
                           props={props}
                           initialValuesEdit={initialValueEditUser}
                           isEdit={true}
+                          dataUserEdit={data}
+                          isSuccessUserEdit={isSuccess}
+                          isLoadingUserEdit={isLoading}
+                        
                         ></FormUser>
                       )}
                     </Formik>
@@ -97,15 +126,14 @@ export default function ResponsiveLayoutEditUser() {
           </Grid>
         </Container>
       </Box>
-      {/* {showAlertSuccess && (
+      {updateUserData.data && (
         <Notification
-          openNotification={showAlertSuccess}
-          closeNotification={() => setShowAlertSuccess(false)}
-          message={"Registro exitoso"}
+          openNotification={updateUserData.isSuccess}
+          message={updateSuccessMsg}
           severity={"success"}
         />
       )}
-      {showAlertError && (
+      {/* {showAlertError && (
         <Notification
           openNotification={showAlertError}
           closeNotification={() => setShowAlertError(false)}
