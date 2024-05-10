@@ -35,12 +35,12 @@ const columns = [
   },
 ];
 
-export function UserTable() {
+export function UserTable({data}) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const { data } = useUser();
   const [users, setUsers] = useState([]);
   const [openRows, setOpenRows] = useState({});
+  
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

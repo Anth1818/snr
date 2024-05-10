@@ -10,18 +10,20 @@ import { initialValuesEditUser } from "../../../utils/initialValues/initialValue
 export default function FormUser({
   props,
   initialValues: initialValuesNewUser,
-  initialValuesEdit,
+  initialValues: initialValuesEditUser,
   isEdit,
 }) {
   const { getUserById } = useUser();
 
-  const { data, isSuccess } = getUserById;
+  const { data, isSuccess, isLoading } = getUserById;
+  
    
   return (
     <>
       {isEdit && (
         <Form>
-          {!isSuccess && <p>Cargando formulario...</p>}
+          {isLoading && <p>Cargando formulario...</p>}
+          {!isSuccess && <p>Error al cargar formulario...</p>}
           {isSuccess && data && isEdit && (
             <>
               <FormGroup sx={{ marginTop: "20px" }}>
@@ -46,14 +48,14 @@ export default function FormUser({
                   <Grid item xs={12} sm={4} md={3}>
                     <TextField
                       label="Nombres *"
-                      name="first_name"
-                      defaultValue={data ? data.first_name + " " + data.other_names : ""}
+                      name="names"
+                      defaultValue={data ? data.names : ""}
                       variant="outlined"
                       onChange={props.handleChange}
                       onBlur={props.handleBlur}
-                      helperText={<ErrorMessage name="first_name" />}
+                      helperText={<ErrorMessage name="names" />}
                       error={Boolean(
-                        props.errors?.first_name && props.touched?.first_name
+                        props.errors?.names && props.touched?.names
                       )}
                       size="small"
                       fullWidth
@@ -62,15 +64,15 @@ export default function FormUser({
                   <Grid item xs={12} sm={4} md={3}>
                     <TextField
                       label="Apellidos *"
-                      name="first_last_name"
-                      defaultValue={data ? data.first_last_name + " " + data.other_last_names : ""}
+                      name="last_names"
+                      defaultValue={data ? data.last_names : ""}
                       variant="outlined"
                       onChange={props.handleChange}
                       onBlur={props.handleBlur}
-                      helperText={<ErrorMessage name="first_last_name" />}
+                      helperText={<ErrorMessage name="last_names" />}
                       error={Boolean(
-                        props.errors?.first_last_name &&
-                          props.touched?.first_last_name
+                        props.errors?.last_names &&
+                          props.touched?.last_names
                       )}
                       size="small"
                       fullWidth
@@ -231,7 +233,7 @@ export default function FormUser({
                     ></Autocomplete>
                   </Grid>
                   <Grid item xs={12} sm={4} md={3}>
-                  <FormControlLabel control={<Checkbox  />} label="¿Resetear contraseña?" />
+                  <FormControlLabel control={<Checkbox  />} name="resetPassword"label="¿Resetear contraseña?" onChange={props.handleChange}/>
                     </Grid>            
                 </Grid>
               </FormGroup>
@@ -263,15 +265,15 @@ export default function FormUser({
               </Grid>
               <Grid item xs={12} sm={4} md={3}>
                 <TextField
-                  label="Primer nombre *"
-                  name="first_name"
+                  label="Nombres *"
+                  name="names"
                   defaultValue={""}
                   variant="outlined"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
-                  helperText={<ErrorMessage name="first_name" />}
+                  helperText={<ErrorMessage name="names" />}
                   error={Boolean(
-                    props.errors?.first_name && props.touched?.first_name
+                    props.errors?.names && props.touched?.names
                   )}
                   size="small"
                   fullWidth
@@ -279,49 +281,16 @@ export default function FormUser({
               </Grid>
               <Grid item xs={12} sm={4} md={3}>
                 <TextField
-                  label="Segundo nombre *"
-                  name="other_names"
+                  label="Apellidos *"
+                  name="last_names"
                   defaultValue={""}
                   variant="outlined"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
-                  helperText={<ErrorMessage name="other_names" />}
+                  helperText={<ErrorMessage name="last_names" />}
                   error={Boolean(
-                    props.errors?.other_names && props.touched?.other_names
-                  )}
-                  size="small"
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12} sm={4} md={3}>
-                <TextField
-                  label="Primer apellido"
-                  name="first_last_name"
-                  defaultValue={""}
-                  variant="outlined"
-                  onChange={props.handleChange}
-                  onBlur={props.handleBlur}
-                  helperText={<ErrorMessage name="first_last_name" />}
-                  error={Boolean(
-                    props.errors?.first_last_name &&
-                      props.touched?.first_last_name
-                  )}
-                  size="small"
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12} sm={4} md={3}>
-                <TextField
-                  label="Segundo apellido"
-                  name="other_last_names"
-                  defaultValue={""}
-                  variant="outlined"
-                  onChange={props.handleChange}
-                  onBlur={props.handleBlur}
-                  helperText={<ErrorMessage name="other_last_names" />}
-                  error={Boolean(
-                    props.errors?.other_last_names &&
-                      props.touched?.other_last_names
+                    props.errors?.last_names &&
+                      props.touched?.last_names
                   )}
                   size="small"
                   fullWidth
@@ -395,7 +364,7 @@ export default function FormUser({
                   renderInput={(params) => (
                     <TextField
                       {...params}
-                      label="Seleccione un genero *"
+                      label="Género *"
                       error={Boolean(
                         props.errors?.gender_id && props.touched?.gender_id
                       )}
@@ -424,7 +393,7 @@ export default function FormUser({
                   renderInput={(params) => (
                     <TextField
                       {...params}
-                      label="Seleccione un departamento *"
+                      label="Departamento *"
                       error={Boolean(
                         props.errors?.department_id &&
                           props.touched?.department_id
@@ -454,7 +423,7 @@ export default function FormUser({
                   renderInput={(params) => (
                     <TextField
                       {...params}
-                      label="Seleccione un cargo *"
+                      label="Cargo *"
                       error={Boolean(
                         props.errors?.role_id && props.touched?.role_id
                       )}

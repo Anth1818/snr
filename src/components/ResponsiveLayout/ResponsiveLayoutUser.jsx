@@ -5,12 +5,29 @@ import {UserTable} from "../Tables/UserTable";
 // import {useState } from "react";
 import { Link } from "react-router-dom";
 import Iconify from "../Iconify";
-import useUser from "../../hooks/useUser";
+import { useQuery } from "@tanstack/react-query";
+import api from "../../api/API_SNR";
+import { getTokenFromlocalStorage } from "../../utils/getDataLocalStorage";
 
 // eslint-disable-next-line react/prop-types
 export default function ResponsiveLayoutUser() {
- const { isPending, error, } = useUser()
- 
+  
+  const token = getTokenFromlocalStorage();
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const { isPending, error, data, isSuccess} = useQuery({
+    queryKey: ["repoData"],
+    queryFn: async () =>{
+      const data = await api.get("/users", config)
+      return data.data.data
+    }
+   
+  });
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -48,7 +65,7 @@ export default function ResponsiveLayoutUser() {
             </Button>
           </Link>
         </Stack>
-        <UserTable></UserTable>
+        <UserTable data={data}></UserTable>
         {isPending && (<p className="w-full text-center">Cargando datos de usuarios...</p>)}
         {error && (<p className="w-full text-center">Hubo un error al cargar los usuarios.</p>)}
         </Container>

@@ -10,26 +10,30 @@ import Notification from "../Notifications/Notification";
 // import { useEffect } from "react";
 
 export default function ResponsiveLayoutEditUser() {
-  const {
-    showAlertSuccess,
-    setShowAlertSuccess,
-    showAlertError,
-    setShowAlertError,
-    errorMessage,
-    isPendingUserEdit,
-  } = useUser();
+
   const { getUserById } = useUser();
 
-  const { data, isSuccess } = getUserById;
-    console.log(data)
+  const { data, isSuccess, isLoading } = getUserById;
 
-  let initialValueUser = {};
+  let initialValueEditUser= {};
+  
 
-  if (isSuccess) {
-    initialValueUser = {
-      user: { columns: ["identity_card"], values: [] },
-      location: { columns: [], values: [] },
-      resetPassword: false
+  if (isSuccess && data) {
+    initialValueEditUser = {
+      identity_card: data?.identity_card,
+      names: data?.names,  
+      last_names: data?.last_names, 
+      is_foreign: data?.is_foreign,
+      email: data?.email, 
+      phone: data?.phone, 
+      gender_id: data?.gender_id,
+      state_id: data?.state_id,
+      municipality_id: data?.municipality_id,
+      parish_id: data?.parish_id,
+      department_id: data?.department_id,
+      role_id: data?.role_id,
+      address:data?.address,
+      resetPassword: false,
     };
   }
 
@@ -69,10 +73,10 @@ export default function ResponsiveLayoutEditUser() {
                   </Typography>
                 </Box>
                 <Box>
-                  {!isSuccess && <p>Cargando...</p>}
+                  {isLoading && <p>Cargando...</p>}
                   {isSuccess && (
                     <Formik
-                      initialValues={initialValueUser}
+                      initialValues={initialValueEditUser}
                       validationSchema={validationSchemaEditUser}
                       onSubmit={(values) => {
                         console.log(values);
@@ -81,9 +85,8 @@ export default function ResponsiveLayoutEditUser() {
                       {(props) => (
                         <FormUser
                           props={props}
-                          initialValuesEdit={initialValueUser}
+                          initialValuesEdit={initialValueEditUser}
                           isEdit={true}
-                          pending={isPendingUserEdit}
                         ></FormUser>
                       )}
                     </Formik>
@@ -94,7 +97,7 @@ export default function ResponsiveLayoutEditUser() {
           </Grid>
         </Container>
       </Box>
-      {showAlertSuccess && (
+      {/* {showAlertSuccess && (
         <Notification
           openNotification={showAlertSuccess}
           closeNotification={() => setShowAlertSuccess(false)}
@@ -109,7 +112,7 @@ export default function ResponsiveLayoutEditUser() {
           message={errorMessage}
           severity={"error"}
         />
-      )}
+      )} */}
     </Box>
   );
 }

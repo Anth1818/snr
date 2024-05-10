@@ -9,7 +9,9 @@ function ProtectedRoute() {
 
   if (isActive === false && !checkToken) {
      return <Navigate to={"/login"} replace />;  
-  } else {
+  } else if(!checkToken){
+      return <Navigate to={"/login"} replace />;
+  }else {
    return <Outlet />;
   }
 }

@@ -1,21 +1,16 @@
 import * as Yup from "yup";
 
 const validationSchemaUser = Yup.object().shape({
-  first_name: Yup.string()
+  names: Yup.string()
     .matches(/^[aA-zZ\s]+$/, "Solo se permiten caracteres alfabéticos")
     .max(30, "Máximo 30 caracteres")
     .required("Campo requerido"),
-  other_names: Yup.string()
-    .matches(/^[aA-zZ\s]+$/, "Solo se permiten caracteres alfabéticos")
-    .max(30, "Máximo 30 caracteres"),
-  first_last_name: Yup.string()
+ 
+  last_names: Yup.string()
     .matches(/^[aA-zZ\s]+$/, "Solo se permiten caracteres alfabéticos")
     .max(30, "Máximo 30 caracteres")
     .required("Campo requerido"),
-  other_last_names: Yup.string()
-    .matches(/^[aA-zZ\s]+$/, "Solo se permiten caracteres alfabéticos")
-    .max(30, "Máximo 30 caracteres"),
-
+ 
   identity_card: Yup.string()
     .required("Campo requerido")
     .matches(/^[0-9]+$/, "Solo se permiten números")

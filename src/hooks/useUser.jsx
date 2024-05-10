@@ -32,78 +32,28 @@ const useUser = () => {
       console.error("Error en la mutación:", error);
       setShowAlertError(true);
       setErrorMessage(
-        `${error.response.data.data.error}: ${
-          error.response.data.data.identity_card === undefined
-            ? error.response.data.data.username
-            : error.response.data.data.identity_card
-        }`
+        `${error.response.data.error.msg}
+        `
       );
     },
   });
 
-  // const getUser = useQuery({
-  //   queryKey: ["repoDataUserEdit"],
-  //   queryFn: () => {
-  //     if (userId) {
-  //       return api
-  //         .get(`/users/${userId}`, config)
-  //         .then((response) => response.data.data[0]);
-  //     } else {
-  //       return null; 
-  //     }
-  //   },
-  //   onSuccess: (data) =>{
-  //     return data
-  //   },
-  //   onError: (error) =>{
-  //     return error
-  //   }
-  // })
-  const { isPending, error, data, isSuccess} = useQuery({
-    queryKey: ["repoData"],
-    queryFn: async () =>{
-      const data = await api.get("/users", config)
-      return data.data.data
-    }
-   
-  });
 
   const getUserById = useQuery({
     queryKey: ["repoDataUserEdit"],
     queryFn: () => {
-      if (userId) {
         return api
           .get(`/users/${userId}`, config)
           .then((response) => response.data.data[0]);
-      } else {
-        return null; 
-      }
+     
     },
-    onSuccess: (data) =>{
+    onSuccess: async (data) =>{
       return data
     },
     onError: (error) =>{
       return error
     }
   })
-
-  // const {
-  //   isPending: isPendingUserEdit,
-  //   error: errorUserEdit,
-  //   data: dataUserEdit,
-  //   isSuccess: successDataEdit
-  // } = useQuery({
-  //   queryKey: ["repoDataUserEdit"],
-  //   queryFn: () => {
-  //     if (userId) {
-  //       return api
-  //         .get(`/users/${userId}`, config)
-  //         .then((response) => response.data.data[0]);
-  //     } else {
-  //       return null; 
-  //     }
-  //   },
-  // });
 
 
   return {
@@ -113,15 +63,8 @@ const useUser = () => {
     showAlertError,
     setShowAlertError,
     errorMessage,
-    data,
-    isPending,
-    error,
-    isSuccess,
     getUserById
-    // isPendingUserEdit,
-    // errorUserEdit,
-    // dataUserEdit,
-    // successDataEdit
+   
   };
 };
 

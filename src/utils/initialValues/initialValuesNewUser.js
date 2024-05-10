@@ -1,9 +1,7 @@
 export const initialValuesNewUser = {
-  first_name: "", 
-  other_names: "", 
-  first_last_name: "",
-  other_last_names: "", 
   identity_card: "",
+  names: "",  
+  last_names: "", 
   is_foreign: false,
   email: "", 
   phone: "", 

@@ -57,7 +57,6 @@ export default function LocationInputs({
     }
   }, [selectedMunicipality, selectedState]);
 
-  console.log("render")
   return (
     <>
     {isEdit && (
@@ -120,6 +119,7 @@ export default function LocationInputs({
           size="small"
           fullWidth
           name="parish_id"
+          freeSolo
           defaultValue={location.parish}
           options={locationParish?.map((item) => ({
             label: item.parish,
@@ -145,6 +145,7 @@ export default function LocationInputs({
        <Grid item xs={12} sm={4} md={3}>
         <Autocomplete
           size="small"
+          freeSolo
           fullWidth
           name="state_id"
           id="states"
@@ -170,6 +171,7 @@ export default function LocationInputs({
         <Autocomplete
           size="small"
           fullWidth
+          freeSolo
           name="municipality_id"
           id="municipio"
           options={locationMunicipality?.map((item) => ({
@@ -195,6 +197,7 @@ export default function LocationInputs({
         <Autocomplete
           size="small"
           fullWidth
+          freeSolo
           name="parish_id"
           options={locationParish?.map((item) => ({
             label: item.parish,
