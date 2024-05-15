@@ -48,6 +48,7 @@ export default function UserListToolbar({
   numSelected,
   filterName,
   onFilterName,
+  searchLabel,
 }) {
   return (
     <StyledRoot
@@ -67,7 +68,7 @@ export default function UserListToolbar({
           value={filterName}
           name="filter"
           onChange={onFilterName}
-          placeholder="Buscar por n° de caso"
+          placeholder={searchLabel}
           startAdornment={
             <InputAdornment position="start">
               <Iconify

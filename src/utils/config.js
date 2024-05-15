@@ -1,4 +1,4 @@
-import { getTokenFromlocalStorage } from "../utils/getDataLocalStorage";
+import { getTokenFromlocalStorage } from "./getDataLocalStorage.js";
 const token = getTokenFromlocalStorage();
 
 const  config = {

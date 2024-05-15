@@ -9,12 +9,13 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Button, Collapse, IconButton, } from "@mui/material";
+import { Button, Collapse, IconButton, Typography, } from "@mui/material";
 import InfoIcon from "@mui/icons-material/Info";
 import React from "react";
 import { Box, } from "@mui/system";
-
+import { filter } from "lodash";
 import { Link } from "react-router-dom";
+import { UserListToolbar } from "../../sections/user";
 
 const columns = [
   { id: "details_user", label: "Detalles", align: "center" },
@@ -34,12 +35,54 @@ const columns = [
   },
 ];
 
+function descendingComparator(a, b, orderBy) {
+  if (b[orderBy] < a[orderBy]) {
+    return -1;
+  }
+  if (b[orderBy] > a[orderBy]) {
+    return 1;
+  }
+  return 0;
+}
+
+function getComparator(order, orderBy) {
+  return order === "desc"
+    ? (a, b) => descendingComparator(a, b, orderBy)
+    : (a, b) => -descendingComparator(a, b, orderBy);
+}
+
+
+
 export function UserTable({data}) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [users, setUsers] = useState([]);
   const [openRows, setOpenRows] = useState({});
+  const [filterName, setFilterName] = useState("");
+  const [orderBy, setOrderBy] = useState("name");
+  const [order, setOrder] = useState("asc");
+
+  function applySortFilter(array, comparator, query) {
+
+    const stabilizedThis = array?.map((el, index) => [el, index]);
+    stabilizedThis?.sort((a, b) => {
+      const order = comparator(a[0], b[0]);
+      if (order !== 0) return order;
+      return a[1] - b[1];
+    });
+    if (query) {
+      return filter(
+        stabilizedThis,
+        (_user) => _user[0]?.identity_card.toString().indexOf(query) !== -1
+      ).map((el) => el[0]);
+    }
+    return stabilizedThis?.map((el) => el[0]);
+  }
   
+  const handleFilterByName = (event) => {
+    setPage(0);
+    setFilterName(event.target.value);
+  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -60,10 +103,26 @@ export function UserTable({data}) {
       [userId]: !prevOpenRows[userId],
     }));
   };
+  
+
+  const filteredUsers = applySortFilter(
+    data,
+    getComparator(order, orderBy),
+    filterName
+  );
+  const isNotFound = !filteredUsers?.length && !!filterName;
+
+  // const filteredUsersReverse = [...filteredUsers].reverse();
 
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       <TableContainer sx={{ maxHeight: 440 }}>
+        <UserListToolbar
+            // numSelected={selected.length}
+            filterName={filterName}
+            onFilterName={handleFilterByName}
+            searchLabel="Buscar por cédula"
+          />
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -84,7 +143,7 @@ export function UserTable({data}) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {users?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
+            {filteredUsers?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
               <React.Fragment key={row.id}>
                 <TableRow hover tabIndex={-1}>
                   {columns.map((column) => {
@@ -159,6 +218,28 @@ export function UserTable({data}) {
               </React.Fragment>
             ))}
           </TableBody>
+          {isNotFound && (
+                  <TableBody>
+                    <TableRow>
+                      <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
+                        <Paper
+                          sx={{
+                            textAlign: "center",
+                          }}
+                        >
+                          <Typography variant="h6" paragraph>
+                            No encontrado
+                          </Typography>
+
+                          <Typography variant="body2">
+                            No hay resultados para &nbsp;
+                            <strong>&quot;{filterName}&quot;</strong>.
+                          </Typography>
+                        </Paper>
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                )}
         </Table>
       </TableContainer>
       <TablePagination
