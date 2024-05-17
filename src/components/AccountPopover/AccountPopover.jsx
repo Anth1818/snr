@@ -20,13 +20,13 @@ const MENU_OPTIONS = [
 // ----------------------------------------------------------------------
 
 export default function AccountPopover() {
-  const {role, department, username} = getUserDataFromStorage()
+  const {role, department, username,gender_id,id} = getUserDataFromStorage()
   const [open, setOpen] = useState(null);
   const account = {
     displayName: username,
     appointment: role,
     department: department,
-    photoURL: '/assets/female-user-profile.png',
+    photoURL: gender_id === 1 ? '/assets/female-user-profile.png' : '/assets/male-user-profile.webp' ,
   };
   
 
@@ -100,9 +100,11 @@ export default function AccountPopover() {
 
         <Stack sx={{ p: 1 }}>
           {MENU_OPTIONS.map((option) => (
-            <MenuItem key={option.label} onClick={editProfile}>
+            <Link to={`/PageViewProfile/${id}`} key={option.label}>
+            <MenuItem  onClick={editProfile}>
               {option.label}
             </MenuItem>
+            </Link>
           ))}
         </Stack>
 

@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import Iconify from "../Iconify";
 import { useQuery } from "@tanstack/react-query";
 import api from "../../api/API_SNR";
-import config from "../../utils/config";
+import {config} from "../../utils/config.js"
 
 // eslint-disable-next-line react/prop-types
 export default function ResponsiveLayoutUser() {

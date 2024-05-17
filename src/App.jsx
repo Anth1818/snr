@@ -7,7 +7,6 @@ import NotFound from "./pages/PageNotFound.jsx";
 import PageStatistics from "./pages/PageStatistics.jsx";
 import PageForm0800 from "./pages/Pageform0800.jsx";
 import PageForm0800Edit from "./pages/PageForm0800Edit.jsx";
-import EditProfile from "./pages/EditProfile.jsx";
 import AddUser from "./pages/AddUser.jsx";
 import { UserProvider } from "./context/userContext.jsx";
 import ProtectedRoute from "./components/Routes/ProtectedRoute.jsx";
@@ -16,6 +15,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme.js";
 import PageUser from "./pages/PageUser.jsx";
 import PageEditUser from "./pages/PageEditUser.jsx";
+import PageViewProfile from "./pages/PageViewProfile.jsx";
 
 export default function App() {
   return (
@@ -24,7 +24,6 @@ export default function App() {
         <Routes>
           <Route element={<ProtectedRoute /> }>
             <Route path="/Page0800" element={<Page0800 />} />
-            <Route path="/EditProfile" element={<EditProfile />} />
             <Route path="/AddUser" element={<AddUser />} />
             <Route path="/PageUser" element={<PageUser />} />
             <Route path="/PageRCV" element={<PageRCV />} />
@@ -32,6 +31,7 @@ export default function App() {
             <Route path="/PageStatistics" element={<PageStatistics />} />
             <Route path="/PageForm0800" element={<PageForm0800 />} />
             <Route path="/EditUser/:userId" element={<PageEditUser />} />
+            <Route path="/PageViewProfile/:userId" element={<PageViewProfile />} />
             <Route
               path="/PageForm0800Edit/:caseId"
               element={<PageForm0800Edit />}

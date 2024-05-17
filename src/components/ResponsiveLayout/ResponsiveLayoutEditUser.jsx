@@ -4,7 +4,7 @@ import RenderDrawer from "../Drawer/Drawer";
 import { Formik } from "formik";
 import validationSchemaEditUser from "../../utils/validationsSchemas/validationSchemaEditUser";
 import FormUser from "../Forms/FormUser/FormUser";
-import config from "../../utils/config";
+import {config} from "../../utils/config";
 import Notification from "../Notifications/Notification";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import api from "../../api/API_SNR";
@@ -13,6 +13,7 @@ import { useState } from "react";
 // import { useEffect } from "react";
 
 export default function ResponsiveLayoutEditUser() {
+  
   const [updateSuccessMsg, setUpdateSuccessMsg] = useState("")
   const { userId } = useParams();
 

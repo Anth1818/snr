@@ -1,4 +1,11 @@
-import { Autocomplete, Checkbox, FormControlLabel, FormGroup, Grid, TextField } from "@mui/material";
+import {
+  Autocomplete,
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  Grid,
+  TextField,
+} from "@mui/material";
 import { ErrorMessage, Form } from "formik";
 import { GENDER, OFFICES, POSITIONS } from "../../../utils/constants";
 import FormButtonSubmit from "../Form0800/FormButtonSubmit";
@@ -10,12 +17,11 @@ export default function FormUser({
   initialValues: initialValuesNewUser,
   initialValues: initialValuesEditUser,
   isEdit,
-  dataUserEdit ,
+  dataUserEdit,
   isSuccessUserEdit,
   isLoadingUserEdit,
+  viewProfile,
 }) {
-
-   
   return (
     <>
       {isEdit && (
@@ -31,7 +37,9 @@ export default function FormUser({
                       label="Cédula *"
                       type="number"
                       name="identity_card"
-                      defaultValue={dataUserEdit ? dataUserEdit.identity_card : ""}
+                      defaultValue={
+                        dataUserEdit ? dataUserEdit.identity_card : ""
+                      }
                       variant="outlined"
                       onChange={props.handleChange}
                       onBlur={props.handleBlur}
@@ -42,6 +50,7 @@ export default function FormUser({
                       )}
                       size="small"
                       fullWidth
+                      disabled={viewProfile}
                     />
                   </Grid>
                   <Grid item xs={12} sm={4} md={3}>
@@ -70,8 +79,7 @@ export default function FormUser({
                       onBlur={props.handleBlur}
                       helperText={<ErrorMessage name="last_names" />}
                       error={Boolean(
-                        props.errors?.last_names &&
-                          props.touched?.last_names
+                        props.errors?.last_names && props.touched?.last_names
                       )}
                       size="small"
                       fullWidth
@@ -135,7 +143,11 @@ export default function FormUser({
                   <Grid item xs={12} sm={4} md={3}>
                     <Autocomplete
                       disablePortal
-                      defaultValue={GENDER.find(gender => gender.id === dataUserEdit.gender_id)?.label || "no valor"}
+                      defaultValue={
+                        GENDER.find(
+                          (gender) => gender.id === dataUserEdit.gender_id
+                        )?.label || "no valor"
+                      }
                       freeSolo
                       size="small"
                       fullWidth
@@ -170,11 +182,16 @@ export default function FormUser({
                   <Grid item xs={12} sm={4} md={3}>
                     <Autocomplete
                       disablePortal
+                      disabled={viewProfile}
                       disableClearable
                       size="small"
                       fullWidth
                       name="department_id"
-                      defaultValue={OFFICES.find(office => office.id === dataUserEdit.department_id)?.label || "no valor"}
+                      defaultValue={
+                        OFFICES.find(
+                          (office) => office.id === dataUserEdit.department_id
+                        )?.label || "no valor"
+                      }
                       freeSolo
                       options={OFFICES}
                       onChange={(e, value) => {
@@ -205,11 +222,16 @@ export default function FormUser({
                   <Grid item xs={12} sm={4} md={3}>
                     <Autocomplete
                       disablePortal
+                      disabled={viewProfile}
                       disableClearable
                       size="small"
                       fullWidth
                       name="role_id"
-                      defaultValue={POSITIONS.find(position => position.id === dataUserEdit.role_id)?.label || "no valor"}
+                      defaultValue={
+                        POSITIONS.find(
+                          (position) => position.id === dataUserEdit.role_id
+                        )?.label || "no valor"
+                      }
                       freeSolo
                       options={POSITIONS}
                       onChange={(e, value) => {
@@ -235,11 +257,17 @@ export default function FormUser({
                     ></Autocomplete>
                   </Grid>
                   <Grid item xs={12} sm={4} md={3}>
-                  <FormControlLabel control={<Checkbox  />} name="resetPassword"label="¿Resetear contraseña?" onChange={props.handleChange}/>
-                    </Grid>            
+                    <FormControlLabel
+                      disabled={viewProfile}
+                      control={<Checkbox />}
+                      name="resetPassword"
+                      label="¿Resetear contraseña?"
+                      onChange={props.handleChange}
+                    />
+                  </Grid>
                 </Grid>
               </FormGroup>
-              <FormButtonSubmit isEdit={isEdit} ></FormButtonSubmit>
+              <FormButtonSubmit isEdit={isEdit}></FormButtonSubmit>
             </>
           )}
         </Form>
@@ -274,9 +302,7 @@ export default function FormUser({
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
                   helperText={<ErrorMessage name="names" />}
-                  error={Boolean(
-                    props.errors?.names && props.touched?.names
-                  )}
+                  error={Boolean(props.errors?.names && props.touched?.names)}
                   size="small"
                   fullWidth
                 />
@@ -291,8 +317,7 @@ export default function FormUser({
                   onBlur={props.handleBlur}
                   helperText={<ErrorMessage name="last_names" />}
                   error={Boolean(
-                    props.errors?.last_names &&
-                      props.touched?.last_names
+                    props.errors?.last_names && props.touched?.last_names
                   )}
                   size="small"
                   fullWidth
