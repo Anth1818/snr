@@ -14,7 +14,7 @@ import validationSchemaEditUser from "../../utils/validationsSchemas/validationS
 import FormUser from "../Forms/FormUser/FormUser";
 import { config } from "../../utils/config";
 import Notification from "../Notifications/Notification";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import {  useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import api from "../../api/API_SNR";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
@@ -23,9 +23,10 @@ import { getUserDataFromStorage } from "../../utils/getDataLocalStorage";
 export default function ResponsiveLayoutViewProfile() {
   const [updateSuccessMsg, setUpdateSuccessMsg] = useState("");
   const { userId } = useParams();
+  const queryClient = useQueryClient();
 
   const { data, isSuccess, isLoading } = useQuery({
-    queryKey: ["repoDataUserEdit"],
+    queryKey: ['userDataProfile', userId],
     queryFn: () => {
       return api
         .get(`/users/${userId}`, config)
@@ -38,6 +39,7 @@ export default function ResponsiveLayoutViewProfile() {
     },
     onSuccess: async ({ data }) => {
       setUpdateSuccessMsg(data.data.msg);
+      queryClient.invalidateQueries(["userDataProfile", userId]);
     },
     onError: async (error) => {
       console.error("Error en la mutación:", error);

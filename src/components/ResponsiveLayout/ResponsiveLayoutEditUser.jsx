@@ -6,62 +6,74 @@ import validationSchemaEditUser from "../../utils/validationsSchemas/validationS
 import FormUser from "../Forms/FormUser/FormUser";
 import {config} from "../../utils/config";
 import Notification from "../Notifications/Notification";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import api from "../../api/API_SNR";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import { useEffect } from "react";
 
 export default function ResponsiveLayoutEditUser() {
   
-  const [updateSuccessMsg, setUpdateSuccessMsg] = useState("")
+  const [updateSuccessMsg, setUpdateSuccessMsg] = useState("");
   const { userId } = useParams();
+  const queryClient = useQueryClient();
 
-  const { data, isSuccess, isLoading } = useQuery({
-    queryKey: ["repoDataUserEdit"],
-    queryFn: () => {
-      return api
-        .get(`/users/${userId}`, config)
-        .then((response) => response.data.data[0]);
-    },
+  const { data, isSuccess, isLoading, isError } = useQuery({
+    queryKey: ['userData', userId],
+    queryFn: () => api.get(`/users/${userId}`, config).then((response) => response.data.data[0]),
+    enabled: !!userId, // Solo ejecutar la query si userId está definido
   });
+
   const updateUserData = useMutation({
-    mutationFn: (values) => {
-      return api.patch(`/users/${userId}`, values, config);
-    },
+    mutationFn: (values) => api.patch(`/users/${userId}`, values, config),
     onSuccess: async ({ data }) => {
-      setUpdateSuccessMsg(data.data.msg)
+      setUpdateSuccessMsg(data.data.msg);
+      queryClient.invalidateQueries(['userData', userId]);
     },
     onError: async (error) => {
-      console.error("Error en la mutación:", error);  
+      console.error("Error en la mutación:", error);
+    },
+  });
 
-  }})
+  const handleUpdateUser = (values) => {
+    updateUserData.mutateAsync(values);
+  };
 
-  const handleUpdateUser = (values)=>{
-    updateUserData.mutateAsync(values)
-  }
+  const initialValueEditUser = {
+    identity_card: '',
+    names: '',
+    last_names: '',
+    is_foreign: false,
+    email: '',
+    phone: '',
+    gender_id: '',
+    state_id: '',
+    municipality_id: '',
+    parish_id: '',
+    department_id: '',
+    role_id: '',
+    address: '',
+    resetPassword: false,
+  };
 
-
-  let initialValueEditUser = {};
-
-  if (isSuccess && data) {
-    initialValueEditUser = {
-      identity_card: data?.identity_card,
-      names: data?.names,
-      last_names: data?.last_names,
-      is_foreign: data?.is_foreign,
-      email: data?.email,
-      phone: data?.phone,
-      gender_id: data?.gender_id,
-      state_id: data?.state_id,
-      municipality_id: data?.municipality_id,
-      parish_id: data?.parish_id,
-      department_id: data?.department_id,
-      role_id: data?.role_id,
-      address: data?.address,
-      resetPassword: false,
-    };
-  }
+  useEffect(() => {
+    if (isSuccess && data) {
+      initialValueEditUser.identity_card = data.identity_card;
+      initialValueEditUser.names = data.names;
+      initialValueEditUser.last_names = data.last_names;
+      initialValueEditUser.is_foreign = data.is_foreign;
+      initialValueEditUser.email = data.email;
+      initialValueEditUser.phone = data.phone;
+      initialValueEditUser.gender_id = data.gender_id;
+      initialValueEditUser.state_id = data.state_id;
+      initialValueEditUser.municipality_id = data.municipality_id;
+      initialValueEditUser.parish_id = data.parish_id;
+      initialValueEditUser.department_id = data.department_id;
+      initialValueEditUser.role_id = data.role_id;
+      initialValueEditUser.address = data.address;
+      initialValueEditUser.resetPassword = false;
+    }
+  }, [isSuccess, data]);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -127,7 +139,7 @@ export default function ResponsiveLayoutEditUser() {
           </Grid>
         </Container>
       </Box>
-      {updateUserData.data && (
+      { updateUserData.data && (
         <Notification
           openNotification={updateUserData.isSuccess}
           message={updateSuccessMsg}
