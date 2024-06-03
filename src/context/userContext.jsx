@@ -11,7 +11,7 @@ export const useUser = () => useContext(UserContext);
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const queryClient = useQueryClient();
-
+  const [tokenUser, setTokenUser] = useState("")
   const loginMutation = useMutation({
     mutationFn: (credentials) => {
       return api.post("/auth/login", credentials);
@@ -19,6 +19,7 @@ export const UserProvider = ({ children }) => {
 
     onSuccess: async ({ data }) => {
       await setUser(data?.data?.[0]);
+      await setTokenUser(data.tokenSession)
       await saveTokenLocalStorage(data.tokenSession)
       await saveUserDataLocalStorage(JSON.stringify(data?.data?.[0]))
     },
@@ -43,7 +44,7 @@ export const UserProvider = ({ children }) => {
     return localStorage.getItem("token"); 
   }
   return (
-    <UserContext.Provider value={{ user, loginUser, logoutUser, checkTokenLocalStorgare}}>
+    <UserContext.Provider value={{ user, loginUser, logoutUser, checkTokenLocalStorgare, tokenUser}}>
       {children}
     </UserContext.Provider>
   );

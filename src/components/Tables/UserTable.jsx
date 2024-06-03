@@ -12,10 +12,11 @@ import { useEffect } from "react";
 import { Button, Collapse, IconButton, Typography, } from "@mui/material";
 import InfoIcon from "@mui/icons-material/Info";
 import React from "react";
-import { Box, } from "@mui/system";
+import { Box, Stack, } from "@mui/system";
 import { filter } from "lodash";
 import { Link } from "react-router-dom";
 import { UserListToolbar } from "../../sections/user";
+import Iconify from "../Iconify";
 
 const columns = [
   { id: "details_user", label: "Detalles", align: "center" },
@@ -53,7 +54,7 @@ function getComparator(order, orderBy) {
 
 
 
-export function UserTable({data}) {
+export function UserTable({data, titlePage}) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [users, setUsers] = useState([]);
@@ -117,6 +118,27 @@ export function UserTable({data}) {
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       <TableContainer sx={{ maxHeight: 440 }}>
+      <Stack
+          direction="row"
+          flexWrap={"wrap"}
+          justifyContent={"space-around"}
+          px={3}
+          pt={3}
+        >
+          <Typography variant="h4" gutterBottom align="center">
+          {titlePage}
+        </Typography>
+          <Link to={"../AddUser"}>
+            <Button
+              variant="contained"
+              startIcon={<Iconify icon="eva:plus-fill" />}
+             color={"primary"}
+            >
+              Agregar nuevo usuario
+            </Button>
+          </Link>
+        </Stack>
+      
         <UserListToolbar
             // numSelected={selected.length}
             filterName={filterName}
